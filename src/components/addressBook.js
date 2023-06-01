@@ -84,7 +84,7 @@ const AddressBook = () => {
                <QrReader
                 delay={300}
                 onError={handleError}
-                facingMode={ "environment" }
+                constraints= {{facingMode:  'environment' }}
                 onResult={handleScanQR}
                 style={{ width: '300px' }}
               /> 
