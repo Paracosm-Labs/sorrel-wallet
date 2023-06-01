@@ -29,11 +29,11 @@ const Dialpad = ({ onConfirm }) => {
         </h1>
       </div>
         <div className="d-flex mt-3">
-          <button className="btn btn-sm btn-outline-secondary mx-1 w-50" onClick={() => handleSetAmountClick('30')}>$30</button>
-          <button className="btn btn-sm btn-outline-secondary mx-1 w-50" onClick={() => handleSetAmountClick('60')}>$60</button>
-          <button className="btn btn-sm btn-outline-secondary mx-1 w-50" onClick={() => handleSetAmountClick('100')}>$100</button>
-          <button className="btn btn-sm btn-outline-secondary mx-1 w-50" onClick={() => handleSetAmountClick('500')}>$500</button>
-          <button className="btn btn-sm btn-outline-secondary mx-1 w-50" onClick={() => handleSetAmountClick('1000')}>$1000</button>
+          <button className="btn btn-md btn-outline-secondary mx-1 w-50" onClick={() => handleSetAmountClick('30')}>$30</button>
+          <button className="btn btn-md btn-outline-secondary mx-1 w-50" onClick={() => handleSetAmountClick('60')}>$60</button>
+          <button className="btn btn-md btn-outline-secondary mx-1 w-50" onClick={() => handleSetAmountClick('100')}>$100</button>
+          <button className="btn btn-md btn-outline-secondary mx-1 w-50" onClick={() => handleSetAmountClick('500')}>$500</button>
+          <button className="btn btn-md btn-outline-secondary mx-1 w-50" onClick={() => handleSetAmountClick('1000')}>$1000</button>
         </div>
       <div className="dialpad mt-3 row">
         <div className="d-flex mb-2">

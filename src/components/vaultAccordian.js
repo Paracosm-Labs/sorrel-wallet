@@ -44,7 +44,6 @@ const VaultAccordion = () => {
               >
               <div className="w-100 row">
               <div className="col-2">
-                {/*<img src={`vault-icon-${vault.id}.png`} alt={vault.name} className="vault-icon rounded-circle" />*/}
                 <img src={LogoImg} alt={vault.name} className="vault-icon rounded-circle mx-2" height="42" />
               </div>
               <div className="col-6">
