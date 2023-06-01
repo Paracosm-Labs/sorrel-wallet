@@ -18,7 +18,7 @@ const AddressBook = () => {
   const handleOptionClick = (option) => {
     setSelectedOption(option);
     setShowModal(false);
-    // setScannedQR(null); // Reset the scanned QR when selecting a new option
+    setScannedQR(null); // Reset the scanned QR when selecting a new option
   };
 
   const handleScanQR = (data) => {
@@ -77,7 +77,7 @@ const AddressBook = () => {
             <h6 className="badge bg-success">To QR Address</h6>
             {scannedQR ? (
               <>
-                <p>Scanned QR: {scannedQR}</p>
+                <p>{scannedQR}</p>
                 {/* Additional logic to process the scanned QR and update the "To" section */}
               </>
             ) : (
