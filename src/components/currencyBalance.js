@@ -8,7 +8,7 @@ import USDDImg from '../img/usdd.png';
 
 const CurrencyItem = ({ logo, currency, balance }) => {
   return (
-    <div className="col-sm-4">
+    <div className="col-4">
       <div className="currency-item row text-center">
         <div className="">
           <img className="rounded-circle currency-icon m-1" src={logo} alt={currency} height="22" />
