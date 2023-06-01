@@ -11,3 +11,102 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.bg{background-color:#2f3349;
+    background: radial-gradient(circle, #0f0f0f, #2d2a31, #0f0f0f);
+  }
+
+
+/* Track */
+::-webkit-scrollbar {
+  width: 8px; /* Set the width of the scrollbar */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; /* Set the color of the scrollbar handle */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Set the color of the scrollbar handle on hover */
+}
+
+.app-content, .welcome, .vaults, .discover {min-height: 800px;}
+
+.app-content{background-color: #252435;}
+
+
+.bg-sorrel-nav .nav-item a:hover {color: #7b8ab8!important;}
+.bg-sorrel-nav {
+    background-color: #242435;
+}
+
+.skipper a{text-decoration: none;}
+
+.welcome{background-color: #252435;}
+.wallet, .vaults, .discover {background-color: #2f3349;}
+
+.account-balance .card, .search-box .card {
+    height: 180px;
+    background-color: #242435;
+    border-radius: 0px 0px 30px 30px;
+    color: #eee!important;
+    border:none;
+    box-shadow: 0 3px 0px #109e77;
+}
+
+.carousel-inner{color: #fff;}
+
+.address-book i{font-size:48px;}
+
+.dialpad{width: -webkit-fill-available;}
+
+
+.transactions{
+  max-height: 500px; /* Adjust the height as needed */
+  overflow-y: auto;
+}
+
+.address-book i {color:#6a539b;}
+
+.address-book{
+  max-height: 300px; /* Adjust the height as needed */
+  overflow-x: auto;
+}
+
+
+/* Customize the scrollbar */
+
+.address-book::-webkit-scrollbar{height: 5px;}
+
+.address-book::-webkit-scrollbar,
+.transactions::-webkit-scrollbar {
+  width: 1px;
+}
+
+.address-book::-webkit-scrollbar-thumb,
+.transactions::-webkit-scrollbar-thumb {
+  background-color: #2f3349; /* Purpleish color */
+}
+
+.address-book::-webkit-scrollbar-track,
+.transactions::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Light gray color */
+}
+
+
+
+
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.nav-options{
+background-color: #f8f8f8;
+}
