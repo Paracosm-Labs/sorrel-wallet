@@ -31,14 +31,9 @@ const OffcanvasDeposit = () => {
       </div>
       <div className="offcanvas-body">
         <div className="mb-3">
-          <label htmlFor="accountSelect" className="form-label">Account</label>
-          <select className="form-select form-control-lg" id="accountSelect" value={selectedAccount} onChange={handleAccountChange}>
-            <option value="">Select Account</option>
-            <option value="primary">Primary Balance</option>
-            <option value="vault">Vault Balance</option>
-          </select>
+
         </div>
-        //Deposit option cards
+        //TODO Deposit options
       </div>
     </div>
   );
