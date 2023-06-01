@@ -23,9 +23,10 @@ const AddressBook = () => {
 
   const handleScanQR = (data) => {
     if (data) {
-      setScannedQR(data);
+      setScannedQR(data?.text);
     }
   };
+
 
   const handleModalClose = () => {
     setSelectedContact(null);
