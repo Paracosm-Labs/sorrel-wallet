@@ -19,7 +19,7 @@ const WelcomeOnboarding = () => {
 		  <div className="carousel-inner">
 		    <div className="carousel-item active" data-bs-interval="10000">
 
-		      <img src="/img/onboard1.jpg" width="420" height="800"/>
+		      <img src="/img/onboard1.jpg" className="m-0" width="390" height="800"/>
 		      <div className="carousel-caption">
 				  <button className="btn btn-lg btn-outline-success w-100 mt-3 mb-3" type="button"  data-bs-target="#homeCarousel" data-bs-slide="next">
 				    Next&nbsp;&nbsp;>
@@ -30,7 +30,7 @@ const WelcomeOnboarding = () => {
 		    </div>
 		    <div className="carousel-item" data-bs-interval="10000">
 
-		      <img src="/img/onboard2.jpg" width="420" height="800"/>
+		      <img src="/img/onboard2.jpg" className="m-0" width="390" height="800"/>
 		      <div className="carousel-caption">
 		        <h5>Earn a steady APR interest. Interest is credited monthly to your account.</h5>
 
@@ -43,7 +43,7 @@ const WelcomeOnboarding = () => {
 		    </div>
 		    <div className="carousel-item" data-bs-interval="10000">
 
-		      <img src="/img/onboard3.jpg" width="420" height="800"/>
+		      <img src="/img/onboard3.jpg" className="m-0" width="390" height="800"/>
 		      <div className="carousel-caption">
 		        <h5>You Sorrel Concierge will be available to assist you 24/7</h5>
 
@@ -56,7 +56,7 @@ const WelcomeOnboarding = () => {
 		    </div>
 		    <div className="carousel-item" data-bs-interval="10000">
 
-		      <img src="/img/onboard4b.jpg" width="420" height="800"/>
+		      <img src="/img/onboard4b.jpg" className="m-0" width="390" height="800"/>
 		      <div className="carousel-caption">
 		        <h3>Coming Soon</h3>
 		        <h5>Wallet NFC Cards and zero to low interest credit limit</h5>
@@ -72,7 +72,7 @@ const WelcomeOnboarding = () => {
 
 				<div className="carousel-item" data-bs-interval="50000">
 
-				    <img src="/img/onboard5.jpg" width="420" height="800"/>
+				    <img src="/img/onboard5.jpg" className="m-0" width="390" height="800"/>
 				      <div className="carousel-caption pb-5">
 				        <h5>Get Started Here</h5>
 
@@ -105,7 +105,7 @@ const WelcomeOnboarding = () => {
 
 		    <div className="carousel-item" data-bs-interval="50000">
 
-		      	<img src="/img/onboard5.jpg" width="420" height="800"/>
+		      	<img src="/img/onboard5.jpg" className="m-0" width="390" height="800"/>
 
 			      <div className="carousel-caption">
 			        
