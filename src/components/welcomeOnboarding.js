@@ -6,7 +6,7 @@ const WelcomeOnboarding = () => {
 
     <>
 	<div className="onboarding">
-	<div className="skipper text-end mt-3 mx-3"><a href="/wallet">Skip</a></div>
+	<div className="skipper position-fixed text-end mt-3 mx-3"><a href="/wallet">Skip</a></div>
 		<div id="homeCarousel" className="carousel carousel-light slide" data-bs-ride="carousel">
 		  <div className="carousel-indicators">
 		    <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
@@ -19,9 +19,20 @@ const WelcomeOnboarding = () => {
 		  <div className="carousel-inner">
 		    <div className="carousel-item active" data-bs-interval="10000">
 
-		      <img src="https://dummyimage.com/420x800/242435/fff"/>
+		      <img src="/img/onboard1.jpg" width="420" height="800"/>
 		      <div className="carousel-caption">
-		        <h5>Earn a steady APR interest in stablecoins on your assets. Interest is credited monthly to your<br/>Sorrel Savings Account.<br/>Withdraw your assets at anytime.</h5>
+				  <button className="btn btn-lg btn-outline-success w-100 mt-3 mb-3" type="button"  data-bs-target="#homeCarousel" data-bs-slide="next">
+				    Next&nbsp;&nbsp;>
+				  </button>
+
+		      </div>
+
+		    </div>
+		    <div className="carousel-item" data-bs-interval="10000">
+
+		      <img src="/img/onboard2.jpg" width="420" height="800"/>
+		      <div className="carousel-caption">
+		        <h5>Earn a steady APR interest. Interest is credited monthly to your account.</h5>
 
 				  <button className="btn btn-lg btn-outline-success w-100 mt-3 mb-3" type="button"  data-bs-target="#homeCarousel" data-bs-slide="next">
 				    Next&nbsp;&nbsp;>
@@ -32,9 +43,9 @@ const WelcomeOnboarding = () => {
 		    </div>
 		    <div className="carousel-item" data-bs-interval="10000">
 
-		      <img src="https://dummyimage.com/420x800/242435/fff"/>
+		      <img src="/img/onboard3.jpg" width="420" height="800"/>
 		      <div className="carousel-caption">
-		        <h5>Earn a steady APR interest in stablecoins by<br/>staking your assets for fixed periods in<br/>Sorrel Vaults.<br/>Interest is credited monthly to your <br/>Sorrel Savings Account.</h5>
+		        <h5>You Sorrel Concierge will be available to assist you 24/7</h5>
 
 				  <button className="btn btn-lg btn-outline-success w-100 mt-3 mb-3" type="button"  data-bs-target="#homeCarousel" data-bs-slide="next">
 				    Next&nbsp;&nbsp;>
@@ -45,23 +56,10 @@ const WelcomeOnboarding = () => {
 		    </div>
 		    <div className="carousel-item" data-bs-interval="10000">
 
-		      <img src="https://dummyimage.com/420x800/242435/fff"/>
-		      <div className="carousel-caption">
-		        <h5>Bridge your stablecoins into the real world<br/>via various available off-ramp methods.</h5>
-
-				  <button className="btn btn-lg btn-outline-success w-100 mt-3 mb-3" type="button"  data-bs-target="#homeCarousel" data-bs-slide="next">
-				    Next&nbsp;&nbsp;>
-				  </button>
-
-		      </div>
-
-		    </div>
-		    <div className="carousel-item" data-bs-interval="10000">
-
-		      <img src="https://dummyimage.com/420x800/242435/fff"/>
+		      <img src="/img/onboard4b.jpg" width="420" height="800"/>
 		      <div className="carousel-caption">
 		        <h3>Coming Soon</h3>
-		        <h5>Access a low interest credit limit using your Sorrel Savings Accounts and Vaults as collateral.</h5>
+		        <h5>Wallet NFC Cards and zero to low interest credit limit</h5>
 
 				  <button className="btn btn-lg btn-outline-success w-100 mt-3 mb-3" type="button"  data-bs-target="#homeCarousel" data-bs-slide="next">
 				    Next&nbsp;&nbsp;>
@@ -74,7 +72,7 @@ const WelcomeOnboarding = () => {
 
 				<div className="carousel-item" data-bs-interval="50000">
 
-				    <img src="https://dummyimage.com/420x800/242435/fff"/>
+				    <img src="/img/onboard5.jpg" width="420" height="800"/>
 				      <div className="carousel-caption pb-5">
 				        <h5>Get Started Here</h5>
 
@@ -107,7 +105,7 @@ const WelcomeOnboarding = () => {
 
 		    <div className="carousel-item" data-bs-interval="50000">
 
-		      	<img src="https://dummyimage.com/420x800/242435/fff"/>
+		      	<img src="/img/onboard5.jpg" width="420" height="800"/>
 
 			      <div className="carousel-caption">
 			        

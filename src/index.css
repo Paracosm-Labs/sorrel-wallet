@@ -43,6 +43,11 @@ code {
     background-color: #242435;
 }
 
+.skipper {
+  top: 0px; 
+  right: 650px;
+  z-index: 1000;
+  }
 .skipper a{text-decoration: none;}
 
 .welcome{background-color: #252435;}
