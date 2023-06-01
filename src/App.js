@@ -1,8 +1,6 @@
-// import logo from './logo.svg';
 import './App.css';
 import React from 'react';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Welcome from './pages/welcomePage';
 import Wallet from './pages/accountsPage';
 import Earn from './pages/vaultsPage';
@@ -11,19 +9,16 @@ import Addons from './pages/addonsPage';
 
 const App = () => {
   return (
-    <>
-    <Router>
-      <Routes>
-        <Route path = "/" element={<Welcome/>} />
-        <Route path = "wallet" element={<Wallet/>} />
-        <Route path = "earn" element={<Earn/>} />
-        <Route path = "explore" element={<Explore/>} />
-        <Route path = "addons" element={<Addons/>} />
-        <Route path = "*" element={<Welcome/>} />
-      </Routes>
-
-    </Router>
-    </>
+    <BrowserRouter>
+    <Routes>
+        <Route exact path="/" element={<Welcome />} />
+        <Route exact path="/wallet" element={<Wallet />} />
+        <Route exact path="/earn" element={<Earn />} />
+        <Route exact path="/explore" element={<Explore />} />
+        <Route exact path="/addons" element={<Addons />} />
+        <Route element={<Welcome />} />
+    </Routes>
+    </BrowserRouter>
   );
 };
 
