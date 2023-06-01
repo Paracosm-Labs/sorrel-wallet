@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import QrReader from 'react-qr-reader';
+import { QrReader } from 'react-qr-reader';
 
 const AddressBook = () => {
   const dummyContacts = [
@@ -40,7 +40,7 @@ const AddressBook = () => {
     <div>
       <div className="d-flex address-book">
         <div className="align-items-center m-2">
-          <button className="btn btn-sm h-100 btn-outline-secondary disabled" onClick={() => handleOptionClick('qr')}>
+          <button className="btn btn-sm h-100 btn-outline-secondary" onClick={() => handleOptionClick('qr')}>
             <i className="fa-solid fa-qrcode"></i>
             <small>Scan QR</small>
           </button>
@@ -81,12 +81,12 @@ const AddressBook = () => {
               </>
             ) : (
             <>
-              {/* <QrReader
+               <QrReader
                 delay={300}
                 onError={handleError}
                 onScan={handleScanQR}
                 style={{ width: '300px' }}
-              /> */}
+              /> 
             </>
             )}
           </div>
