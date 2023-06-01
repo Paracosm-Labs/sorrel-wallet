@@ -116,7 +116,7 @@ const WelcomeOnboarding = () => {
 				    <div className="p-1 mt-5">
 				      	<h6 className="text-left">Select Your Home Country</h6>
 				        <select className="mt-3 form-select" aria-label="Select Country">
-				          <option selected>Trinidad & Tobago</option>
+				          <option defaultValue >Trinidad & Tobago</option>
 				          <option value="1">Barbados</option>
 				          <option value="2">Jamaica</option>
 				          <option value="3">Dominica</option>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Navigation from '../components/navMenu';
+import OffcanvasTransfer from '../components/offcanvasTransfer';
 import LogoImg from '../img/logo2x.png';
 
 const AddonsPage = () => {
@@ -19,7 +20,7 @@ const AddonsPage = () => {
     label: "Sorrel AIA Concierge",
     goal: "$18,000+",
     link: "https://docs.sorrelbanq.org/addons/concierge",
-    progress: 5,
+    progress: 3,
     status:1,
   },
 
@@ -28,7 +29,7 @@ const AddonsPage = () => {
     label: "Sorrel Branch Lounges",
     goal: "$18,000+",
     link: "https://docs.sorrelbanq.org/addons/lounges",
-    progress: 5,
+    progress: 3,
     status:1,
   },
 
@@ -37,7 +38,7 @@ const AddonsPage = () => {
     label: "Sorrel Pay",
     goal: "$30,000+",
     link: "https://docs.sorrelbanq.org/addons/sorrelpay",
-    progress: 5,
+    progress: 0,
     status:0,
   },
 
@@ -46,7 +47,7 @@ const AddonsPage = () => {
     label: "Sorrel Family Office",
     goal: "TBD",
     link: "https://docs.sorrelbanq.org/addons/family-office",
-    progress: 5,
+    progress: 0,
     status:0,
   },
     // Add more dummy addons as needed
@@ -65,7 +66,7 @@ const AddonsPage = () => {
             <div className="col-md-10 col-sm-9">
               <div className="card-body">
                 <h5 className="card-title">{addon.label}</h5>
-                <a href={addon.link} target="_blank">Learn More</a>
+                <a href={addon.link} target="_blank" rel="noreferrer">Learn More</a>
                 <p className="card-text">
                   <strong>Goal:</strong> {addon.goal}
                 </p>
@@ -74,13 +75,14 @@ const AddonsPage = () => {
                   </div>
                   <span className="m-auto">{addon.progress}%</span>
                 </div>
-                <button className="btn btn-lg btn-outline-secondary mt-3 w-100" disabled={addon.status === 0}>Fund</button>
+                <button className="btn btn-lg btn-outline-secondary mt-3 w-100" disabled={addon.status === 0} type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTransfer" aria-controls="offcanvasTransfer">Fund</button>
               </div>
             </div>
           </div>
         </div>
       ))}
     </div>
+    <OffcanvasTransfer />
     </>
   );
 };

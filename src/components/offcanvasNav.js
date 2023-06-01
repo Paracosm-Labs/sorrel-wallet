@@ -33,7 +33,7 @@ const OffcanvasNav = () => {
             
               <a href="/addons">
               <button className="btn btn lg btn-outline-primary w-100" type="button">
-                <i className="fa-solid fa-puzzle-piece"></i><br/><p className="text-muted">Crowdfund Addons</p>
+                <i className="fa-solid fa-lg fa-puzzle-piece mt-4"></i><p className="text-muted">Addons</p>
               </button>
               </a>
 
@@ -41,37 +41,40 @@ const OffcanvasNav = () => {
             </div>
             <div className="col mt-2">
               <button className="btn btn lg btn-outline-primary disabled w-100">
-                <i className="fa-solid fa-credit-card"></i><br/><p className="text-muted">Wallet NFC Card</p>
+                <i className="fa-solid fa-credit-card mt-4 fa-lg"></i><p className="">NFC Card</p>
               </button>
             </div>
             <div className="col mt-2">
               <button className="btn btn lg btn-outline-primary disabled w-100">
-                <i className="fa-solid fa-bell-concierge"></i><br/><p className="text-muted">Sorrel Concierge</p>
+                <i className="fa-solid fa-bell-concierge mt-4 fa-lg"></i><p className="">Concierge</p>
               </button>
             </div>
             <div className="col mt-2">
               <button className="btn btn lg btn-outline-primary disabled w-100">
-                <i className="fa-solid fa-plus"></i><br/><p className="text-muted">Sorrel Lounges</p>
+                <i className="fa-solid fa-plus mt-4 fa-lg"></i><p className="">Sorrel Lounges</p>
               </button>
             </div>
             <div className="col mt-2">
               <button className="btn btn lg btn-outline-primary disabled w-100">
-                <i className="fa-solid fa-plus"></i><br/><p className="text-muted">Sorrel <br/>Pay</p>
+                <i className="fa-solid fa-plus mt-4 fa-lg"></i><p className="">Sorrel <br/>Pay</p>
               </button>
             </div>
             <div className="col mt-2">
               <button className="btn btn lg btn-outline-primary disabled w-100">
-                <i className="fa-solid fa-plus"></i><br/><p className="text-muted">Family Office</p>
+                <i className="fa-solid fa-plus mt-4 fa-lg"></i><p className="">Family Office</p>
               </button>
             </div>
           </div>
         </section>
 
-
-          <button className="btn btn lg btn-outline-primary w-100 mt-5" type="button">
-            <i className="fa-solid fa-satellite-dish"></i><p>Join Community</p>
+        <a href="https://discord.gg/kBtNQ9dtFV" rel="noreferrer" target="_blank">
+          <button className="btn btn lg btn-outline-primary w-100 mt-3" type="button">
+            <i className="fa-solid fa-xl fa-satellite-dish mt-4"></i><p>Join Community</p>
           </button>
-
+        </a>
+        <div className="mt-5 text-center">
+          <p className="text-muted">By Paracsom Labs</p>
+        </div>
       </div>
     </div>
   );

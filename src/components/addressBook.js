@@ -45,7 +45,7 @@ const AddressBook = () => {
             <small>Scan QR</small>
           </button>
         </div>
-        <div className="align-items-center m-2">
+        <div className="align-items-center m-2 d-none">
           <button className="btn btn-sm h-100 btn-outline-secondary disabled" onClick={() => handleOptionClick('nfc')}>
             <i className="fa-brands fa-nfc-symbol"></i>
             <small>Wallet NFC Card</small>
@@ -103,7 +103,7 @@ const AddressBook = () => {
       )}
 
       {selectedOption && typeof selectedOption === 'object' && (
-        <div className="mt-3">
+        <div className="mt-3 text-center">
             <img
               src={selectedOption.avatar}
               alt={selectedOption.name}
@@ -121,7 +121,7 @@ const AddressBook = () => {
 
       {showModal && (
         <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
-          <div className="modal-dialog">
+          <div className="modal-dialog modal-fullscreen-sm-down">
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">My Contacts</h5>

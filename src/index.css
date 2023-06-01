@@ -78,24 +78,31 @@ code {
   overflow-x: auto;
 }
 
+.address-book .modal-body{
+  max-height: 200px;
+  overflow-y: auto;
+}
 
 /* Customize the scrollbar */
 
 .address-book::-webkit-scrollbar{height: 5px;}
 
+.address-book .modal-body::-webkit-scrollbar,
 .address-book::-webkit-scrollbar,
 .transactions::-webkit-scrollbar {
   width: 1px;
 }
 
+.address-book .modal-body::-webkit-scrollbar,
 .address-book::-webkit-scrollbar-thumb,
 .transactions::-webkit-scrollbar-thumb {
-  background-color: #2f3349; /* Purpleish color */
+  background-color: #2f3349;
 }
 
+.address-book .modal-body::-webkit-scrollbar,
 .address-book::-webkit-scrollbar-track,
 .transactions::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* Light gray color */
+  background-color: #f1f1f1;
 }
 
 
