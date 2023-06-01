@@ -1,7 +1,7 @@
 import React from 'react';
 import AccountBalance from '../components/accountBalance';
 import AccountActions from '../components/accountActions';
-import CurrencyBalance from '../components/currencyBalance';
+// import CurrencyBalance from '../components/currencyBalance';
 import PromoSlide from '../components/promoSlide'
 import TxnHistory from '../components/txnHistory'
 import Navigation from '../components/navMenu';
@@ -15,7 +15,7 @@ const AccountsPage = () => {
       <AccountBalance></AccountBalance>
       <AccountActions></AccountActions>
       <PromoSlide></PromoSlide>
-      <CurrencyBalance></CurrencyBalance> 
+      {/* <CurrencyBalance></CurrencyBalance> */}
       <TxnHistory></TxnHistory>
 
     </div>
