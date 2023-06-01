@@ -25,7 +25,7 @@ const OffcanvasTransfer = () => {
   return (
     <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasTransfer" aria-labelledby="offcanvasTransferLabel">
       <div className="offcanvas-header">
-        <h5 className="offcanvas-title" id="offcanvasTransferLabel">Transfer Funds To</h5>
+        <h5 className="offcanvas-title" id="offcanvasTransferLabel">Transfer To</h5>
         <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div className="offcanvas-body">
