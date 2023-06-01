@@ -79,7 +79,7 @@ const AccountActions = () => {
 
       {showQRCode && (
         <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
-          <div className="modal-dialog">
+          <div className="modal-dialog modal-fullscreen-sm-down">
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">My Sorrel Wallet</h5>

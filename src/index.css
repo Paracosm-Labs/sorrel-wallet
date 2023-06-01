@@ -59,6 +59,8 @@ code {
 
 .carousel-inner{color: #fff;}
 
+.carousel-inner .bg-primary{background-color: #2f3349!important;}
+
 .address-book i{font-size:48px;}
 
 .dialpad{width: -webkit-fill-available;}

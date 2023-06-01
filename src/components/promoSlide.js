@@ -12,24 +12,32 @@ const PromoSlide = () => {
   </div>
   <div className="carousel-inner">
     <div className="carousel-item active">
+    <a href="#">
       <img src="/img/cards-mockup.jpg" className="d-block w-100" width="380" height="220" alt=""/>
-      <div className="carousel-caption d-none d-md-block">Coming Soon!
+      <div className="carousel-caption bg-primary">Coming Soon!
       </div>
+    </a>
     </div>
     <div className="carousel-item">
+    <a href="/earn">
       <img src="/img/earn-yield.jpg" className="d-block w-100" width="380" height="220" alt=""/>
-      <div className="carousel-caption d-none d-md-block mb-3 bg-primary">Earn Base <span className="text-success">2% APR</span> and more!
+      <div className="carousel-caption bg-primary">Earn Base <span className="text-success">2% APR</span> and more!
       </div>
+    </a>
     </div>
     <div className="carousel-item">
+    <a href="/addons">
       <img src="/img/jes-concierge.jpg" className="d-block w-100" width="380" height="220" alt=""/>
-      <div className="carousel-caption d-none d-md-block mb-3 bg-primary">Hi I'm Jes, Your Sorrel Concierge
+      <div className="carousel-caption bg-primary">Hi I'm Jes, Your Sorrel Concierge
       </div>
+    </a>
     </div>
     <div className="carousel-item">
-      <img src="https://via.placeholder.com/380x220/2f3349" className="d-block w-100" width="380" height="220" alt=""/>
-      <div className="carousel-caption d-none d-md-block mb-3">Crowdfund addons to enhance your Sorrel Experience
-      </div>
+      <a href="/addons">
+        <img src="/img/crowdfund.jpg" className="d-block w-100" width="380" height="220" alt=""/>
+        <div className="carousel-caption bg-primary">Crowdfund addons to enhance your Sorrel Experience
+        </div>
+      </a>
     </div>
   </div>
   <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
