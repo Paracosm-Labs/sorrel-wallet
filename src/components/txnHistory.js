@@ -7,16 +7,16 @@ const TxnHistory = () => {
       type: 'Payment',
       amount: '-$50',
       date: 'May 28, 2023',
-      receiver: 'Jane Smith',
-      avatar: "https://i.pravatar.cc/42?img=1"
+      receiver: 'Marcus Toussaint',
+      avatar: "/img/marcus.jpg"
     },
     {
       id: 2,
       type: 'Transfer',
       amount: '-$100',
       date: 'May 27, 2023',
-      receiver: 'John Doe Cash',
-      avatar: "https://i.pravatar.cc/42?img=14"
+      receiver: 'Alex van Anders',
+      avatar: "/img/alex.jpg"
     },
     {
       id: 3,
@@ -32,23 +32,23 @@ const TxnHistory = () => {
       amount: '+$300',
       date: 'May 27, 2023',
       receiver: 'Alex van Anders',
-      avatar: "https://i.pravatar.cc/42?img=34"
+      avatar: "/img/alex.jpg"
     },
     {
       id: 5,
-      type: 'Payment',
-      amount: '-$100',
+      type: 'Transfer',
+      amount: '+800',
       date: 'May 27, 2023',
-      receiver: 'Amazon P2P',
-      avatar: "https://i.pravatar.cc/42?img=40"
+      receiver: 'Michelle',
+      avatar: "/img/Michelle.jpg"
     },
     {
       id: 6,
       type: 'Payment',
       amount: '-$100',
       date: 'May 27, 2023',
-      receiver: 'cosmicquant@gmail.com',
-      avatar: "https://i.pravatar.cc/42?img=30"
+      receiver: 'Javier',
+      avatar: "/img/javier.jpg"
     },
     {
       id: 7,
@@ -56,7 +56,7 @@ const TxnHistory = () => {
       amount: '+$100',
       date: 'May 27, 2023',
       receiver: 'Jes Sorrel Concierge',
-      avatar: "https://i.pravatar.cc/42?img=44"
+      avatar: "/img/jes.jpg"
     },
     {
       id: 8,
@@ -88,9 +88,9 @@ const TxnHistory = () => {
             <div className="d-flex">
               <div className="p-2 mr-3">
                 {transaction.type === 'Payment' || 'Subscription' ? (
-                  <img className="rounded-circle" src={transaction.avatar} />
+                  <img className="rounded-circle avatar" src={transaction.avatar} />
                 ) : (
-                  <img className="rounded-circle" src={transaction.avatar} />
+                  <img className="rounded-circle avatar" src={transaction.avatar} width="42" height="42"/>
                 )}
               </div>
               <div>

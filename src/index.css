@@ -76,6 +76,8 @@ code {
   overflow-y: auto;
 }
 
+.transactions img.avatar{height: 42px; width: 42px;}
+
 .address-book i {color:#6a539b;}
 
 .address-book{
