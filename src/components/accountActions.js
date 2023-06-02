@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import QRCode from 'react-qr-code';
 import OffcanvasDeposit from './offcanvasDeposit';
 import OffcanvasTransfer from './offcanvasTransfer';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import LogoImg from '../img/logo2x.png';
 
 const AccountActions = () => {
   const [balance, setBalance] = useState(0);
@@ -54,6 +57,13 @@ const AccountActions = () => {
     setShowQRCode(true);
   };
 
+  const offcanvasExchange = () => {
+    toast.info("Exchange will be enabled soon.", {
+      icon: ({theme, type}) =>  <img src={LogoImg} className="rounded-circle" height="32"/>
+    });
+
+  };
+
   const handleShareQRCode = () => {
     // Handle sharing the QR code logic
     console.log('QR code shared');
@@ -63,17 +73,20 @@ const AccountActions = () => {
     <div>
       <div className="mt-3 d-flex justify-content-around">
         <button className="btn btn-lg btn-outline-secondary" type="button" onClick={() => deposit(100)} data-bs-toggle="offcanvas" data-bs-target="#offcanvasDeposit" aria-controls="offcanvasExchange">
-          <i className="fa-solid fa-cloud-arrow-down"></i>&nbsp;
-          Deposit
+          <i className="fa-solid fa-cloud-arrow-up"></i>&nbsp;
+          Add
         </button>
 
         <button className="btn btn-lg btn-outline-secondary" type="button" onClick={handleQRCodeClick}>
           <i className="fa-solid fa-qrcode"></i>
         </button>
+        <button className="btn btn-lg btn-outline-secondary" type="button" onClick={offcanvasExchange}>
+          <i className="fa-solid fa-coins"></i>
+        </button>
 
         <button className="btn btn-lg btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTransfer" aria-controls="offcanvasTransfer">
           <i className="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;
-          Transfer
+          Send
         </button>
       </div>
 
@@ -105,6 +118,16 @@ const AccountActions = () => {
 
       <OffcanvasDeposit />
       <OffcanvasTransfer />
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />  
+
     </div>
   );
 };

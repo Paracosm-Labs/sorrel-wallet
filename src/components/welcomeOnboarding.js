@@ -142,8 +142,7 @@ const WelcomeOnboarding = () => {
 		</div>
 
 
-
-</div>
+		</div>
 
     </>
 

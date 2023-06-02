@@ -1,35 +1,54 @@
 import React, { useState } from 'react';
 import { QrReader } from 'react-qr-reader';
 
-const AddressBook = () => {
+const AddressBook = ({ onContactSelect }) => {
   const dummyContacts = [
-    { name: 'Alex van Anders', avatar: '/img/alex.jpg' },
-    { name: 'Javier Reyes', avatar: '/img/javier.jpg' },
-    { name: 'Michelle Ge', avatar: '/img/michelle.jpg' },
-    { name: 'Marcus Toussaint', avatar: '/img/marcus.jpg' },
+    { name: 'Alex van Anders', avatar: 'https://i.pravatar.cc/42?img=1', address: 'TALaB0x123' },
+    { name: 'Javier Reyes', avatar: 'https://i.pravatar.cc/42?img=2', address: 'TBLaB0x456' },
+    { name: 'Michelle Ge', avatar: 'https://i.pravatar.cc/42?img=3', address: 'TCLaB0x789' },
+    { name: 'Marcus Toussaint', avatar: 'https://i.pravatar.cc/42?img=4', address: 'TDLaB0xabc' },
   ];
 
-  const [showModal, setShowModal] = useState(false);
-  const [selectedContact, setSelectedContact] = useState(null);
 
+  const [showModal, setShowModal] = useState(false);
+  
   const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedAddress, setSelectedAddress] = useState(null);
   const [scannedQR, setScannedQR] = useState(null);
 
-  const handleOptionClick = (option) => {
+  const handleOptionClick = (option, address) => {
     setSelectedOption(option);
+    if (option === 'nfc') {
+       setSelectedAddress("STR0xNFC-DEMO");
+       onContactSelect(selectedAddress);
+    }
+     if (option === 'qr'){
+      onContactSelect(selectedAddress);
+      setScannedQR(null); // Reset the scanned QR when selecting a new option
+    }
+     if (typeof option === 'object'){
+      setSelectedAddress(address);
+      onContactSelect(address);
+    }
+
     setShowModal(false);
-    setScannedQR(null); // Reset the scanned QR when selecting a new option
+    console.log(selectedAddress, address);
   };
 
   const handleScanQR = (data) => {
     if (data) {
       setScannedQR(data?.text);
     }
+    setSelectedAddress(scannedQR);
+  };
+
+
+  const handleScanNFC = (data) => {
+    //TODO
   };
 
 
   const handleModalClose = () => {
-    setSelectedContact(null);
     setShowModal(false);
   };
 
@@ -46,8 +65,8 @@ const AddressBook = () => {
             <small>Scan QR</small>
           </button>
         </div>
-        <div className="align-items-center m-2 d-none">
-          <button className="btn btn-sm h-100 btn-outline-secondary disabled" onClick={() => handleOptionClick('nfc')}>
+        <div className="align-items-center m-2">
+          <button className="btn btn-sm h-100 btn-outline-secondary" onClick={() => handleOptionClick('nfc')}>
             <i className="fa-brands fa-nfc-symbol"></i>
             <small>Wallet NFC Card</small>
           </button>
@@ -62,7 +81,7 @@ const AddressBook = () => {
           <div key={index} className="align-items-center m-2">
             <button
               className="btn btn-sm h-100 btn-outline-secondary"
-              onClick={() => handleOptionClick(contact)}
+              onClick={() => handleOptionClick(contact, contact.address)}
             >
               <img src={contact.avatar} alt={contact.name} className="rounded-circle" width="50" height="50" />
               <small className="text-muted">{contact.name}</small>
@@ -114,7 +133,7 @@ const AddressBook = () => {
               height="50"
             />
           <div className="text-center">
-            <p>{selectedOption.name}</p>            
+            <p>{selectedOption.name}</p>                       
             {/* Additional logic for handling the selected contact */}
           </div>
         </div>
@@ -135,7 +154,7 @@ const AddressBook = () => {
                     <button
                       key={index}
                       className="btn btn-outline-secondary text-start m-1"
-                      onClick={() => handleOptionClick(contact)}
+                      onClick={() => handleOptionClick(contact, contact.address)}
                     >
                     <img
                       src={contact.avatar}

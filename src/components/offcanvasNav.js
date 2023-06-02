@@ -33,7 +33,7 @@ const OffcanvasNav = () => {
             
               <a href="/addons">
               <button className="btn btn lg btn-outline-primary w-100" type="button">
-                <i className="fa-solid fa-lg fa-puzzle-piece mt-4"></i><p className="text-muted">Addons</p>
+                <i className="fa-solid fa-lg fa-puzzle-piece mt-4"></i><p className="">Addons</p>
               </button>
               </a>
 

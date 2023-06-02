@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 
-const Dialpad = ({ onConfirm }) => {
+
+
+const Dialpad = ({ onConfirm, selectedDestination }) => {
   const [amount, setAmount] = useState('');
 
   const handleNumberClick = (number) => {
     setAmount(amount + number);
+    console.log(number, selectedDestination)
   };
 
   const handleClearClick = () => {
@@ -18,6 +21,7 @@ const Dialpad = ({ onConfirm }) => {
 
   const handleSetAmountClick = (presetAmount) => {
     setAmount(presetAmount);
+    console.log(presetAmount, selectedDestination)
   };
 
   return (
