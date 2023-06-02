@@ -16,7 +16,7 @@ const ExplorePage = () => {
     <div className="text-center explore">
     <Navigation></Navigation>
     <SearchBox></SearchBox>
-      <div className="row shops">
+      <div className="row shops mt-3">
         {shops.map((shop) => (
           <div className="col mt-3 mb-3 m-auto" key={shop.id}>
             <div className="card shop-card">
