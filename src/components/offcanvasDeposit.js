@@ -49,7 +49,8 @@ const OffcanvasDeposit = () => {
             <div className="col-12 mt-2">
             <a href="#">
               <button className="btn btn lg btn-outline-primary w-100">
-                <i className="fa-solid fa-sun mt-4 fa-lg"></i><p className=""> Exchange</p>
+                <i className="fa-solid fa-sun mt-4 fa-lg"></i><p className=""> Exchanges</p>
+                <small className="text-center text-info">3 Sources Available</small>
               </button>
             </a>
             </div>
@@ -57,7 +58,7 @@ const OffcanvasDeposit = () => {
             <a href="#">
               <button className="btn btn lg btn-outline-primary w-100">
                 <i className="fa-solid fa-users-gear mt-4 fa-lg"></i><p className="">P2P Options Near Me</p>
-                <small className="text-center text-success">3 Sources Available</small>
+                <small className="text-center text-info">8 Sources Available</small>
               </button>
             </a>
             </div>
