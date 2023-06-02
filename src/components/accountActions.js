@@ -58,8 +58,9 @@ const AccountActions = () => {
   };
 
   const offcanvasExchange = () => {
-    toast.info("Exchange will be enabled soon.", {
-      icon: ({theme, type}) =>  <img src={LogoImg} className="rounded-circle" height="32"/>
+    toast.info("What features would you like to have available? Let us know :)", {
+      icon: ({theme, type}) =>  <img src={LogoImg} className="rounded-circle" height="32"/>,
+      theme: "dark",
     });
 
   };
@@ -120,7 +121,7 @@ const AccountActions = () => {
       <OffcanvasTransfer />
       <ToastContainer
         position="top-center"
-        autoClose={3000}
+        autoClose={8000}
         newestOnTop={false}
         closeOnClick
         pauseOnFocusLoss

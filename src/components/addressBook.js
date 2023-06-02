@@ -45,9 +45,9 @@ const AddressBook = ({ onContactSelect, selectedAddonAddress, selectedVaultAddre
 
 
   const handleScanNFC = (data) => {
-    if (data) {
+     handleOptionClick('nfc');
       setSelectedAddress(data);
-    }
+     
   };
 
 

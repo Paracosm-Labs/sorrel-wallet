@@ -3,6 +3,7 @@ import AddressBook from './addressBook';
 import Dialpad from './dialpad';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LogoImg from '../img/logo2x.png';
 
 const OffcanvasTransfer = ({ selectedAddonAddress, selectedVaultAddress }) => {
   const [selectedDestination, setSelectedDestination] = useState('');
@@ -13,7 +14,11 @@ const OffcanvasTransfer = ({ selectedAddonAddress, selectedVaultAddress }) => {
 
   const handleConfirmTransfer = (amount) => {
     // Process transfer using the selected address
-    toast.success(`Sent ${amount} to ${selectedDestination}`);
+    toast.success(`Sent ${amount} to ${selectedDestination}`, {
+      icon: ({theme, type}) =>  <img src={LogoImg} className="rounded-circle" height="32"/>,
+      theme: "dark",
+    });
+
     console.log('Transfer of', amount, 'to address:', selectedDestination);
   };
 
