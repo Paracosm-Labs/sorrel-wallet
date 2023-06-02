@@ -39,7 +39,7 @@ const TxnHistory = () => {
       type: 'Transfer',
       amount: '+800',
       date: 'May 27, 2023',
-      receiver: 'Michelle',
+      receiver: 'Michelle Ge',
       avatar: "/img/Michelle.jpg"
     },
     {
@@ -47,7 +47,7 @@ const TxnHistory = () => {
       type: 'Payment',
       amount: '-$100',
       date: 'May 27, 2023',
-      receiver: 'Javier',
+      receiver: 'Javier Reyes',
       avatar: "/img/javier.jpg"
     },
     {
