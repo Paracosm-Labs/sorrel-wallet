@@ -32,7 +32,7 @@ const WelcomeOnboarding = () => {
 
 		      <img src="/img/onboard2.jpg" className="d-block mx-auto w-100" width="420" height="800"/>
 		      <div className="carousel-caption">
-		        <h5>Earn a steady APR interest. Interest is credited monthly to your account.</h5>
+		        <h5>Earn a steady APR interest, credited monthly to your<br/> Sorrel account</h5>
 
 				  <button className="btn btn-lg btn-outline-success w-100 mt-3 mb-3" type="button"  data-bs-target="#homeCarousel" data-bs-slide="next">
 				    Next&nbsp;&nbsp;>
@@ -45,7 +45,7 @@ const WelcomeOnboarding = () => {
 
 		      <img src="/img/onboard3.jpg" className="d-block mx-auto w-100" width="420" height="800"/>
 		      <div className="carousel-caption">
-		        <h5>You Sorrel Concierge will be available to assist you 24/7</h5>
+		        <h5>Jes, Your Sorrel Concierge will be available to assist you 24/7</h5>
 
 				  <button className="btn btn-lg btn-outline-success w-100 mt-3 mb-3" type="button"  data-bs-target="#homeCarousel" data-bs-slide="next">
 				    Next&nbsp;&nbsp;>
@@ -59,7 +59,7 @@ const WelcomeOnboarding = () => {
 		      <img src="/img/onboard4b.jpg" className="d-block mx-auto w-100" width="420" height="800"/>
 		      <div className="carousel-caption">
 		        <h3>Coming Soon</h3>
-		        <h5>Wallet NFC Cards and zero to low interest credit limit</h5>
+		        <h5>Wallet NFC Cards and zero to low interest shared credit facility</h5>
 
 				  <button className="btn btn-lg btn-outline-success w-100 mt-3 mb-3" type="button"  data-bs-target="#homeCarousel" data-bs-slide="next">
 				    Next&nbsp;&nbsp;>
