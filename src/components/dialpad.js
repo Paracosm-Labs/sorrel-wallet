@@ -2,12 +2,17 @@ import React, { useState } from 'react';
 
 
 
-const Dialpad = ({ onConfirm, selectedDestination }) => {
+const Dialpad = ({ onConfirm, selectedAddonAddress, selectedVaultAddress }) => {
   const [amount, setAmount] = useState('');
+  const [selectedAddress, setSelectedAddress] = useState(null);
 
   const handleNumberClick = (number) => {
     setAmount(amount + number);
-    console.log(number, selectedDestination)
+    //     if (selectedAddonsAddress) {
+    //   setSelectedAddress(selectedAddonsAddress);
+    //   console.log(amount, selectedAddress)
+    // }
+    console.log(number, selectedAddonAddress, selectedVaultAddress)
   };
 
   const handleClearClick = () => {
@@ -16,12 +21,13 @@ const Dialpad = ({ onConfirm, selectedDestination }) => {
 
   const handleConfirmClick = () => {
     onConfirm(amount);
+    console.log(amount, selectedAddonAddress, selectedVaultAddress)
     setAmount('');
   };
 
   const handleSetAmountClick = (presetAmount) => {
     setAmount(presetAmount);
-    console.log(presetAmount, selectedDestination)
+    console.log(presetAmount, selectedAddonAddress, selectedVaultAddress)
   };
 
   return (
@@ -65,6 +71,7 @@ const Dialpad = ({ onConfirm, selectedDestination }) => {
 
         <div className="d-flex mt-4">
           <button data-bs-dismiss="offcanvas" className="btn btn-lg btn-primary w-100" onClick={() => handleConfirmClick()} >Confirm {amount}</button>
+        }
         </div>
       </div>
     </div>

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { QrReader } from 'react-qr-reader';
 
-const AddressBook = ({ onContactSelect }) => {
+const AddressBook = ({ onContactSelect, selectedAddonAddress, selectedVaultAddress}) => {
   const dummyContacts = [
-    { name: 'Alex van Anders', avatar: 'https://i.pravatar.cc/42?img=1', address: 'TALaB0x123' },
-    { name: 'Javier Reyes', avatar: 'https://i.pravatar.cc/42?img=2', address: 'TBLaB0x456' },
-    { name: 'Michelle Ge', avatar: 'https://i.pravatar.cc/42?img=3', address: 'TCLaB0x789' },
-    { name: 'Marcus Toussaint', avatar: 'https://i.pravatar.cc/42?img=4', address: 'TDLaB0xabc' },
+    { name: 'Alex van Anders', avatar: 'https://i.pravatar.cc/42?img=1', address: 'TALaB0x123addressbook' },
+    { name: 'Javier Reyes', avatar: 'https://i.pravatar.cc/42?img=2', address: 'TBLaB0x456ab' },
+    { name: 'Michelle Ge', avatar: 'https://i.pravatar.cc/42?img=3', address: 'TCLaB0x789ab' },
+    { name: 'Marcus Toussaint', avatar: 'https://i.pravatar.cc/42?img=4', address: 'TDLaB0xabcab' },
   ];
 
 
@@ -16,10 +16,10 @@ const AddressBook = ({ onContactSelect }) => {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [scannedQR, setScannedQR] = useState(null);
 
+
   const handleOptionClick = (option, address) => {
     setSelectedOption(option);
     if (option === 'nfc') {
-       setSelectedAddress("STR0xNFC-DEMO");
        onContactSelect(selectedAddress);
     }
      if (option === 'qr'){
@@ -31,8 +31,9 @@ const AddressBook = ({ onContactSelect }) => {
       onContactSelect(address);
     }
 
+
     setShowModal(false);
-    console.log(selectedAddress, address);
+    console.log(selectedAddress, address,  option);
   };
 
   const handleScanQR = (data) => {
@@ -44,7 +45,9 @@ const AddressBook = ({ onContactSelect }) => {
 
 
   const handleScanNFC = (data) => {
-    //TODO
+    if (data) {
+      setSelectedAddress(data);
+    }
   };
 
 
@@ -58,7 +61,7 @@ const AddressBook = ({ onContactSelect }) => {
 
   return (
     <div>
-      <div className="d-flex address-book">
+      <div className={selectedAddonAddress ? "d-none" : "d-flex address-book"}>
         <div className="align-items-center m-2">
           <button className="btn btn-sm h-100 btn-outline-secondary" onClick={() => handleOptionClick('qr')}>
             <i className="fa-solid fa-qrcode"></i>
@@ -66,7 +69,7 @@ const AddressBook = ({ onContactSelect }) => {
           </button>
         </div>
         <div className="align-items-center m-2">
-          <button className="btn btn-sm h-100 btn-outline-secondary" onClick={() => handleOptionClick('nfc')}>
+          <button className="btn btn-sm h-100 btn-outline-secondary" onClick={() => handleScanNFC('STR0xNFC-DEMO')}>
             <i className="fa-brands fa-nfc-symbol"></i>
             <small>Wallet NFC Card</small>
           </button>
@@ -137,6 +140,28 @@ const AddressBook = ({ onContactSelect }) => {
             {/* Additional logic for handling the selected contact */}
           </div>
         </div>
+      )}
+
+      {selectedAddonAddress ? (
+        <div className="mt-3">
+          <div className="text-center">
+            <h5 className="badge bg-info p-2">Sorrel Transfer</h5>
+            <p>{selectedAddonAddress}</p>
+          </div>
+        </div>
+      ):(
+        <div></div>
+      )}
+
+      {selectedVaultAddress ? (
+        <div className="mt-3">
+          <div className="text-center">
+            <h5 className="badge bg-info p-2">Sorrel Vault Transfer</h5>
+            <p>{selectedVaultAddress}</p>
+          </div>
+        </div>
+      ):(
+        <div></div>
       )}
 
 

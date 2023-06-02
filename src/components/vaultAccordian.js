@@ -1,26 +1,24 @@
 import React, { useState } from 'react';
 import LogoImg from '../img/logo2x.png';
 import gTTDImg from '../img/gttd.png';
+import OffcanvasTransfer from './offcanvasTransfer';
 
 const VaultAccordion = () => {
   const vaults = [
-    { id: 1, icon: gTTDImg, name: 'TTD', details: '3 Month Lock',  apr:"2%", unlockTime: 6664300400, balance: '$3,500.69' },
-    { id: 2, icon: gTTDImg, name: 'TTD', details: '6 Month Lock',  apr:"2%", unlockTime: 6664311200, balance: '' },
-    { id: 3, icon: gTTDImg, name: 'TTD', details: '12 Month Lock', apr:"2%",  unlockTime: 1664322000, balance: '$500.83' },
+    { id: 1, icon: gTTDImg, name: 'TTD', details: '3 Month Lock',  apr:"2%", unlockTime: 6664300400, balance: '$3,500.69',address:'TLX0tttAM' },
+    { id: 2, icon: gTTDImg, name: 'TTD', details: '6 Month Lock',  apr:"2%", unlockTime: 6664311200, balance: '',address:'TLX0aaDM' },
+    { id: 3, icon: gTTDImg, name: 'TTD', details: '12 Month Lock', apr:"2%",  unlockTime: 1664322000, balance: '$500.83',address:'TLX0xxxPM' },
   ];
 
-  const [transactionAmount, setTransactionAmount] = useState('');
+  const [selectedVaultAddress, setSelectedVaultAddress] = useState('');
 
-  const handleDeposit = (vaultId) => {
-    // Handle deposit action for the given vaultId and transactionAmount
-    console.log(`Deposit ${transactionAmount} to Vault ${vaultId}`);
-    // Add your logic here to interact with the contract and perform the deposit
+  const handleVaultAddress = (address) => {
+    setSelectedVaultAddress(address);
+    console.log(`Preparing to transfer to Vault ${address}  ${selectedVaultAddress}`);
   };
 
-  const handleRedeem = (vaultId) => {
-    // Handle redeem action for the given vaultId and transactionAmount
-    console.log(`Redeem ${transactionAmount} from Vault ${vaultId}`);
-    // Add your logic here to interact with the contract and perform the redeem
+  const handleRedeem = (address) => {
+    console.log(`Redeemed from Vault ${address}`);
   };
 
   const isUnlockTimePassed = (vaultId) => {
@@ -66,40 +64,32 @@ const VaultAccordion = () => {
               data-bs-parent="#vaultAccordion"
             >
               <div className="accordion-body">
-                <div className="mb-3">
-                  <label htmlFor={`transactionAmount${vault.id}`} className="form-label">
-                    Enter Amount
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id={`transactionAmount${vault.id}`}
-                    value={transactionAmount}
-                    onChange={(e) => setTransactionAmount(e.target.value)}
-                  />
-                </div>
+
                 <div className="d-flex justify-content-around">
                   <button
                     className="btn btn-primary btn-lg w-50 mx-2"
-                    onClick={() => handleDeposit(vault.id)}
+                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasTransfer" aria-controls="offcanvasTransfer"
+                    onClick={() => handleVaultAddress(vault.address)}
                   >
                     Deposit
                   </button>
-                  {isUnlockTimePassed(vault.id) && (
+                  
                     <button
                       className="btn btn-primary btn-lg w-50 mx-2"
-                      onClick={() => handleRedeem(vault.id)}
+
+                      onClick={() => handleRedeem(vault.address)}
                       disabled={!isUnlockTimePassed(vault.id)}
                     >
                       Redeem
                     </button>
-                  )}
+                  
                 </div>
               </div>
             </div>
           </div>
         ))}
       </div>
+      <OffcanvasTransfer selectedVaultAddress={selectedVaultAddress} />
     </div>
   );
 };

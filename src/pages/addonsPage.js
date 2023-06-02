@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navigation from '../components/navMenu';
 import OffcanvasTransfer from '../components/offcanvasTransfer';
 import LogoImg from '../img/logo2x.png';
@@ -13,6 +13,7 @@ const AddonsPage = () => {
     link: "https://docs.sorrelbanq.org/addons/cards",
     progress: 5,
     status:1,
+    address: "TL0x222234",
   },
 
   {
@@ -22,6 +23,7 @@ const AddonsPage = () => {
     link: "https://docs.sorrelbanq.org/addons/concierge",
     progress: 3,
     status:1,
+    address: "TL0x1555534",
   },
 
   {
@@ -31,6 +33,7 @@ const AddonsPage = () => {
     link: "https://docs.sorrelbanq.org/addons/lounges",
     progress: 3,
     status:1,
+    address: "TL0x12777734",
   },
 
   {
@@ -40,6 +43,7 @@ const AddonsPage = () => {
     link: "https://docs.sorrelbanq.org/addons/sorrelpay",
     progress: 0,
     status:0,
+    address: "TL0x18888234",
   },
 
   {
@@ -49,12 +53,21 @@ const AddonsPage = () => {
     link: "https://docs.sorrelbanq.org/addons/family-office",
     progress: 0,
     status:0,
+    address: "TL0x12999934",
   },
     // Add more dummy addons as needed
   ];
 
+  const [selectedAddonAddress, setSelectedAddonAddress] = useState('');
+
+  const handleAddonFund = (address) => {
+    setSelectedAddonAddress(address);
+    console.log(`Preparing to fund addon at ${address}`);
+  };
+
   return (
     <>
+    <div className="crowdfunder">
     <Navigation></Navigation>
     <div>
       {dummyAddons.map((addon) => (
@@ -75,14 +88,15 @@ const AddonsPage = () => {
                   </div>
                   <span className="m-auto">{addon.progress}%</span>
                 </div>
-                <button className="btn btn-lg btn-outline-secondary mt-3 w-100" disabled={addon.status === 0} type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTransfer" aria-controls="offcanvasTransfer">Fund</button>
+                <button onClick={() => handleAddonFund(addon.address)} className="btn btn-lg btn-outline-secondary mt-3 w-100" disabled={addon.status === 0} type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTransfer" aria-controls="offcanvasTransfer">Fund</button>
               </div>
             </div>
           </div>
         </div>
       ))}
     </div>
-    <OffcanvasTransfer />
+    <OffcanvasTransfer selectedAddonAddress={selectedAddonAddress} />
+    </div>
     </>
   );
 };

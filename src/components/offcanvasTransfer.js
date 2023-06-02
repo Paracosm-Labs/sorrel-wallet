@@ -4,8 +4,7 @@ import Dialpad from './dialpad';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const OffcanvasTransfer = () => {
-
+const OffcanvasTransfer = ({ selectedAddonAddress, selectedVaultAddress }) => {
   const [selectedDestination, setSelectedDestination] = useState('');
 
   const handleDestinationChange = (event) => {
@@ -15,23 +14,22 @@ const OffcanvasTransfer = () => {
   const handleConfirmTransfer = (amount) => {
     // Process transfer using the selected address
     toast.success(`Sent ${amount} to ${selectedDestination}`);
-    console.log('Transfer of', amount, 'to address:' , selectedDestination);
+    console.log('Transfer of', amount, 'to address:', selectedDestination);
   };
 
   return (
     <>
-    <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasTransfer" aria-labelledby="offcanvasTransferLabel">
-      <div className="offcanvas-header">
-        <h5 className="offcanvas-title" id="offcanvasTransferLabel">Transfer Funds</h5>
-        <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasTransfer" aria-labelledby="offcanvasTransferLabel">
+        <div className="offcanvas-header">
+          <h5 className="offcanvas-title" id="offcanvasTransferLabel">Transfer Funds</h5>
+          <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div className="offcanvas-body">
+          <AddressBook onContactSelect={handleDestinationChange} selectedAddonAddress={selectedAddonAddress} selectedVaultAddress={selectedVaultAddress}/>
+          <Dialpad onConfirm={handleConfirmTransfer} selectedDestination={selectedDestination} />
+        </div>
       </div>
-      <div className="offcanvas-body">
-          <AddressBook onContactSelect={handleDestinationChange} />
-          <Dialpad onConfirm={handleConfirmTransfer} selectedDestination={selectedDestination}/>
-        </div>   
-      
-    </div>
-         <ToastContainer
+      <ToastContainer
         position="top-center"
         autoClose={3000}
         newestOnTop={false}
@@ -39,7 +37,7 @@ const OffcanvasTransfer = () => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-      />  
+      />
     </>
   );
 };
