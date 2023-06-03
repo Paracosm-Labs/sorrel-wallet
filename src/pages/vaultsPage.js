@@ -10,9 +10,9 @@ import gTTDImg from '../img/gttd.png';
 const VaultsPage = () => {
 
   const vaults = [
-    { id: 1, icon: gTTDImg, name: 'TTD', details: '3 Month Lock',  apr:"2%", unlockTime: 1664300400, balance: '$3,500.69',address:'TLX0tttAM' },
-    { id: 2, icon: gTTDImg, name: 'TTD', details: '6 Month Lock',  apr:"2%", unlockTime: 2664311200, balance: '',address:'TLX0aaDM' },
-    { id: 3, icon: gTTDImg, name: 'TTD', details: '12 Month Lock', apr:"2%",  unlockTime: 6664322000, balance: '$500.83',address:'TLX0xxxPM' },
+    { id: 1, icon: LogoImg, name: 'TTD', details: '3 Month Lock',  apr:"2%", unlockTime: 1664300400, balance: '$3,500.69',address:'TLX0tttAM' },
+    { id: 2, icon: LogoImg, name: 'TTD', details: '6 Month Lock',  apr:"2%", unlockTime: 2664311200, balance: '',address:'TLX0aaDM' },
+    { id: 3, icon: LogoImg, name: 'TTD', details: '12 Month Lock', apr:"2%",  unlockTime: 6664322000, balance: '$500.83',address:'TLX0xxxPM' },
   ];
 
   const [selectedVaultAddress, setselectedVaultAddress] = useState('');
@@ -46,13 +46,14 @@ const VaultsPage = () => {
         <div key={vault.id} className="card mb-3">
           <div className="row g-0">
             <div className="col-md-2 col-xs-4">
-              <img src={gTTDImg} alt={vault.name} className="img-fluid m-4" width="42" />
+              <img src={vault.icon} alt={vault.name} className="img-fluid m-4" width="42" />
             </div>
             <div className="col-md-10 col-sm-9">
               <div className="card-body">
               <div className="row">
                 <div className="col">
-                  <h5 className="card-title">{vault.name} Vault</h5>
+                  <h5 className="card-title"><img src={gTTDImg} alt={vault.name} className="align-baseline" width="16" />&nbsp;
+                  {vault.name} Vault</h5>
                   <p className="card-text">
                     {(vault.balance) ? vault.balance : (<small className="text-muted">No Deposits</small>)}<br/>
                     <small className="text-muted"><i className="fa-regular fa-sm fa-clock"></i>&nbsp;{vault.details}</small>
