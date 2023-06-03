@@ -14,12 +14,19 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
 
   const handleConfirmTransfer = (amount) => {
     // Process transfer using the selected address
-    toast.success(`Sent ${amount} to ${selectedDestination} ${selectedSorrelAddress}`, {
-      icon: ({theme, type}) =>  <img src={LogoImg} className="rounded-circle me-5" height="24"/>,
-      theme: "dark",
-    });
-
-    console.log(`Transfer of ${amount}, to address: ${selectedDestination} match ${selectedSorrelAddress}`);
+    if (selectedSorrelAddress) {
+        toast.success(`Sent ${amount} to ${selectedSorrelAddress}`, {
+          icon: ({theme, type}) =>  <img src={LogoImg} className="rounded-circle me-5" height="24"/>,
+          theme: "dark",
+        });
+        console.log(`Transfer of ${amount}, to address: ${selectedSorrelAddress}`);
+    } else {
+        toast.success(`Sent ${amount} to ${selectedDestination}`, {
+          icon: ({theme, type}) =>  <img src={LogoImg} className="rounded-circle me-5" height="24"/>,
+          theme: "dark",
+        });
+        console.log(`Transfer of ${amount}, to address: ${selectedDestination}`);
+    }
   };
 
   return (

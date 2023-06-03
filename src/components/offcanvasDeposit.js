@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import Dialpad from './dialpad';
+import ModalQRCode from './modalQRCode';
 
 const OffcanvasDeposit = () => {
   const [selectedAccount, setSelectedAccount] = useState('');
   const [selectedDestination, setSelectedDestination] = useState('');
   const [depositDetails, setDepositDetails] = useState('');
+  const [showQRCode, setShowQRCode] = useState(false);
 
   const handleAccountChange = (event) => {
     setSelectedAccount(event.target.value);
@@ -23,6 +25,16 @@ const OffcanvasDeposit = () => {
     console.log('Deposit confirmed');
   };
 
+  const handleQRCodeClick = () => {
+    setShowQRCode(true);
+  };
+
+  const handleShareQRCode = () => {
+    // Handle sharing the QR code logic
+    console.log('QR code shared');
+  };
+
+
   return (
     <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasDeposit" aria-labelledby="offcanvasDepositLabel">
       <div className="offcanvas-header">
@@ -40,11 +52,11 @@ const OffcanvasDeposit = () => {
               </a>
             </div>
             <div className="col-12 mt-2">
-              <a href="#">
-              <button className="btn btn lg btn-outline-primary w-100" type="button">
+              
+              <button onClick={handleQRCodeClick} className="btn btn lg btn-outline-primary w-100" type="button">
                 <i className="fa-solid fa-lg fa-qrcode mt-4"></i><p className="">QR Code</p>
               </button>
-              </a>
+              
             </div>
             <div className="col-12 mt-2">
             <a href="#">
@@ -71,6 +83,13 @@ const OffcanvasDeposit = () => {
             </div>
           </div>
       </div>
+
+      <ModalQRCode
+        showQRCode={showQRCode}
+        onClose={() => setShowQRCode(false)}
+        onShare={handleShareQRCode}
+      />
+
     </div>
   );
 };

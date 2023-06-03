@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import OffcanvasDeposit from './offcanvasDeposit';
-import OffcanvasTransfer from './offcanvasTransfer';
 import gTTDImg from '../img/gttd.png';
 
 const AccountBalance = () => {
@@ -32,8 +30,6 @@ const AccountBalance = () => {
         </div>
 
       </div>
-      <OffcanvasDeposit></OffcanvasDeposit>
-      <OffcanvasTransfer></OffcanvasTransfer>
     </div>
   );
 };

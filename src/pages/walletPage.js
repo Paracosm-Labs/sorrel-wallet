@@ -5,7 +5,6 @@ import AccountActions from '../components/accountActions';
 import PromoSlide from '../components/promoSlide'
 import TxnHistory from '../components/txnHistory'
 import Navigation from '../components/navMenu';
-// import BottomNav from '../components/bottomNav';
 
 const AccountsPage = () => {
   return (

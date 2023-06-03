@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import QRCode from 'react-qr-code';
+import ModalQRCode from './modalQRCode';
 import OffcanvasDeposit from './offcanvasDeposit';
 import OffcanvasTransfer from './offcanvasTransfer';
 import { toast, ToastContainer } from 'react-toastify';
@@ -91,34 +91,16 @@ const AccountActions = () => {
         </button>
       </div>
 
-      {showQRCode && (
-        <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
-          <div className="modal-dialog modal-fullscreen-sm-down">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">My Sorrel Wallet</h5>
-                <button type="button" className="btn-close" onClick={() => setShowQRCode(false)}></button>
-              </div>
-              <div className="modal-body">
-                <div className="text-center">
-                  <QRCode value="Wallet Address!" />
-                </div>
-              </div>
-              <div className="modal-footer m-auto">
-                <button className="btn btn-lg btn-outline-secondary" type="button" onClick={handleShareQRCode}>
-                  <i className="fa-solid fa-share"></i>&nbsp;
-                  Share QR Code
-                </button>
 
-                <button type="button" className="btn btn-lg btn-secondary" onClick={() => setShowQRCode(false)}>Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
+      <ModalQRCode 
+        showQRCode={showQRCode}
+        onClose={() => setShowQRCode(false)}
+        onShare={handleShareQRCode}
+      />
+      
       <OffcanvasDeposit />
       <OffcanvasTransfer />
+
       <ToastContainer
         position="top-center"
         autoClose={8000}

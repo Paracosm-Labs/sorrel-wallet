@@ -1,26 +1,28 @@
 import React, { useState } from 'react';
-import AccountBalance from '../components/accountBalance';
 import Navigation from '../components/navMenu';
+import AccountBalance from '../components/accountBalance';
 import OffcanvasTransfer from '../components/offcanvasTransfer';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import LogoImg from '../img/logo2x.png';
 import gTTDImg from '../img/gttd.png';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const VaultsPage = () => {
+const EarnPage = () => {
 
   const vaults = [
-    { id: 1, icon: gTTDImg, name: 'TTD', details: '3 Month Lock',  apr:"2%", unlockTime: 1664300400, balance: '$3,500.69',address:'TLX0tttAM' },
-    { id: 2, icon: gTTDImg, name: 'TTD', details: '6 Month Lock',  apr:"2%", unlockTime: 2664311200, balance: '',address:'TLX0aaDM' },
-    { id: 3, icon: gTTDImg, name: 'TTD', details: '12 Month Lock', apr:"2%",  unlockTime: 6664322000, balance: '$500.83',address:'TLX0xxxPM' },
+    { id: 1, icon: gTTDImg, name: 'TTD', details: '3 Month Lock',  apr:"2%", unlockTime: 1664300400, balance: '$3,500.69',address:'TLX0tttA-Vault-AM' },
+    { id: 2, icon: gTTDImg, name: 'TTD', details: '6 Month Lock',  apr:"2%", unlockTime: 2664311200, balance: '',address:'TLX0aaDM-Vault-AP' },
+    { id: 3, icon: gTTDImg, name: 'TTD', details: '12 Month Lock', apr:"2%",  unlockTime: 6664322000, balance: '$500.83',address:'TLX0xxxP-Vault-AX' },
   ];
 
-  const [selectedVaultAddress, setselectedVaultAddress] = useState('');
-  
+
+  const [selectedVaultAddress, setSelectedVaultAddress] = useState('');
+
   const handleVaultAddress = (address) => {
-    setselectedVaultAddress(address);
-    console.log(`Preparing to transfer to Vault ${address}`);
+    setSelectedVaultAddress(address);
+    console.log(`Preparing transfer to vault at ${address}`);
   };
+
 
   const handleRedeem = (address) => {
     console.log(`Redeeming from Vault ${address}`);
@@ -35,13 +37,12 @@ const VaultsPage = () => {
     return currentTime > vaults.find((vault) => vault.id === vaultId)?.unlockTime;
   };
 
-
   return (
     <>
     <div className="vaults">
-      <Navigation></Navigation>
-      <AccountBalance></AccountBalance>
-
+    <Navigation></Navigation>
+    <AccountBalance></AccountBalance>
+    <div>
       {vaults.map((vault) => (
         <div key={vault.id} className="card mb-3">
           <div className="row g-0">
@@ -84,23 +85,12 @@ const VaultsPage = () => {
           </div>
 
       ))}
-    
-    <OffcanvasTransfer selectedSorrelAddress={selectedVaultAddress} />
-    
     </div>
 
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        newestOnTop={false}
-        closeOnClick
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-
+    <OffcanvasTransfer selectedSorrelAddress={selectedVaultAddress} />
+    </div>
     </>
   );
 };
 
-export default VaultsPage;
+export default EarnPage;

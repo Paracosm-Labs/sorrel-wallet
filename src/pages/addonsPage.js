@@ -13,7 +13,7 @@ const AddonsPage = () => {
     link: "https://docs.sorrelbanq.org/addons/cards",
     progress: 5,
     status:1,
-    address: "TL0x222234",
+    address: "TL0x22-Addon-34",
   },
 
   {
@@ -23,7 +23,7 @@ const AddonsPage = () => {
     link: "https://docs.sorrelbanq.org/addons/concierge",
     progress: 3,
     status:1,
-    address: "TL0x1555534",
+    address: "TL0x15-Addon-534",
   },
 
   {
@@ -33,7 +33,7 @@ const AddonsPage = () => {
     link: "https://docs.sorrelbanq.org/addons/lounges",
     progress: 3,
     status:1,
-    address: "TL0x12777734",
+    address: "TL0x12-Addon-7734",
   },
 
   {
@@ -43,7 +43,7 @@ const AddonsPage = () => {
     link: "https://docs.sorrelbanq.org/addons/sorrelpay",
     progress: 0,
     status:0,
-    address: "TL0x18888234",
+    address: "TL0x18-Addon-8234",
   },
 
   {
@@ -53,7 +53,7 @@ const AddonsPage = () => {
     link: "https://docs.sorrelbanq.org/addons/family-office",
     progress: 0,
     status:0,
-    address: "TL0x12999934",
+    address: "TL0x12-Addon-9934",
   },
     // Add more dummy addons as needed
   ];
