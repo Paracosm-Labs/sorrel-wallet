@@ -175,13 +175,13 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
                     <img
                       src={contact.avatar}
                       alt={contact.name}
-                      className="rounded-circle me-3"
+                      className="rounded-circle me-2"
                       width="50"
                       height="50"
                     />
 
                       {contact.name}
-                      
+
                     </button>
                   ))}
                 </div>
