@@ -5,7 +5,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LogoImg from '../img/logo2x.png';
 
-const OffcanvasTransfer = ({ selectedAddonAddress, selectedVaultAddress }) => {
+const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
   const [selectedDestination, setSelectedDestination] = useState('');
 
   const handleDestinationChange = (event) => {
@@ -14,12 +14,12 @@ const OffcanvasTransfer = ({ selectedAddonAddress, selectedVaultAddress }) => {
 
   const handleConfirmTransfer = (amount) => {
     // Process transfer using the selected address
-    toast.success(`Sent ${amount} to ${selectedDestination}`, {
-      icon: ({theme, type}) =>  <img src={LogoImg} className="rounded-circle" height="32"/>,
+    toast.success(`Sent ${amount} to ${selectedDestination} ${selectedSorrelAddress}`, {
+      icon: ({theme, type}) =>  <img src={LogoImg} className="rounded-circle me-5" height="24"/>,
       theme: "dark",
     });
 
-    console.log('Transfer of', amount, 'to address:', selectedDestination);
+    console.log(`Transfer of ${amount}, to address: ${selectedDestination} match ${selectedSorrelAddress}`);
   };
 
   return (
@@ -30,7 +30,7 @@ const OffcanvasTransfer = ({ selectedAddonAddress, selectedVaultAddress }) => {
           <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div className="offcanvas-body">
-          <AddressBook onContactSelect={handleDestinationChange} selectedAddonAddress={selectedAddonAddress} selectedVaultAddress={selectedVaultAddress}/>
+          <AddressBook onContactSelect={handleDestinationChange} sorrelAddress={selectedSorrelAddress}/>
           <Dialpad onConfirm={handleConfirmTransfer} selectedDestination={selectedDestination} />
         </div>
       </div>

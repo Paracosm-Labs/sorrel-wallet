@@ -60,7 +60,7 @@ const AddonsPage = () => {
 
   const [selectedAddonAddress, setSelectedAddonAddress] = useState('');
 
-  const handleAddonFund = (address) => {
+  const handleAddonAddress = (address) => {
     setSelectedAddonAddress(address);
     console.log(`Preparing to fund addon at ${address}`);
   };
@@ -88,14 +88,15 @@ const AddonsPage = () => {
                   </div>
                   <span className="m-auto">{addon.progress}%</span>
                 </div>
-                <button onClick={() => handleAddonFund(addon.address)} className="btn btn-lg btn-outline-secondary mt-3 w-100" disabled={addon.status === 0} type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTransfer" aria-controls="offcanvasTransfer">Fund</button>
+                <button onClick={() => handleAddonAddress(addon.address)} className="btn btn-lg btn-outline-secondary mt-3 w-100" disabled={addon.status === 0} type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTransfer" aria-controls="offcanvasTransfer">Fund</button>
               </div>
             </div>
           </div>
         </div>
       ))}
     </div>
-    <OffcanvasTransfer selectedAddonAddress={selectedAddonAddress} />
+
+    <OffcanvasTransfer selectedSorrelAddress={selectedAddonAddress} />
     </div>
     </>
   );

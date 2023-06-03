@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { QrReader } from 'react-qr-reader';
 
-const AddressBook = ({ onContactSelect, selectedAddonAddress, selectedVaultAddress}) => {
+const AddressBook = ({ onContactSelect, sorrelAddress}) => {
   const dummyContacts = [
     { name: 'Alex van Anders', avatar: 'https://i.pravatar.cc/42?img=1', address: 'TALaB0x123addressbook' },
     { name: 'Javier Reyes', avatar: 'https://i.pravatar.cc/42?img=2', address: 'TBLaB0x456ab' },
@@ -30,7 +30,6 @@ const AddressBook = ({ onContactSelect, selectedAddonAddress, selectedVaultAddre
       setSelectedAddress(address);
       onContactSelect(address);
     }
-
 
     setShowModal(false);
     console.log(selectedAddress, address,  option);
@@ -61,7 +60,7 @@ const AddressBook = ({ onContactSelect, selectedAddonAddress, selectedVaultAddre
 
   return (
     <div>
-      <div className={selectedAddonAddress ? "d-none" : "d-flex address-book"}>
+      <div className={sorrelAddress ? `d-none address-book ${sorrelAddress}` : "d-flex address-book"}>
         <div className="align-items-center m-2">
           <button className="btn btn-sm h-100 btn-outline-secondary" onClick={() => handleOptionClick('qr')}>
             <i className="fa-solid fa-qrcode"></i>
@@ -142,27 +141,19 @@ const AddressBook = ({ onContactSelect, selectedAddonAddress, selectedVaultAddre
         </div>
       )}
 
-      {selectedAddonAddress ? (
+      {sorrelAddress ? (
         <div className="mt-3">
           <div className="text-center">
             <h5 className="badge bg-info p-2">Sorrel Transfer</h5>
-            <p>{selectedAddonAddress}</p>
+            <p>{sorrelAddress}</p>
           </div>
         </div>
       ):(
         <div></div>
       )}
 
-      {selectedVaultAddress ? (
-        <div className="mt-3">
-          <div className="text-center">
-            <h5 className="badge bg-info p-2">Sorrel Vault Transfer</h5>
-            <p>{selectedVaultAddress}</p>
-          </div>
-        </div>
-      ):(
-        <div></div>
-      )}
+
+
 
 
       {showModal && (

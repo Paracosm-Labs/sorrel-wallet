@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 
 
-const Dialpad = ({ onConfirm, selectedAddonAddress, selectedVaultAddress }) => {
+const Dialpad = ({ onConfirm, selectedDestination }) => {
   const [amount, setAmount] = useState('');
   const [selectedAddress, setSelectedAddress] = useState(null);
 
@@ -12,7 +12,7 @@ const Dialpad = ({ onConfirm, selectedAddonAddress, selectedVaultAddress }) => {
     //   setSelectedAddress(selectedAddonsAddress);
     //   console.log(amount, selectedAddress)
     // }
-    console.log(number, selectedAddonAddress, selectedVaultAddress)
+    console.log(number, selectedDestination)
   };
 
   const handleClearClick = () => {
@@ -21,13 +21,13 @@ const Dialpad = ({ onConfirm, selectedAddonAddress, selectedVaultAddress }) => {
 
   const handleConfirmClick = () => {
     onConfirm(amount);
-    console.log(amount, selectedAddonAddress, selectedVaultAddress)
+    console.log(amount, selectedDestination)
     setAmount('');
   };
 
   const handleSetAmountClick = (presetAmount) => {
     setAmount(presetAmount);
-    console.log(presetAmount, selectedAddonAddress, selectedVaultAddress)
+    console.log(presetAmount, selectedDestination)
   };
 
   return (
