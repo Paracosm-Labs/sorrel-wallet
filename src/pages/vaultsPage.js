@@ -45,10 +45,10 @@ const VaultsPage = () => {
       {vaults.map((vault) => (
         <div key={vault.id} className="card mb-3">
           <div className="row g-0">
-            <div className="col-md-2 col-xs-4">
+            <div className="col-md-2 col-sm-4  d-none d-md-block d-sm-none">
               <img src={vault.icon} alt={vault.name} className="img-fluid m-4" width="42" />
             </div>
-            <div className="col-md-10 col-sm-9">
+            <div className="col-md-10 col-sm-8">
               <div className="card-body">
               <div className="row">
                 <div className="col">
