@@ -3,10 +3,10 @@ import { QrReader } from 'react-qr-reader';
 
 const AddressBook = ({ onContactSelect, sorrelAddress}) => {
   const dummyContacts = [
-    { name: 'Alex van Anders', avatar: 'https://i.pravatar.cc/42?img=1', address: 'TALaB0x123addressbook' },
-    { name: 'Javier Reyes', avatar: 'https://i.pravatar.cc/42?img=2', address: 'TBLaB0x456ab' },
-    { name: 'Michelle Ge', avatar: 'https://i.pravatar.cc/42?img=3', address: 'TCLaB0x789ab' },
-    { name: 'Marcus Toussaint', avatar: 'https://i.pravatar.cc/42?img=4', address: 'TDLaB0xabcab' },
+    { name: 'Alex van Anders', avatar: '/img/alex.jpg', address: 'TALaB0x123addressbook' },
+    { name: 'Javier Reyes', avatar: '/img/javier.jpg', address: 'TBLaB0x456ab' },
+    { name: 'Michelle Ge', avatar: '/img/michelle.jpg', address: 'TCLaB0x789ab' },
+    { name: 'Marcus Toussaint', avatar: '/img/marcus.jpg', address: 'TDLaB0xabcab' },
   ];
 
 
@@ -86,7 +86,7 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
               onClick={() => handleOptionClick(contact, contact.address)}
             >
               <img src={contact.avatar} alt={contact.name} className="rounded-circle" width="50" height="50" />
-              <small className="text-muted">{contact.name}</small>
+              <small className="">{contact.name}</small>
             </button>
           </div>
         ))}

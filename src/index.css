@@ -45,7 +45,7 @@ code {
 
 .skipper {
   top: 0px; 
-  right: 650px;
+  right: 20px;
   z-index: 1000;
   }
 .skipper a{text-decoration: none;}

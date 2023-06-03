@@ -19,7 +19,7 @@ const WelcomeOnboarding = () => {
 		  <div className="carousel-inner">
 		    <div className="carousel-item active" data-bs-interval="10000">
 
-		      <img src="/img/onboard1.jpg" className="d-block mx-auto w-100" width="420" height="800"/>
+		      <img src="/img/onboard6.jpg" className="d-block mx-auto w-100" width="420" height="800"/>
 		      <div className="carousel-caption">
 				  <button className="btn btn-lg btn-outline-success w-100 mt-3 mb-3" type="button"  data-bs-target="#homeCarousel" data-bs-slide="next">
 				    Next&nbsp;&nbsp;>
@@ -59,7 +59,7 @@ const WelcomeOnboarding = () => {
 		      <img src="/img/onboard4b.jpg" className="d-block mx-auto w-100" width="420" height="800"/>
 		      <div className="carousel-caption">
 		        <h3>Coming Soon</h3>
-		        <h5>Wallet NFC Cards and zero to low interest shared credit facility</h5>
+		        <h5>Wallet NFC Cards and zero to low interest credit facility</h5>
 
 				  <button className="btn btn-lg btn-outline-success w-100 mt-3 mb-3" type="button"  data-bs-target="#homeCarousel" data-bs-slide="next">
 				    Next&nbsp;&nbsp;>
