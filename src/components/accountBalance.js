@@ -25,7 +25,7 @@ const AccountBalance = () => {
   return (
     <div className="account-balance mb-4">
       <div className="card">
-        <div className="card-body mx-5">
+        <div className="card-body mx-5 text-center">
           <h6 className="mt-2"><img src={gTTDImg} alt="" className="currency-icon rounded-circle px-1" height="24" />
           TTD Balance</h6>
           <h1 className="card-text"><span className="text-muted">$</span>{balance}</h1>

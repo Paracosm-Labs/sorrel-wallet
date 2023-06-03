@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Welcome from './pages/welcomePage';
-import Wallet from './pages/accountsPage';
+import Wallet from './pages/walletPage';
 import Earn from './pages/vaultsPage';
 import Explore from './pages/explorePage';
 import Addons from './pages/addonsPage';

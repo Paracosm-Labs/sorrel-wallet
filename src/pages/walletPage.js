@@ -9,7 +9,7 @@ import Navigation from '../components/navMenu';
 
 const AccountsPage = () => {
   return (
-    <div className="text-center wallet">
+    <div className="wallet">
       
       <Navigation></Navigation>
       <AccountBalance></AccountBalance>
