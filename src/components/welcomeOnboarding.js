@@ -22,7 +22,7 @@ const WelcomeOnboarding = () => {
 		      <img src="/img/onboard6.jpg" className="d-block mx-auto w-100" width="420" height="800"/>
 		      <div className="carousel-caption">
 				  <button className="btn btn-lg btn-outline-success w-100 mt-3 mb-3" type="button"  data-bs-target="#homeCarousel" data-bs-slide="next">
-				    Next&nbsp;&nbsp;>
+				    Get Started&nbsp;&nbsp;>
 				  </button>
 
 		      </div>
