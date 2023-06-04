@@ -134,10 +134,8 @@ background-color: #f8f8f8;
   -webkit-animation: vibrate-1 0.2s linear infinite both;
           animation: vibrate-1 0.2s linear infinite both;
   color: #109e77;
-  font-weight: 900;
-  font-size: 3.1rem;
-  transition-timing-function: ease-out;
-  transition: 1.5s;
+  transition-timing-function: ease-in;
+  transition: 1s;
 }
 
 @-webkit-keyframes vibrate-1 {
