@@ -57,7 +57,7 @@ const AccountActions = () => {
   };
 
   const offcanvasExchange = () => {
-    toast.info("Hi I'm Jes, Your Concierge. Welcome to Sorrel! What would you like to do today?", {
+    toast.info("Welcome to Sorrel! I'm Jes, Your Concierge. What would you like to do today?", {
       icon: ({theme, type}) =>  <img src="/img/jes.jpg" className="rounded-circle" height="24"/>,
       theme: "dark",
     });
