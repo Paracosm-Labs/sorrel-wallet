@@ -3,6 +3,18 @@ import gTTDImg from '../img/gttd.png';
 
 const AccountBalance = () => {
   const [balance, setBalance] = useState(0);
+  const [isAnimated, setIsAnimated] = useState(false);
+
+    //function to handle the logic of making the value animate then back to normal.
+    const handleValueAnimate = () => {
+      // set the value to animation
+      setIsAnimated(true);
+      
+      // after 1 second, set the value back to normal
+      setTimeout(() => {
+        setIsAnimated(false);
+      }, 1500);
+    }
 
 
   useEffect(() => {
@@ -13,11 +25,15 @@ const AccountBalance = () => {
 
       // Update the balance state
       setBalance("142,369.88");
+      if (balance !== 0) {
+        handleValueAnimate();
+      }
+
     };
 
     // Call the fetchBalance function
     fetchBalance();
-  }, []);
+  }, [balance]);
 
 
   return (
@@ -26,7 +42,10 @@ const AccountBalance = () => {
         <div className="card-body mx-5 text-center">
           <h6 className="mt-2"><img src={gTTDImg} alt="" className="currency-icon rounded-circle px-1" height="24" />
           TTD Balance</h6>
-          <h1 className="card-text"><span className="text-muted">$</span>{balance}</h1>
+          <h1 className="card-text">
+            <span className="text-muted">$</span>
+            <span className={isAnimated ? 'vibrate-1' : '' }>{balance}</span>
+          </h1>
         </div>
 
       </div>
