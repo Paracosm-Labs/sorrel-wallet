@@ -8,7 +8,7 @@ const AddonsPage = () => {
 
   {
     id: 1,
-    label: "Sorrel Wallet Cards",
+    label: "Sorrel Wallet Card & Concierge",
     goal: "$18,000+",
     link: "https://docs.sorrelbanq.org/addons/wallet-nfc-cards",
     progress: 12,
@@ -18,9 +18,9 @@ const AddonsPage = () => {
 
   {
     id: 2,
-    label: "Sorrel AIA Concierge",
+    label: "Sorrel AIA Team",
     goal: "$18,000+",
-    link: "https://docs.sorrelbanq.org/addons/concierge",
+    link: "https://docs.sorrelbanq.org/addons/aia-team",
     progress: 3,
     status:1,
     address: "TL0x15-Addon-534",
