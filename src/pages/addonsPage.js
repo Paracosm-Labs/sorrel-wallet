@@ -11,7 +11,7 @@ const AddonsPage = () => {
     label: "Sorrel Wallet Cards",
     goal: "$18,000+",
     link: "https://docs.sorrelbanq.org/addons/cards",
-    progress: 5,
+    progress: 12,
     status:1,
     address: "TL0x22-Addon-34",
   },
@@ -73,10 +73,10 @@ const AddonsPage = () => {
       {dummyAddons.map((addon) => (
         <div key={addon.id} className="card mb-3">
           <div className="row g-0">
-            <div className="col-md-2 col-sm-3">
-              <img src={LogoImg} alt={addon.label} className="img-fluid m-4" width="50" />
+            <div className="col-2">
+              <img src={LogoImg} alt={addon.label} className="img-fluid m-4" width="42" />
             </div>
-            <div className="col-md-10 col-sm-9">
+            <div className="col-10">
               <div className="card-body">
                 <h5 className="card-title">{addon.label}</h5>
                 <a href={addon.link} target="_blank" rel="noreferrer">Learn More</a>
