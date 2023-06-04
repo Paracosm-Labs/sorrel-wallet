@@ -4,7 +4,6 @@ import OffcanvasDeposit from './offcanvasDeposit';
 import OffcanvasTransfer from './offcanvasTransfer';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import LogoImg from '../img/logo2x.png';
 
 const AccountActions = () => {
   const [balance, setBalance] = useState(0);
@@ -58,8 +57,8 @@ const AccountActions = () => {
   };
 
   const offcanvasExchange = () => {
-    toast.info("What features would you like to have available? Let us know :)", {
-      icon: ({theme, type}) =>  <img src={LogoImg} className="rounded-circle" height="32"/>,
+    toast.info("Hi I'm Jes, Your Concierge. Welcome to Sorrel! What would you like to do today?", {
+      icon: ({theme, type}) =>  <img src="/img/jes.jpg" className="rounded-circle" height="24"/>,
       theme: "dark",
     });
 
@@ -82,7 +81,7 @@ const AccountActions = () => {
           <i className="fa-solid fa-qrcode"></i>
         </button>
         <button className="btn btn-lg btn-outline-secondary" type="button" onClick={offcanvasExchange}>
-          <i className="fa-solid fa-coins"></i>
+          <i className="fa-solid fa-bell-concierge"></i>
         </button>
 
         <button className="btn btn-lg btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTransfer" aria-controls="offcanvasTransfer">
