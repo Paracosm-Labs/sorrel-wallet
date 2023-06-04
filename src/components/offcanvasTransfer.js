@@ -19,13 +19,13 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
           icon: ({theme, type}) =>  <img src={LogoImg} className="rounded-circle me-5" height="24"/>,
           theme: "dark",
         });
-        console.log(`Transfer of ${amount}, to address: ${selectedSorrelAddress}`);
+        console.log(`Transferred ${amount}, to address: ${selectedSorrelAddress}`);
     } else {
         toast.success(`Sent ${amount} to ${selectedDestination}`, {
           icon: ({theme, type}) =>  <img src={LogoImg} className="rounded-circle me-5" height="24"/>,
           theme: "dark",
         });
-        console.log(`Transfer of ${amount}, to address: ${selectedDestination}`);
+        console.log(`Transferred ${amount}, to address: ${selectedDestination}`);
     }
   };
 
