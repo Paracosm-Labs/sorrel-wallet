@@ -10,7 +10,7 @@ const AddonsPage = () => {
     id: 1,
     label: "Sorrel Wallet Cards",
     goal: "$18,000+",
-    link: "https://docs.sorrelbanq.org/addons/cards",
+    link: "https://docs.sorrelbanq.org/addons/wallet-nfc-cards",
     progress: 12,
     status:1,
     address: "TL0x22-Addon-34",
