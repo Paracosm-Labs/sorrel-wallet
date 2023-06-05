@@ -66,6 +66,13 @@ code {
 
 .carousel-inner .bg-primary{background-color: #2f3349!important;}
 
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .address-book i{font-size:48px;}
 
 .dialpad{width: -webkit-fill-available;}

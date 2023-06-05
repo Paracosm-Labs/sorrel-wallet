@@ -1,6 +1,6 @@
 import React  from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-
+import RingLoader from "react-spinners/RingLoader";
 
 const redirectToURL = (url) => {
   window.location.href = url;
@@ -15,7 +15,11 @@ const WelcomeOnboarding = () => {
   };
 
   if (isLoading) {
-    return <div className="m-auto"><h1>Loading...</h1></div>;
+    return (
+    	<div className="spinner-container">
+				<RingLoader color="#109e77" size={100} />
+			</div>
+		);
   }
 
   if (error) {
