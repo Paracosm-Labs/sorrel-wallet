@@ -4,7 +4,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 const OffcanvasNav = () => {
   const [selectedCountry, setSelectedCountry] = useState('1');
 
-  const { isAuthenticated, user, logout } =
+  const { isAuthenticated, user, logout, loginWithRedirect } =
     useAuth0();
 
   const handleCountryChange = async (event) => {
@@ -13,7 +13,7 @@ const OffcanvasNav = () => {
   };
 
   return (
-    <div className="offcanvas offcanvas-end" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
+    <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
       <div className="offcanvas-header">
         <h5 className="offcanvas-title" id="offcanvasNavLabel">Explore Sorrel</h5>
         <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -38,11 +38,23 @@ const OffcanvasNav = () => {
               <option value="Other Countries">other countries</option>
             </select>
           </div>
-          <button onClick={() => logout({ returnTo: `/` })} className="btn btn-xs btn-outline-secondary mt-3" type="button">
+          <button onClick={() => logout({ returnTo: `/explore` })} className="btn btn-xs btn-outline-secondary mt-3" type="button">
             Logout
           </button>
           <hr/>
-        </section> ):(<></>)
+        </section> ):(
+
+        <section className="mb-4 text-center">
+          <div className="align-items-center">
+            <p className="badge bg-warning p-1"><i className="fa-solid fa-wifi"></i>&nbsp;Not Connected</p>
+          </div>
+          <button onClick={() => loginWithRedirect()} className="btn btn-xs btn-outline-secondary mt-3" type="button">
+            Login | Sign Up
+          </button>
+          <hr/>
+        </section>
+
+        )
 
       }
 
