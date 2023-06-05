@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navigation from '../components/navMenu';
 import SearchBox from '../components/searchBox';
+import OffcanvasBuy from '../components/offcanvasBuy';
+import OffcanvasSubscribe from '../components/offcanvasSubscribe';
 
 const ExplorePage = () => {
+  const [selectedShopId, setSelectedShopId] = useState(null);
+  const [selectedShopName, setSelectedShopName] = useState('');
+  const [selectedShopPic, setSelectedShopPic] = useState('');
+
   // Dummy data for the list of shops
   const shops = [
     { id: 1, username: 'Food & Entertainment', image: 'https://media.discordapp.net/attachments/1061348902252597368/1113937679789338644/wescosmic_table_of_consumer_products_for_instagram_0_d75d5b92-5939-44f0-9139-850581ecbaf8.png?width=350&height=180' },
@@ -11,22 +17,56 @@ const ExplorePage = () => {
     { id: 4, username: 'Positive Social Impact', image: 'https://media.discordapp.net/attachments/1061348902252597368/1113936393211760660/wescosmic_people_doing_social_good_in_community_and_nature_caus_bcbd483f-47c4-4a60-a0ee-1c7ba704e1d4.png?width=350&height=180' },
   ];
 
+  const handleBuyClick = (id, name, pic) => {
+    setSelectedShopId(id);
+    setSelectedShopName(name);
+    setSelectedShopPic(pic);
+  };
+
+  const handleSubscribeClick = (id, name, pic) => {
+    setSelectedShopId(id);
+    setSelectedShopName(name);
+    setSelectedShopPic(pic);
+  };
+
   return (
     <>
-    <div className="text-center explore">
-    <Navigation></Navigation>
-    <SearchBox></SearchBox>
-      <div className="row shops mt-3">
-        {shops.map((shop) => (
-          <div className="col mt-3 mb-3 m-auto" key={shop.id}>
-            <div className="card shop-card">
-              <img src={shop.image} alt={shop.username} className="shop-image" />
-              <p className="shop-username pt-2">{shop.username}</p>
+      <div className="text-center explore">
+        <Navigation />
+        <SearchBox />
+        <div className="row shops mt-3">
+          {shops.map((shop) => (
+            <div className="col mt-3 mb-3 m-auto" key={shop.id}>
+              <div className="card shop-card">
+                <img src={shop.image} alt={shop.username} className="shop-image" />
+                <p className="shop-username pt-2">{shop.username}</p>
+                <button
+                  className="btn btn-outline-secondary mt-3"
+                  type="button"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#offcanvasBuy"
+                  aria-controls="offcanvasBuy"
+                  onClick={() => handleBuyClick(shop.id, shop.username, shop.image)}
+                >
+                  Buy Now<br/><small>Demo</small>
+                </button>
+                <button
+                  className="btn btn-outline-secondary mt-3"
+                  type="button"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#offcanvasSubscribe"
+                  aria-controls="offcanvasSubscribe"
+                  onClick={() => handleSubscribeClick(shop.id, shop.username, shop.image)}
+                >
+                  Subscribe<br/><small>Demo</small>
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+      <OffcanvasBuy shopId={selectedShopId} shopName={selectedShopName} shopPic={selectedShopPic} />
+      <OffcanvasSubscribe shopId={selectedShopId} shopName={selectedShopName} shopPic={selectedShopPic} />
     </>
   );
 };
