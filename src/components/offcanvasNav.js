@@ -38,7 +38,7 @@ const OffcanvasNav = () => {
               <option value="Other Countries">other countries</option>
             </select>
           </div>
-          <button onClick={() => logout({ returnTo: window.location.origin })} className="btn btn-xs btn-outline-secondary mt-3" type="button">
+          <button onClick={() => logout({ returnTo: `/` })} className="btn btn-xs btn-outline-secondary mt-3" type="button">
             Logout
           </button>
           <hr/>
