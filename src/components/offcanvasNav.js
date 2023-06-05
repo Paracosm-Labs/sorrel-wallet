@@ -1,32 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const OffcanvasNav = () => {
+  const [selectedCountry, setSelectedCountry] = useState('1');
+
+  const { isAuthenticated, user, logout } =
+    useAuth0();
+
+  const handleCountryChange = async (event) => {
+    setSelectedCountry(event.target.value);
+    console.log('Selected Country:', selectedCountry);
+  };
+
   return (
-    <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
+    <div className="offcanvas offcanvas-end" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
       <div className="offcanvas-header">
         <h5 className="offcanvas-title" id="offcanvasNavLabel">Explore Sorrel</h5>
         <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div className="offcanvas-body">
+      {isAuthenticated ? (
+
+
         <section className="mb-4 text-center">
           <div className="align-items-center">
-            <img src="https://i.pravatar.cc/64?img=14" alt="Avatar" className="rounded-circle m-3" />
-            <h6 className="mb-0">John Doe</h6>
+            <img src={user.picture} alt="Avatar" className="rounded-circle m-3" height="60" />
+            <h6 className="mb-0">{user.name}</h6>
             <p className="badge bg-success p-1"><i className="fa-solid fa-wifi"></i>&nbsp;Connected</p>
           </div>
-
-          <div className="">
+          <div className="mt-3">
             <label htmlFor="countrySelect" className="form-label">Switch Country</label>
-            <select className="form-select form-control-lg" id="countrySelect">
-              <option value="1">Trinidad & Tobago</option>
+            <select className="form-select form-control-lg" id="countrySelect" onChange={handleCountryChange}>
+              <option defaultValue value="1">Trinidad & Tobago</option>
               <option value="2">Barbados</option>
               <option value="3">Jamaica</option>
               <option value="4">Dominica</option>
-              <option value="5">other countries</option>
+              <option value="Other Countries">other countries</option>
             </select>
           </div>
+          <button onClick={() => logout({ returnTo: window.location.origin })} className="btn btn-xs btn-outline-secondary mt-3" type="button">
+            Logout
+          </button>
           <hr/>
-        </section>
+        </section> ):(<></>)
+
+      }
+
         <section>
           <div className="row">
             <div className="col mt-2">

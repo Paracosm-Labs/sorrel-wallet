@@ -1,12 +1,33 @@
 import React  from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+
+
+const redirectToURL = (url) => {
+  window.location.href = url;
+};
 
 const WelcomeOnboarding = () => {
+
+  const { isLoading, isAuthenticated, error, loginWithRedirect } = useAuth0();
+
+  if (isAuthenticated) {
+    return redirectToURL('/welcome');
+  };
+
+  if (isLoading) {
+    return <div className="m-auto"><h1>Loading...</h1></div>;
+  }
+
+  if (error) {
+    return <div><h1>Oops... {error.message}</h1></div>;
+  }
+  else{
 
   return (
 
     <>
 	<div className="onboarding">
-	<div className="skipper position-fixed text-end mt-3 mx-3"><a href="/wallet">Skip</a></div>
+	<div className="skipper position-fixed text-end mt-3 mx-3"><a href="#" data-bs-target="#homeCarousel" data-bs-slide-to="4" aria-label="Slide 4">Skip</a></div>
 		<div id="homeCarousel" className="carousel carousel-light slide" data-bs-ride="carousel">
 		  <div className="carousel-indicators">
 		    <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
@@ -14,7 +35,6 @@ const WelcomeOnboarding = () => {
 		    <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="2" aria-label="Slide 2"></button>
 		    <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="3" aria-label="Slide 3"></button>
 		    <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="4" aria-label="Slide 4"></button>
-		    <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="5" aria-label="Slide 5"></button>
 		  </div>
 		  <div className="carousel-inner">
 		    <div className="carousel-item active" data-bs-interval="10000">
@@ -78,23 +98,13 @@ const WelcomeOnboarding = () => {
 
 				        <div className="d-grid gap-3 mt-3">
 				        
-				          <button className="btn btn-lg btn-outline-success w-100" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
-				            <i className="fab fa-google me-2"></i>Sign in with Google
+				          <button onClick={() => loginWithRedirect()} className="btn btn-lg btn-outline-success w-100" type="button">
+				            <i className="fa-solid fa-user-plus me-2"></i>Signup | Login
 				          </button>
+
 				        
-				        
-				          <button className="btn btn-lg btn-outline-success w-100" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
-				            <i className="fab fa-telegram-plane me-2"></i>Sign in with Telegram
-				          </button>
-				        
-				        
-				          <button className="btn btn-lg btn-outline-success w-100" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
-				            <i className="fas fa-fingerprint me-2"></i>Sign in with Biometrics
-				          </button>
-				        
-				        
-				          <button className="btn btn-lg btn-outline-success w-100" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
-				            <i className="fas fa-credit-card me-2"></i>via NFC Wallet Card
+				          <button className="btn btn-lg btn-outline-success w-100 disabled" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
+				            <i className="fas fa-credit-card me-2"></i>Login via NFC Card<br/><small>Coming Soon</small>
 				          </button>
 				        
 				        </div>
@@ -103,33 +113,6 @@ const WelcomeOnboarding = () => {
 				</div>
 
 
-		    <div className="carousel-item" data-bs-interval="50000">
-
-		      	<img src="/img/onboard5.jpg" className="d-block mx-auto w-100" width="420" height="800"/>
-
-			      <div className="carousel-caption">
-			        
-				    <h5>Your New Sorrel Account Awaits!</h5>
-
-				    <div className="p-1 mt-5">
-				      	<h6 className="text-left">Select Your Home Country</h6>
-				        <select className="mt-3 form-select" aria-label="Select Country">
-				          <option defaultValue >Trinidad & Tobago</option>
-				          <option value="1">Barbados</option>
-				          <option value="2">Jamaica</option>
-				          <option value="3">Dominica</option>
-				          <option value="4">other countries</option>
-				        </select>
-				    </div>
-
-					  <a href="/wallet"> <button className="btn btn-lg btn-outline-success w-100 mt-5 mb-3" type="button" >
-					   Create Account
-					  </button></a>
-
-			      </div>
-
-
-		    </div>
 		  </div>
 		  <button className="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
 		    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -147,6 +130,7 @@ const WelcomeOnboarding = () => {
     </>
 
   );
+	};
 };
 
 export default WelcomeOnboarding;

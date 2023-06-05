@@ -1,17 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Auth0Provider } from '@auth0/auth0-react';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+
   <React.StrictMode>
     <div className="container">
     <div className="row">
     <div className="col d-none d-md-block d-sm-none"></div>
     <div className="col border border-primary app-content">
+<Auth0Provider
+    domain="dev-3n1an7ikmu2td1ug.us.auth0.com"
+    clientId="PYRKjBrDqPGz9DYyCuYj9h3ISNnrOnKS"
+    authorizationParams={{
+      redirect_uri: window.location.origin,
+    }}
+  > 
       <App />
+</Auth0Provider>
+
     </div>
     <div className="col d-none d-md-block d-sm-none"></div>
     </div>
