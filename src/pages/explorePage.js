@@ -42,7 +42,7 @@ const ExplorePage = () => {
                 <img src={shop.image} alt={shop.username} className="shop-image" />
                 <p className="shop-username pt-2">{shop.username}</p>
                 <button
-                  className="btn btn-outline-secondary mt-3"
+                  className="btn btn-outline-success m-3 mt-2"
                   type="button"
                   data-bs-toggle="offcanvas"
                   data-bs-target="#offcanvasBuy"
@@ -52,7 +52,7 @@ const ExplorePage = () => {
                   Buy Now<br/><small>Demo</small>
                 </button>
                 <button
-                  className="btn btn-outline-secondary mt-3"
+                  className="btn btn-outline-success m-3 mt-2"
                   type="button"
                   data-bs-toggle="offcanvas"
                   data-bs-target="#offcanvasSubscribe"
