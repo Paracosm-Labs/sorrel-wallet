@@ -6,6 +6,7 @@ import Welcome from './pages/welcomePage';
 import Wallet from './pages/walletPage';
 import Earn from './pages/earnPage';
 import Explore from './pages/explorePage';
+import Shop from './pages/shopPage';
 import Addons from './pages/addonsPage';
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
         <Route exact path="/wallet" element={<Wallet />} />
         <Route exact path="/earn" element={<Earn />} />
         <Route exact path="/explore" element={<Explore />} />
+        <Route exact path="/shop" element={<Shop />} />
         <Route exact path="/addons" element={<Addons />} />
         <Route element={<Wallet />} />
       </Routes>

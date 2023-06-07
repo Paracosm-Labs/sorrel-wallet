@@ -1,44 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Navigation from '../components/navMenu';
+import SearchBox from '../components/searchBox';
+import OffcanvasBuy from '../components/offcanvasBuy';
 
-const ShopProfile = () => {
+const ShopPage = () => {
+  const [selectedProductId, setSelectedProductId] = useState(null);
+  const [selectedProductName, setSelectedProductName] = useState('');
+  const [selectedProductPic, setSelectedProductPic] = useState('');
+
+  const products = Array.from({ length: 5 }, (_, i) => ({
+    id: i + 1,
+    name: `Product ${i + 1}`,
+    image: `https://dummyimage.com/200x200/000/fff&text=Product+${i + 1}`,
+    price: (i + 1) * 10,
+  }));
+
+  const handleBuyClick = (id, name, pic) => {
+    setSelectedProductId(id);
+    setSelectedProductName(name);
+    setSelectedProductPic(pic);
+  };
+
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-md-4">
-          <div className="profile-section">
-            <img
-              src="https://dummyimage.com/42x42/000000/fff&text=Shop+Logo"
-              alt="Shop Logo"
-              className="profile-logo"
-            />
-            <h3 className="profile-username">Gourmet Foods</h3>
-            <p className="profile-bio">We deliver to you!</p>
-          </div>
-        </div>
-        <div className="col-md-8">
-          <div className="profile-section">
-            <div className="profile-gallery">
-              <img
-                src="https://dummyimage.com/250x100/000000/fff&text=Post+1"
-                alt="Post 1"
-                className="profile-post m-3"
-              />
-              <img
-                src="https://dummyimage.com/250x100/000000/fff&text=Post+2"
-                alt="Post 2"
-                className="profile-post m-3"
-              />
-              <img
-                src="https://dummyimage.com/250x100/000000/fff&text=Post+3"
-                alt="Post 3"
-                className="profile-post m-3"
-              />
+    <>
+      <div className="text-center shop">
+        <Navigation />
+        <SearchBox />
+        <div className="row products mt-3">
+          {products.map((product) => (
+            <div className="col-md-4 mt-3 mb-3" key={product.id}>
+              <div className="card product-card">
+                <img src={product.image} alt={product.name} className="product-image" />
+                <p className="product-name pt-2">{product.name}</p>
+                <p className="product-price">${product.price}</p>
+                <button
+                  className="btn btn-outline-success m-3 mt-2"
+                  type="button"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#offcanvasBuy"
+                  aria-controls="offcanvasBuy"
+                  onClick={() => handleBuyClick(product.id, product.name, product.image)}
+                >
+                  Buy Now
+                </button>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
-    </div>
+      <OffcanvasBuy productId={selectedProductId} productName={selectedProductName} productPic={selectedProductPic} />
+    </>
   );
 };
 
-export default ShopProfile;
+export default ShopPage;
