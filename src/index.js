@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
   <React.StrictMode>
-    <div className="container">
+    <div className="">
     <div className="row">
     <div className="col d-none d-md-block d-sm-none"></div>
     <div className="col border border-primary app-content">
