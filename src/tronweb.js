@@ -5,7 +5,7 @@ const TronWeb = require("tronweb");
 const tronWeb = new TronWeb({
   fullHost: "https://api.nileex.io/",
   // fullHost: "https://api.trongrid.io/",
-  // headers: { "TRON-PRO-API-KEY": TRON_PRO_API_KEY },
+  headers: { "TRON-PRO-API-KEY": TRON_PRO_API_KEY },
   privateKey: PRIVATE_KEY,
 });
 

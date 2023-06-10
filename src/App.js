@@ -8,6 +8,8 @@ import Earn from './pages/earnPage';
 import Explore from './pages/explorePage';
 import Shop from './pages/shopPage';
 import Addons from './pages/addonsPage';
+import Contract from './components/contractInterface';
+import NFCReaderWriter from './components/nfcReaderWriter';
 
 const App = () => {
 
@@ -21,6 +23,8 @@ const App = () => {
         <Route exact path="/explore" element={<Explore />} />
         <Route exact path="/shop" element={<Shop />} />
         <Route exact path="/addons" element={<Addons />} />
+        <Route exact path="/contract" element={<Contract />} />
+        <Route exact path="/nfc" element={<NFCReaderWriter />} />
         <Route element={<Wallet />} />
       </Routes>
     </BrowserRouter>
