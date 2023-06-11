@@ -62,8 +62,8 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
       setIsScanning(true);
       await reader.scan();
       reader.onreading = ({ message, serialNumber }) => {
-        handleOptionClick('nfc');
         setSelectedAddress(message.records[0].data);
+        handleOptionClick('nfc');
         setIsScanning(false);
       };
     } catch (error) {
@@ -114,9 +114,9 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
                   <h5 className="modal-title">Scanning NFC Card</h5>
                   <button type="button" className="btn-close" onClick={handleClose}></button>
                 </div>
-                <div className="modal-body">
-                  <div className="text-center m-auto">
-                    <PuffLoader color="#109e77" size={120} />
+                <div className="modal-body d-flex justify-content-center align-items-center">
+                  <div className="text-center">
+                    <Spinner size={120} spinnerColor={"#333"} spinnerWidth={2} visible={true} />
                     <p>Scanning... Place card to phone</p>
                   </div>
                 </div>
