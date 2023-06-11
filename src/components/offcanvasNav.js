@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState,  useEffect } from 'react';
+import NFCReaderWriter from './nfcReaderWriter';
+import PuffLoader from "react-spinners/PuffLoader";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import LogoImg from '../img/logo2x.png';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const OffcanvasNav = () => {
   const [selectedCountry, setSelectedCountry] = useState('1');
-
+  const [nfcReader, setNfcReader] = useState(null);
+  const [nfcSupported, setNfcSupported] = useState(false);
   const { isAuthenticated, user, logout, loginWithRedirect } =
     useAuth0();
 
@@ -11,6 +17,35 @@ const OffcanvasNav = () => {
     setSelectedCountry(event.target.value);
     console.log('Selected Country:', selectedCountry);
   };
+
+  useEffect(() => {
+    if ('NDEFReader' in window) {
+      setNfcSupported(true);
+      setNfcReader(new window.NDEFReader());
+      
+    }
+  }, []);
+
+  const [isWriting, setIsWriting] = useState(false);
+  
+  const handleWriteNFC = async () => {
+    if (!nfcReader) return;
+    try {
+      setIsWriting(true);
+      await nfcReader.write({
+        records: [{ recordType: "text", data: "nfc-demo-address-xZx0cmx" }]
+      });
+      setIsWriting(false);
+        toast.success(`Wallet NFC Card Activated`, {
+          icon: ({theme, type}) =>  <img src={LogoImg} className="rounded-circle me-5" height="24"/>,
+          theme: "dark",
+        });
+    } catch (error) {
+      console.error(`Error: ${error}`);
+      setIsWriting(false);
+    }
+  };
+
 
   return (
     <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
@@ -71,9 +106,11 @@ const OffcanvasNav = () => {
 
             </div>
             <div className="col mt-2">
-              <button className="btn btn lg btn-outline-primary disabled w-100">
-                <i className="fa-solid fa-credit-card mt-4 fa-lg"></i><p className="">NFC Card</p>
+            <a href="/cards">
+              <button className="btn btn lg btn-outline-primary w-100">
+                <i className="fa-solid fa-credit-card mt-4 fa-lg"></i><p className="">NFC Cards</p>
               </button>
+            </a>
             </div>
             <div className="col mt-2">
               <button className="btn btn lg btn-outline-primary disabled w-100">

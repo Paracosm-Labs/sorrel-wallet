@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { QrReader } from 'react-qr-reader';
-import NFCReaderWriter from './nfcReaderWriter';
 import PuffLoader from "react-spinners/PuffLoader";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -96,28 +95,6 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
 
 
 
-  const [isWriting, setIsWriting] = useState(false);
-  
-  const handleWriteNFC = async () => {
-    if (!nfcReader) return;
-    try {
-      setSelectedOption('nfc');
-      setIsWriting(true);
-      await nfcReader.write({
-        records: [{ recordType: "text", data: "nfc-demo-address-xZx0x" }]
-      });
-      setIsWriting(false);
-        toast.success(`Wallet NFC Card Updated`, {
-          icon: ({theme, type}) =>  <img src={LogoImg} className="rounded-circle me-5" height="24"/>,
-          theme: "dark",
-        });
-    } catch (error) {
-      console.error(`Error: ${error}`);
-      setIsWriting(false);
-    }
-  };
-
-
   return (
     <div>
       <div className={sorrelAddress ? `d-none address-book ${sorrelAddress}` : "d-flex address-book"}>
@@ -133,13 +110,6 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
           <button className="btn btn-sm h-100 btn-outline-secondary" onClick={() => handleOptionClick('nfc')}>
             <i className="fa-brands fa-nfc-symbol"></i>
             <small>Wallet NFC Card</small>
-          </button>
-      </div>
-      <div className="align-items-center m-2">
-        
-          <button className="btn btn-sm h-100 btn-outline-secondary" onClick={() => handleWriteNFC()}>
-            <i className="fa-brands fa-nfc-symbol"></i>
-            <small>Write to NFC Card</small>
           </button>
       </div>
       </>)}
@@ -192,7 +162,7 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
             <h6 className="badge bg-success">To Wallet NFC Card</h6>
             
             {!selectedAddress ? <PuffLoader className="m-auto" color="#109e77" size={40} /> : <p>{selectedAddress}</p>}
-            {isWriting ? <div><PuffLoader className="m-auto" color="#109e77" size={40} /><br/>Place card near phone to write...</div> : ''}
+
           </div>
         </div>
       )}
@@ -230,11 +200,11 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
 
       {showModal && (
         <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
-          <div className="modal-dialog modal-fullscreen-sm-down">
+          <div className="contacts modal-dialog modal-fullscreen-sm-down">
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">My Contacts</h5>
-                <button type="button" className="btn-close" onClick={handleModalClose}></button>
+                <button type="button" className="btn-close btn-close-white" onClick={handleModalClose}></button>
               </div>
               <div className="modal-body">
                 <div className="list-group">
@@ -259,7 +229,7 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
                 </div>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" onClick={handleModalClose}>
+                <button type="button" className="btn btn-outline-secondary w-100 p-2" onClick={handleModalClose}>
                   Close
                 </button>
               </div>

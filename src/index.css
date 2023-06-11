@@ -34,7 +34,7 @@ code {
   background: #555; /* Set the color of the scrollbar handle on hover */
 }
 
-.app-content, .welcome, .vaults, .discover {min-height: 800px;}
+.app-content, .welcome, .vaults, .discover, .wallet-cards {min-height: 800px;}
 
 .app-content{background-color: #252435;}
 
@@ -52,8 +52,9 @@ code {
 .skipper a{text-decoration: none;}
 
 .welcome{background-color: #252435;}
-.wallet, .vaults, .discover {background-color: #2f3349;}
-
+.wallet, .vaults, .discover, .wallet-cards {background-color: #2f3349;}
+.carousel-inner{color: #fff;}
+.carousel-inner .bg-primary{background-color: #2f3349!important;}
 
 .btn-success {
   --bs-btn-bg: #109E76!important;
@@ -69,9 +70,21 @@ code {
     box-shadow: 0 3px 0px #109e77;
 }
 
-.carousel-inner{color: #fff;}
+.wallet-cards .card {;
+    background-color: #242435;
+    border: none;
+  }
 
-.carousel-inner .bg-primary{background-color: #2f3349!important;}
+.wallet-cards .info {
+    height: 100px;
+    background-color: #242435;
+    border-radius: 0px 0px 30px 30px;
+    color: #eee!important;
+    border:none;
+    box-shadow: 0 3px 0px #109e77;
+}
+
+
 
 .spinner-container {
   display: flex;
@@ -80,16 +93,17 @@ code {
   height: 100vh;
 }
 
-.list-group-item {background-color: #eee!important;}
 
-.offcanvas {background-color: #242435!important;}
-.offcanvas p, .offcanvas h1, .offcanvas h5, .offcanvas h6, .offcanvas .fa-solid { color: #eee;}
+
+.offcanvas, .contacts .modal-content {background-color: #242435!important;}
+.offcanvas p, .offcanvas h1, .offcanvas h5, .offcanvas h6, .offcanvas .fa-solid, .offcanvas label { color: #eee;}
 
 
 .address-book i{font-size:48px;}
 
 .dialpad{width: -webkit-fill-available;}
 
+.list-group-item {background-color: #eee!important;}
 
 .transactions{
   max-height: 500px; /* Adjust the height as needed */
@@ -97,6 +111,7 @@ code {
 }
 
 .transactions img.avatar{height: 42px; width: 42px;}
+
 
 .address-book i {color:#6a539b;}
 
@@ -109,6 +124,10 @@ code {
   max-height: 200px;
   overflow-y: auto;
 }
+
+
+.wallet-cards {}
+
 
 /* Customize the scrollbar */
 
@@ -123,7 +142,7 @@ code {
 .address-book .modal-body::-webkit-scrollbar,
 .address-book::-webkit-scrollbar-thumb,
 .transactions::-webkit-scrollbar-thumb {
-  background-color: #2f3349;
+  background-color: #109E76;
 }
 
 .address-book .modal-body::-webkit-scrollbar,
