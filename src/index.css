@@ -133,6 +133,9 @@ code {
   overflow-x: auto;
 }
 
+.contacts .modal-header,  .contacts .modal-footer{
+  border:none!important;
+}
 .address-book .modal-body{
   max-height: 200px;
   overflow-y: auto;

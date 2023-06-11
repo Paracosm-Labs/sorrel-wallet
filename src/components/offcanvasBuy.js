@@ -40,17 +40,17 @@ const OffcanvasBuy = ({ shopId, shopName, shopPic }) => {
           </div>
           <div className="mb-3">
             <div className="text-white">
-              <h4 className="text-start">Order Summary</h4>
+              <h6 className="text-start">Order Summary</h6>
               <div className="row">
               <div className="col-6 text-start">
-                <p>2 x NFC Cards</p>
+                <p className="text-muted">2 x NFC Cards</p>
               </div>
               <div className="col-6 text-end">
-                $55.00
+                <p className="text-muted">$80.00</p>
               </div>
               <div className="col-12 text-center">
                 
-                <h4>Total: $55.00</h4>
+                <h4>Total: $80.00</h4>
               </div>
               </div>
               
