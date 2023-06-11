@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { QrReader } from 'react-qr-reader';
 import NFCReaderWriter from './nfcReaderWriter';
 import RingLoader from "react-spinners/RingLoader";
@@ -18,6 +18,8 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [scannedQR, setScannedQR] = useState(null);
   const [isScanning, setIsScanning] = useState(false);
+  const [nfcSupported, setNfcSupported] = useState(false);
+  const [reader, setReader] = useState(null);
 
 
   const handleOptionClick = (option, address) => {
@@ -46,10 +48,28 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
   };
 
 
-  const handleScanNFC = (data) => {
-    handleOptionClick('nfc');
-    setSelectedAddress(data);
-    setIsScanning(false);
+  useEffect(() => {
+    if ('NDEFReader' in window) {
+      setNfcSupported(true);
+      setReader(new window.NDEFReader());
+    }
+  }, []);
+
+
+  const handleScanNFC = async () => {
+    if (!reader) return;
+    try {
+      setIsScanning(true);
+      await reader.scan();
+      reader.onreading = ({ message, serialNumber }) => {
+        handleOptionClick('nfc');
+        setSelectedAddress(message.records[0].data);
+        setIsScanning(false);
+      };
+    } catch (error) {
+      console.error(`Error: ${error}`);
+      setIsScanning(false);
+    }
   };
 
   const startScanning = () => {
@@ -65,6 +85,10 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
     console.error(error);
   };
 
+  const handleClose = () => {
+    setIsScanning(false);
+  };
+
   return (
     <div>
       <div className={sorrelAddress ? `d-none address-book ${sorrelAddress}` : "d-flex address-book"}>
@@ -74,20 +98,24 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
             <small>Scan QR</small>
           </button>
         </div>
+      {nfcSupported && (
       <div className="align-items-center m-2">
-        <button className="btn btn-sm h-100 btn-outline-secondary" onClick={startScanning}>
-          <i className="fa-brands fa-nfc-symbol"></i>
-          <small>Wallet NFC Card</small>
-        </button>
+        
+          <button className="btn btn-sm h-100 btn-outline-secondary" onClick={startScanning}>
+            <i className="fa-brands fa-nfc-symbol"></i>
+            <small>Wallet NFC Card</small>
+          </button>
+        
         {isScanning && (
           <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
             <div className="modal-dialog modal-fullscreen-sm-down">
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title">Scanning NFC Card</h5>
+                  <button type="button" className="btn-close" onClick={handleClose}></button>
                 </div>
                 <div className="modal-body">
-                  <RingLoader color="#109e77" size={100} />
+                  <div className="text-center  m-auto"><RingLoader color="#109e77" size={100} /></div>
                   <p>Scanning... Place card to phone</p>
                   <NFCReaderWriter
                     publicAddress={sorrelAddress}
@@ -99,6 +127,7 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
           </div>
         )}
       </div>
+      )}
        <div className="align-items-center m-2">
           <button className="btn btn-sm h-100 btn-outline-secondary" onClick={() => setShowModal(true)}>
             <i className="fa-solid fa-address-book"></i>
