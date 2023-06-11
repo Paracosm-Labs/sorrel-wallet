@@ -33,8 +33,12 @@ const CardsPage = () => {
           </div>
         </div>
       </div>
-      <div className="m-1">
+      <div className="m-1 text-white">
         <img src="/img/cards-mockup.jpg" className="w-100" />
+        <h4>Benefits</h4>
+        <p>Keeps your private keys safely on NFC Chip</p>
+        <p>Make payments easily with just a tap</p>
+        <p>Exciting expansion possiblities</p>
       </div>
       <NFCCards
         publicAddress="sorrelAddress-0x"
