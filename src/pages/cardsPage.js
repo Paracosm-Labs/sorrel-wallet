@@ -1,33 +1,47 @@
-import React, {useState, useEffect } from 'react';
-import NFCCards from '../components/nfcReaderWriter'
+import React, { useState } from 'react';
+import NFCCards from '../components/nfcReaderWriter';
+import OffcanvasBuy from '../components/offcanvasBuy'; // Import the OffcanvasBuy component
 import Navigation from '../components/navMenu';
-// import AccountBalance from '../components/accountBalance';
-import OffcanvasTransfer from '../components/offcanvasTransfer';
 
 const CardsPage = () => {
-  
   const [selectedAddress, setSelectedAddress] = useState(null);
-  
+
   const handleScanNFC = (data) => {
     setSelectedAddress(data);
   };
 
+  // Shop details
+  const shopId = 'sorrel';
+  const shopName = 'Sorrel';
+  const shopPic = 'logo2x.png'; // Replace with the actual logo URL
+
   return (
     <div className="text-center wallet-cards">
       <Navigation />
-    <div className="info mb-5">
-      <div className="card">
-        <div className="card-body text-center mt-2">
-            <h5>Get Your Sorrel Wallet Card Today!</h5>
+      <div className="info mb-5">
+        <div className="card">
+          <div className="card-body text-center mt-2">
+            <h5>Get Your Wallet NFC Card Today!</h5>
+            <button
+              className="btn btn-outline-success w-50  mt-3 btn-lg"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasBuy"
+              aria-controls="offcanvasBuy"
+            >
+              Order Card
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-
       <NFCCards
         publicAddress="sorrelAddress-0x"
-        onRead={handleScanNFC} 
+        onRead={handleScanNFC}
       />
-      
+      <OffcanvasBuy
+        shopId={shopId}
+        shopName={shopName}
+        shopPic={shopPic}
+      />
     </div>
   );
 };

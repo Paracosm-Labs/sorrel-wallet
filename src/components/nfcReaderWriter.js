@@ -47,7 +47,7 @@ class NFCReaderWriter extends Component {
       <div className="">
       <img src="/img/cards-mockup.jpg" className="w-100" />
       <div className="m-5 text-white">
-      <button className="btn btn-outline-success w-100 btn-lg mt-3">Order Card</button>
+      <button className="btn btn-outline-success w-100 btn-lg mt-3">Loader Button</button>
         {nfcAvailable ? (
           <>
             <button className="btn btn-outline-success w-100 btn-lg mt-3" onClick={this.readNFC}>Read Card</button>
