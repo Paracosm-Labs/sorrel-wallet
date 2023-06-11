@@ -19,7 +19,7 @@ class NFCReaderWriter extends Component {
     try {
       await this.reader.scan();
       this.reader.onreading = ({ message, serialNumber }) => {
-        this.setState({ message: `Serial number: ${serialNumber}` });
+        this.setState({ message: `Public address: ${message.records[0].data}` });
       };
     } catch (error) {
       this.setState({ error: `Error: ${error}` });
@@ -28,8 +28,8 @@ class NFCReaderWriter extends Component {
 
   writeNFC = async (data) => {
     try {
-      await this.reader.write(data);
-      this.setState({ message: 'Data written successfully.' });
+      await this.reader.write({ records: [{ recordType: "text", data }] });
+      this.setState({ message: 'Public address written successfully.' });
     } catch (error) {
       this.setState({ error: `Error: ${error}` });
     }
@@ -41,7 +41,7 @@ class NFCReaderWriter extends Component {
     return (
       <div>
         <button onClick={this.readNFC}>Read NFC</button>
-        <button onClick={() => this.writeNFC('Hello NFC!')}>Write NFC</button>
+        <button onClick={() => this.writeNFC(this.props.publicAddress)}>Write NFC</button>
         {message && <p className="text-white">{message}</p>}
         {error && <p className="text-white">{error}</p>}
       </div>

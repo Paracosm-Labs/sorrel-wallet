@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { QrReader } from 'react-qr-reader';
+import NFCReaderWriter from './nfcReaderWriter';
+import RingLoader from "react-spinners/RingLoader";
 
 const AddressBook = ({ onContactSelect, sorrelAddress}) => {
   const dummyContacts = [
@@ -15,6 +17,7 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [scannedQR, setScannedQR] = useState(null);
+  const [isScanning, setIsScanning] = useState(false);
 
 
   const handleOptionClick = (option, address) => {
@@ -44,9 +47,13 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
 
 
   const handleScanNFC = (data) => {
-     handleOptionClick('nfc');
-      setSelectedAddress(data);
-     
+    handleOptionClick('nfc');
+    setSelectedAddress(data);
+    setIsScanning(false);
+  };
+
+  const startScanning = () => {
+    setIsScanning(true);
   };
 
 
@@ -67,12 +74,31 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
             <small>Scan QR</small>
           </button>
         </div>
-        <div className="align-items-center m-2">
-          <button className="btn btn-sm h-100 btn-outline-secondary" onClick={() => handleScanNFC('STR0xNFC-DEMO')}>
-            <i className="fa-brands fa-nfc-symbol"></i>
-            <small>Wallet NFC Card</small>
-          </button>
-        </div>
+      <div className="align-items-center m-2">
+        <button className="btn btn-sm h-100 btn-outline-secondary" onClick={startScanning}>
+          <i className="fa-brands fa-nfc-symbol"></i>
+          <small>Wallet NFC Card</small>
+        </button>
+        {isScanning && (
+          <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
+            <div className="modal-dialog modal-fullscreen-sm-down">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">Scanning NFC Card</h5>
+                </div>
+                <div className="modal-body">
+                  <RingLoader color="#109e77" size={100} />
+                  <p>Scanning... Place card to phone</p>
+                  <NFCReaderWriter
+                    publicAddress={sorrelAddress}
+                    onRead={handleScanNFC}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
        <div className="align-items-center m-2">
           <button className="btn btn-sm h-100 btn-outline-secondary" onClick={() => setShowModal(true)}>
             <i className="fa-solid fa-address-book"></i>
