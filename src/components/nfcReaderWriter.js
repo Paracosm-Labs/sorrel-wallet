@@ -58,6 +58,16 @@ class NFCReaderWriter extends Component {
               onClick={() => this.writeNFC(this.props.publicAddress)}
             >Activate Card</button>
 
+
+        </>
+        ) : (<>
+          <button className="btn btn-outline-success w-100 btn-lg mt-3 mb-3 disabled">Activate Card</button>
+          <p className="text-muted">NFC Reader was not found.<br/>Please use a NFC enabled device to activate.</p>
+        </>)}
+        {message && <p>{message}</p>}
+        {/* error && <p>{error}</p> */} 
+      </div>
+
         <div className="offcanvas nfc-reader offcanvas-top" tabIndex="-1" id="offcanvasActivation" aria-labelledby="offcanvasActivationLabel">
           <div className="offcanvas-header">
             <h5 className="offcanvas-title text-center m-auto" id="offcanvasActivationLabel">
@@ -72,16 +82,6 @@ class NFCReaderWriter extends Component {
             </div>
           </div>
         </div>
-        </>
-        ) : (<>
-          <button className="btn btn-outline-success w-100 btn-lg mt-3 mb-3 disabled">Activate Card</button>
-          <p className="text-muted">NFC Reader was not found.<br/>Please use a NFC enabled device to activate.</p>
-        </>)}
-        {message && <p>{message}</p>}
-        {error && <p>{error}</p>}
-      </div>
-
-
 
 
       </>

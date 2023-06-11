@@ -12,7 +12,7 @@ const PromoSlide = () => {
   </div>
   <div className="carousel-inner">
     <div className="carousel-item active">
-    <a href="#">
+    <a href="/cards">
       <img src="/img/cards-mockup.jpg" className="d-block w-100" width="380" height="220" alt=""/>
       <div className="carousel-caption bg-primary">Coming Soon!
       </div>

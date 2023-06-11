@@ -1,6 +1,7 @@
 import React  from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import RingLoader from "react-spinners/RingLoader";
+import NFCCards from './nfcReaderWriter';
 
 const redirectToURL = (url) => {
   window.location.href = url;
@@ -23,7 +24,7 @@ const WelcomeOnboarding = () => {
   }
 
   if (error) {
-    return <div><h1>Oops... {error.message}</h1></div>;
+    return <div className="text=white text-center"><h1>Oops... {error.message}</h1></div>;
   }
   else{
 
@@ -107,8 +108,12 @@ const WelcomeOnboarding = () => {
 				          </button>
 
 				        
-				          <button className="btn btn-lg btn-outline-success w-100 disabled" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
-				            <i className="fas fa-credit-card me-2"></i>Login via NFC Card<br/><small>Coming Soon</small>
+				          <button className="btn btn-lg btn-outline-success w-100" type="button"
+				            data-bs-toggle="offcanvas"
+              			data-bs-target="#offcanvasActivation"
+              			aria-controls="offcanvasActivation"
+              		>
+				            <i className="fas fa-credit-card me-2"></i>Login via NFC Card<br/>
 				          </button>
 				        
 				        </div>
@@ -130,7 +135,7 @@ const WelcomeOnboarding = () => {
 
 
 		</div>
-
+		<NFCCards  />
     </>
 
   );

@@ -40,7 +40,7 @@ const OffcanvasBuy = ({ shopId, shopName, shopPic }) => {
           </div>
           <div className="mb-3">
             <div className="text-white">
-              <h4>Order Summary</h4>
+              <h4 className="text-start">Order Summary</h4>
               <div className="row">
               <div className="col-6 text-start">
                 <p>2 x NFC Cards</p>
@@ -56,7 +56,7 @@ const OffcanvasBuy = ({ shopId, shopName, shopPic }) => {
               
             </div>
           </div>
-          <div className="mt-5 mb-3">
+          <div className="mt-5 mb-3 text-start">
             <label htmlFor="addressSelect" className="form-label">Delivery Address</label>
             <select className="form-select" id="addressSelect" value={deliveryAddress} onChange={handleAddressChange}>
               <option value="">Select Address</option>
@@ -64,7 +64,7 @@ const OffcanvasBuy = ({ shopId, shopName, shopPic }) => {
               <option value="custom">Custom</option>
             </select>
           </div>
-          <div className="mb-3">
+          <div className="mb-3 text-start">
             <label htmlFor="quantityInput" className="form-label">Quantity</label>
             <input type="number" className="form-control" id="quantityInput" value={orderQuantity} onChange={handleQuantityChange} />
           </div>
