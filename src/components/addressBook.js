@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { QrReader } from 'react-qr-reader';
 import NFCReaderWriter from './nfcReaderWriter';
-import RingLoader from "react-spinners/RingLoader";
+import PuffLoader from "react-spinners/RingLoader";
 
 const AddressBook = ({ onContactSelect, sorrelAddress}) => {
   const dummyContacts = [
@@ -72,7 +72,7 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
     }
   };
 
-  const startScanning = () => {
+  const startNFCScanning = () => {
     setIsScanning(true);
   };
 
@@ -101,13 +101,13 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
       {nfcSupported && (
       <div className="align-items-center m-2">
         
-          <button className="btn btn-sm h-100 btn-outline-secondary" onClick={startScanning}>
+          <button className="btn btn-sm h-100 btn-outline-secondary" onClick={startNFCScanning}>
             <i className="fa-brands fa-nfc-symbol"></i>
             <small>Wallet NFC Card</small>
           </button>
         
         {isScanning && (
-          <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
+          <div className="modal nfc-modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
             <div className="modal-dialog modal-fullscreen-sm-down">
               <div className="modal-content">
                 <div className="modal-header">
@@ -115,12 +115,10 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
                   <button type="button" className="btn-close" onClick={handleClose}></button>
                 </div>
                 <div className="modal-body">
-                  <div className="text-center  m-auto"><RingLoader color="#109e77" size={100} /></div>
-                  <p>Scanning... Place card to phone</p>
-                  <NFCReaderWriter
-                    publicAddress={sorrelAddress}
-                    onRead={handleScanNFC}
-                  />
+                  <div className="text-center m-auto">
+                    <PuffLoader color="#109e77" size={120} />
+                    <p>Scanning... Place card to phone</p>
+                  </div>
                 </div>
               </div>
             </div>
