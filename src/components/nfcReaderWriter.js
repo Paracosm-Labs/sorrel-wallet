@@ -8,11 +8,14 @@ class NFCReaderWriter extends Component {
     this.state = {
       message: '',
       error: '',
+      nfcAvailable: 'NDEFReader' in window,
     };
   }
 
   componentDidMount() {
-    this.reader = new window.NDEFReader();
+    if (this.state.nfcAvailable) {
+      this.reader = new window.NDEFReader();
+    }
   }
 
   readNFC = async () => {
@@ -39,17 +42,23 @@ class NFCReaderWriter extends Component {
   };
 
   render() {
-    const { message, error } = this.state;
-
+    const { message, error, nfcAvailable } = this.state;
     return (
       <div className="">
       <img src="/img/cards-mockup.jpg" className="w-100" />
-      <div className="m-5">
-        <button className="btn btn-outline-success w-100 btn-lg mt-3">Order Card</button>
-        <button className="btn btn-outline-success w-100 btn-lg mt-5" onClick={this.readNFC}>Read Card</button>
-        <button className="btn btn-outline-success w-100 btn-lg mt-3" onClick={() => this.writeNFC(this.props.publicAddress)}>Activate Card</button>
-        {message && <p className="text-white  mt-5">{message}</p>}
-        {error && <p className="text-white">{error}</p>}
+      <div className="m-5 text-white">
+      <button className="btn btn-outline-success w-100 btn-lg mt-3">Order Card</button>
+        {nfcAvailable ? (
+          <>
+            <button className="btn btn-outline-success w-100 btn-lg mt-3" onClick={this.readNFC}>Read Card</button>
+            <button className="btn btn-outline-success w-100 btn-lg mt-3" onClick={() => this.writeNFC(this.props.publicAddress)}>Activate Card</button>
+          </>
+        ) : (<>
+          <button className="btn btn-outline-success w-100 btn-lg mt-3 mb-3 disabled">Activate Card</button>
+          <p className="text-muted">NFC Reader was not found.<br/>Please use a NFC enabled device to activate.</p>
+        </>)}
+        {message && <p>{message}</p>}
+        {error && <p>{error}</p>}
       </div>
       </div>
     );

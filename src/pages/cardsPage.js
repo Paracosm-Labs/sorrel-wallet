@@ -18,7 +18,7 @@ const CardsPage = () => {
     <div className="info mb-5">
       <div className="card">
         <div className="card-body text-center mt-2">
-            <h5>Get Your Wallet NFC Card Today!</h5>
+            <h5>Get Your Sorrel Wallet Card Today!</h5>
         </div>
       </div>
     </div>
