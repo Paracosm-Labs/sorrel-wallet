@@ -28,15 +28,35 @@ const OffcanvasBuy = ({ shopId, shopName, shopPic }) => {
     <>
       <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasBuy" aria-labelledby="offcanvasBuyLabel">
         <div className="offcanvas-header">
-          <h5 className="offcanvas-title" id="offcanvasBuyLabel">Buy Now</h5>
+          <h5 className="offcanvas-title" id="offcanvasBuyLabel">Order Now</h5>
           <button type="button" className="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div className="offcanvas-body">
-          <div className="d-flex align-items-center mb-3">
-            <img src={shopPic} alt={shopName} className="rounded-circle me-3" width="50" height="50" />
-            <h6>{shopName}</h6>
+          <div className="mb-5  justify-content-center">
+            <img src={shopPic} alt={shopName} className="rounded-circle" width="50" height="50" />
+            <div className="text-center">
+              <p>{shopName}</p>
+            </div>
           </div>
           <div className="mb-3">
+            <div className="text-white">
+              <h4>Order Summary</h4>
+              <div className="row">
+              <div className="col-6 text-start">
+                <p>2 x NFC Cards</p>
+              </div>
+              <div className="col-6 text-end">
+                $55.00
+              </div>
+              <div className="col-12 text-center">
+                
+                <h4>Total: $55.00</h4>
+              </div>
+              </div>
+              
+            </div>
+          </div>
+          <div className="mt-5 mb-3">
             <label htmlFor="addressSelect" className="form-label">Delivery Address</label>
             <select className="form-select" id="addressSelect" value={deliveryAddress} onChange={handleAddressChange}>
               <option value="">Select Address</option>

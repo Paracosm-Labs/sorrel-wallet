@@ -12,7 +12,7 @@ const CardsPage = () => {
 
   // Shop details
   const shopId = 'sorrel';
-  const shopName = 'Sorrel';
+  const shopName = 'Sorrel Store';
   const shopPic = 'logo2x.png'; // Replace with the actual logo URL
 
   return (
@@ -37,7 +37,7 @@ const CardsPage = () => {
         <img src="/img/cards-mockup.jpg" className="w-100" />
         <h4>Benefits</h4>
         <p>Keeps your private keys safely on NFC Chip</p>
-        <p>Make payments easily with just a tap</p>
+        <p>Payments made easily with just a tap</p>
         <p>Exciting expansion possiblities</p>
       </div>
       <NFCCards

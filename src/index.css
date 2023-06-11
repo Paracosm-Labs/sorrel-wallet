@@ -34,7 +34,7 @@ code {
   background: #555; /* Set the color of the scrollbar handle on hover */
 }
 
-.app-content, .welcome, .vaults, .discover, .wallet-cards {min-height: 800px;}
+.app-content, .welcome, .vaults, .discover {min-height: 800px;}
 
 .app-content{background-color: #252435;}
 
@@ -70,6 +70,8 @@ code {
     box-shadow: 0 3px 0px #109e77;
 }
 
+.wallet-cards{min-height: 900px;}
+
 .wallet-cards .card {;
     background-color: #242435;
     border: none;
@@ -86,7 +88,7 @@ code {
 
 .wallet-cards .offcanvas{min-height:450px;}
 
-.wallet-cards .offcanvas{
+.wallet-cards .nfc-reader{
     border-radius: 0px 0px 30px 30px;
     color: #eee!important;
     border:none;

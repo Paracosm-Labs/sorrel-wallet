@@ -138,7 +138,7 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
             <h6 className="badge bg-success">To QR Address</h6>
             {scannedQR ? (
               <>
-                <p>{scannedQR}  {selectedAddress}</p>
+                <p>{scannedQR}</p>
                 {/* Additional logic to process the scanned QR and update the "To" section */}
               </>
             ) : (
