@@ -54,6 +54,12 @@ code {
 .welcome{background-color: #252435;}
 .wallet, .vaults, .discover {background-color: #2f3349;}
 
+
+.btn-success {
+  --bs-btn-bg: #109E76!important;
+}
+
+
 .account-balance .card, .search-box .card {
     height: 180px;
     background-color: #242435;

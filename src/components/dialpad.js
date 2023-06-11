@@ -33,7 +33,7 @@ const Dialpad = ({ onConfirm, selectedDestination }) => {
   return (
     <div className="d-flex flex-column align-items-center">
       <div className="">
-        <h1 className="text-center p-4">
+        <h1 className="text-center p-3">
           <small className="text-muted">$</small>
           {amount}
         </h1>
