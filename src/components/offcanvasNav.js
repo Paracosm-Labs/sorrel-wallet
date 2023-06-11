@@ -16,7 +16,7 @@ const OffcanvasNav = () => {
     <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
       <div className="offcanvas-header">
         <h5 className="offcanvas-title" id="offcanvasNavLabel">Explore Sorrel</h5>
-        <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <button type="button" className="btn-close  btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div className="offcanvas-body">
       {isAuthenticated ? (

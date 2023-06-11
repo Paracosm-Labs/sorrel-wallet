@@ -29,7 +29,7 @@ const OffcanvasBuy = ({ shopId, shopName, shopPic }) => {
       <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasBuy" aria-labelledby="offcanvasBuyLabel">
         <div className="offcanvas-header">
           <h5 className="offcanvas-title" id="offcanvasBuyLabel">Buy Now</h5>
-          <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <button type="button" className="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div className="offcanvas-body">
           <div className="d-flex align-items-center mb-3">
@@ -51,8 +51,8 @@ const OffcanvasBuy = ({ shopId, shopName, shopPic }) => {
           <div className="text-center">
             {/* Display order details and total */}
           </div>
-          <div className="text-center">
-            <button className="btn btn-lg btn-success w-100" onClick={handleConfirmOrder}>Confirm Order</button>
+          <div className="text-center mt-5">
+            <button className="btn btn-lg btn-success w-100 p-2" onClick={handleConfirmOrder}>Confirm Order</button>
           </div>
         </div>
       </div>

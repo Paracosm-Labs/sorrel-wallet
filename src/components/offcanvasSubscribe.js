@@ -29,7 +29,7 @@ const OffcanvasSubscribe = ({ shopId, shopName, shopPic }) => {
     <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasSubscribe" aria-labelledby="offcanvasSubscribeLabel">
       <div className="offcanvas-header">
         <h5 className="offcanvas-title" id="offcanvasSubscribeLabel">Subscribe</h5>
-        <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <button type="button" className="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div className="offcanvas-body">
         <div className="d-flex align-items-center mb-3">
@@ -46,8 +46,8 @@ const OffcanvasSubscribe = ({ shopId, shopName, shopPic }) => {
             </li>
           ))}
         </ul>
-        <div className="text-center mt-3">
-          <button className="btn btn-lg btn-success w-100" type="button" onClick={handleSubscribe}>
+        <div className="text-center mt-5">
+          <button className="btn btn-lg btn-success w-100 p-2" type="button" onClick={handleSubscribe}>
             Subscribe Now
           </button>
         </div>

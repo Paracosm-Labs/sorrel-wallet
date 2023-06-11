@@ -4,7 +4,7 @@ import AccountBalance from '../components/accountBalance';
 import OffcanvasTransfer from '../components/offcanvasTransfer';
 import LogoImg from '../img/logo2x.png';
 import gTTDImg from '../img/gttd.png';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const EarnPage = () => {

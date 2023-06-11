@@ -34,7 +34,7 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
       <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasTransfer" aria-labelledby="offcanvasTransferLabel">
         <div className="offcanvas-header">
           <h5 className="offcanvas-title" id="offcanvasTransferLabel">Transfer Funds</h5>
-          <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <button type="button" className="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div className="offcanvas-body">
           <AddressBook onContactSelect={handleDestinationChange} sorrelAddress={selectedSorrelAddress}/>

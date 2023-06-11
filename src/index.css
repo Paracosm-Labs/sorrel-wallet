@@ -74,6 +74,12 @@ code {
   height: 100vh;
 }
 
+.list-group-item {background-color: #eee!important;}
+
+.offcanvas {background-color: #242435!important;}
+.offcanvas p, .offcanvas h1, .offcanvas h5, .offcanvas h6, .offcanvas .fa-solid { color: #eee;}
+
+
 .address-book i{font-size:48px;}
 
 .dialpad{width: -webkit-fill-available;}

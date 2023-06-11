@@ -39,7 +39,7 @@ const OffcanvasDeposit = () => {
     <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasDeposit" aria-labelledby="offcanvasDepositLabel">
       <div className="offcanvas-header">
         <h5 className="offcanvas-title" id="offcanvasDepositLabel">Deposit Funds</h5>
-        <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <button type="button" className="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div className="offcanvas-body">
       <h6 className="text-center mt-3">How would you like to deposit to<br/> Your Sorrel account?</h6>
