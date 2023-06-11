@@ -33,6 +33,9 @@ const CardsPage = () => {
           </div>
         </div>
       </div>
+      <div className="m-1">
+        <img src="/img/cards-mockup.jpg" className="w-100" />
+      </div>
       <NFCCards
         publicAddress="sorrelAddress-0x"
         onRead={handleScanNFC}

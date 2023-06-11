@@ -17,7 +17,7 @@ const OffcanvasBuy = ({ shopId, shopName, shopPic }) => {
 
   const handleConfirmOrder = () => {
     // Process order with the selected details
-    toast.success(`Order confirmed for ${orderQuantity} item(s) from ${shopName} with delivery to ${deliveryAddress}`, {
+    toast.success(`Order confirmed for ${orderQuantity} item(s) from ${shopName} delivering to ${deliveryAddress}`, {
       icon: ({ theme, type }) => <img src={LogoImg} className="rounded-circle me-5" height="24" />,
       theme: 'dark',
     });
@@ -58,7 +58,7 @@ const OffcanvasBuy = ({ shopId, shopName, shopPic }) => {
       </div>
       <ToastContainer
         position="top-center"
-        autoClose={3000}
+        autoClose={5000}
         newestOnTop={false}
         closeOnClick
         pauseOnFocusLoss

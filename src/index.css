@@ -84,9 +84,16 @@ code {
     box-shadow: 0 3px 0px #109e77;
 }
 
+.wallet-cards .offcanvas{min-height:450px;}
 
+.wallet-cards .offcanvas{
+    border-radius: 0px 0px 30px 30px;
+    color: #eee!important;
+    border:none;
+    box-shadow: 0 2px 8px #109e77;
+}
 
-.spinner-container {
+.wallet-cards .nfc-reader, .spinner-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -124,9 +131,6 @@ code {
   max-height: 200px;
   overflow-y: auto;
 }
-
-
-.wallet-cards {}
 
 
 /* Customize the scrollbar */
