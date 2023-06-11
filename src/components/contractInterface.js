@@ -1,14 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import tronWeb from "../utils/tronWeb";
+import TronWeb from 'tronweb';
 
 const ContractInterface = () => {
+  const [tronWeb, setTronWeb] = useState(null);
   const [balance, setBalance] = useState(null);
   const [depositId, setDepositId] = useState('');
   const [depositTokens, setDepositTokens] = useState('');
   const [withdrawId, setWithdrawId] = useState('');
   const [withdrawTokens, setWithdrawTokens] = useState('');
 
-  const contractAddress = 'TQoiUFedkHM2RiBNCbDCMBFwAf8HTX8qKc';
+  const contractAddress = 'TNYsTzEyH5Jr2BuagKhfTCTjeaLRaRu1Av';
+
+  useEffect(() => {
+    const HttpProvider = TronWeb.providers.HttpProvider;
+    const fullNode = new HttpProvider('https://api.nileex.io');
+    const solidityNode = new HttpProvider('https://api.nileex.io');
+    const eventServer = 'https://api.nileex.io';
+
+
+    const privateKey = '0f';
+
+    const tronWebInstance = new TronWeb(
+      fullNode,
+      solidityNode,
+      eventServer,
+      privateKey
+    );
+
+    setTronWeb(tronWebInstance);
+  }, []);
 
   const handleDeposit = async () => {
     const contract = await tronWeb.contract().at(contractAddress);
@@ -26,17 +46,9 @@ const ContractInterface = () => {
 
   useEffect(() => {
     const fetchBalance = async () => {
-
-    try{
-          const contract = await window.tronWeb.contract().at(contractAddress);
-          const balance = await contract.gStableBalanceMap(1,'TCiJCtTBhGSw8mMYYts67vCXUjdoFLLuYw').call();
-          setBalance(balance.toString());
-           console.log(balance);
-            } catch (e) {
-            console.error(e);
-          }
-
-
+      const contract = await tronWeb.contract().at(contractAddress);
+      const balance = await contract.gStableBalanceMap(1,'TCiJCtTBhGSw8mMYYts67vCXUjdoFLLuYw').call();
+      setBalance(balance.toString());
     };
 
     if (tronWeb) {

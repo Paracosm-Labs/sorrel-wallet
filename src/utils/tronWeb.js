@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import TronWeb from 'tronweb';
-import { Buffer } from 'buffer';
-
 
 const TronWebConnect = () => {
   const [tronWeb, setTronWeb] = useState(null);
@@ -24,7 +22,7 @@ const TronWebConnect = () => {
 
     setTronWeb(tronWebInstance);
   }, []);
-
+  
 
   };
 
