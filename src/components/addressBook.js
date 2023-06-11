@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { QrReader } from 'react-qr-reader';
 import NFCReaderWriter from './nfcReaderWriter';
-import PuffLoader from "react-spinners/RingLoader";
+import PuffLoader from "react-spinners/PuffLoader";
 
 const AddressBook = ({ onContactSelect, sorrelAddress}) => {
   const dummyContacts = [
@@ -115,8 +115,8 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
                   <button type="button" className="btn-close" onClick={handleClose}></button>
                 </div>
                 <div className="modal-body d-flex justify-content-center align-items-center">
-                  <div className="text-center">
-                    <Spinner size={120} spinnerColor={"#333"} spinnerWidth={2} visible={true} />
+                  <div className="text-center m-auto">
+                    <PuffLoader color="#109e77" size={120} />
                     <p>Scanning... Place card to phone</p>
                   </div>
                 </div>
