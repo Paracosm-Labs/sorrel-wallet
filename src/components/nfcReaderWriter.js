@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+// import { toast, ToastContainer } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 
 class NFCReaderWriter extends Component {
   constructor(props) {
@@ -40,8 +42,8 @@ class NFCReaderWriter extends Component {
       <div>
         <button onClick={this.readNFC}>Read NFC</button>
         <button onClick={() => this.writeNFC('Hello NFC!')}>Write NFC</button>
-        {message && <p>{message}</p>}
-        {error && <p>{error}</p>}
+        {message && <p className="text-white">{message}</p>}
+        {error && <p className="text-white">{error}</p>}
       </div>
     );
   }
