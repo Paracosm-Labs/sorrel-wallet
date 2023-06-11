@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { QrReader } from 'react-qr-reader';
 import NFCReaderWriter from './nfcReaderWriter';
 import PuffLoader from "react-spinners/PuffLoader";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import LogoImg from '../img/logo2x.png';
 
 const AddressBook = ({ onContactSelect, sorrelAddress}) => {
   const dummyContacts = [
@@ -19,23 +22,31 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
   const [scannedQR, setScannedQR] = useState(null);
   const [isScanning, setIsScanning] = useState(false);
   const [nfcSupported, setNfcSupported] = useState(false);
-  const [reader, setReader] = useState(null);
+  const [nfcReader, setNfcReader] = useState(null);
 
 
   const handleOptionClick = (option, address) => {
     setSelectedOption(option);
+
     if (option === 'nfc') {
-       onContactSelect(selectedAddress);
+      setIsScanning(true);
+      handleScanNFC();
+      onContactSelect(selectedAddress);
+      setSelectedAddress(null);
+      // setIsWriting(false);
     }
      if (option === 'qr'){
-      onContactSelect(selectedAddress);
+      onContactSelect(scannedQR);      
+      // setIsWriting(false);
       setScannedQR(null); // Reset the scanned QR when selecting a new option
+
     }
      if (typeof option === 'object'){
       setSelectedAddress(address);
       onContactSelect(address);
-    }
+      // setIsWriting(false);
 
+    }
     setShowModal(false);
     console.log(selectedAddress, address,  option);
   };
@@ -51,20 +62,24 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
   useEffect(() => {
     if ('NDEFReader' in window) {
       setNfcSupported(true);
-      setReader(new window.NDEFReader());
+      setNfcReader(new window.NDEFReader());
+      
     }
   }, []);
 
 
   const handleScanNFC = async () => {
-    if (!reader) return;
+    if (!nfcReader) return;
+    
     try {
-      setIsScanning(true);
-      await reader.scan();
-      reader.onreading = ({ message, serialNumber }) => {
-        setSelectedAddress(message.records[0].data);
-        handleOptionClick('nfc');
+      await nfcReader.scan();
+      nfcReader.onreading = ({ message, serialNumber }) => {
+        setSelectedOption('nfc');
+        const decoder = new TextDecoder();
+        const addr = decoder.decode(message.records[0].data);
+        setSelectedAddress(addr);
         setIsScanning(false);
+        onContactSelect(addr);
       };
     } catch (error) {
       console.error(`Error: ${error}`);
@@ -72,9 +87,6 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
     }
   };
 
-  const startNFCScanning = () => {
-    setIsScanning(true);
-  };
 
 
   const handleModalClose = () => {
@@ -85,9 +97,29 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
     console.error(error);
   };
 
-  const handleClose = () => {
-    setIsScanning(false);
+
+
+  const [isWriting, setIsWriting] = useState(false);
+  
+  const handleWriteNFC = async () => {
+    if (!nfcReader) return;
+    try {
+      setSelectedOption('nfc');
+      setIsWriting(true);
+      await nfcReader.write({
+        records: [{ recordType: "text", data: "nfc-demo-address-xZx0x" }]
+      });
+      setIsWriting(false);
+        toast.success(`Wallet NFC Card Updated`, {
+          icon: ({theme, type}) =>  <img src={LogoImg} className="rounded-circle me-5" height="24"/>,
+          theme: "dark",
+        });
+    } catch (error) {
+      console.error(`Error: ${error}`);
+      setIsWriting(false);
+    }
   };
+
 
   return (
     <div>
@@ -98,34 +130,22 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
             <small>Scan QR</small>
           </button>
         </div>
-      {nfcSupported && (
+      {nfcSupported && (<>
       <div className="align-items-center m-2">
         
-          <button className="btn btn-sm h-100 btn-outline-secondary" onClick={startNFCScanning}>
+          <button className="btn btn-sm h-100 btn-outline-secondary" onClick={() => handleOptionClick('nfc')}>
             <i className="fa-brands fa-nfc-symbol"></i>
             <small>Wallet NFC Card</small>
           </button>
-        
-        {isScanning && (
-          <div className="modal nfc-modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
-            <div className="modal-dialog modal-fullscreen-sm-down">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title">Scanning NFC Card</h5>
-                  <button type="button" className="btn-close" onClick={handleClose}></button>
-                </div>
-                <div className="modal-body d-flex justify-content-center align-items-center">
-                  <div className="text-center m-auto">
-                    <PuffLoader color="#109e77" size={120} />
-                    <p>Scanning... Place card to phone</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
-      )}
+      <div className="align-items-center m-2">
+        
+          <button className="btn btn-sm h-100 btn-outline-secondary" onClick={() => handleWriteNFC()}>
+            <i className="fa-brands fa-nfc-symbol"></i>
+            <small>Write to NFC Card</small>
+          </button>
+      </div>
+      </>)}
        <div className="align-items-center m-2">
           <button className="btn btn-sm h-100 btn-outline-secondary" onClick={() => setShowModal(true)}>
             <i className="fa-solid fa-address-book"></i>
@@ -173,7 +193,9 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
         <div className="mt-3">
           <div className="text-center">
             <h6 className="badge bg-success">To Wallet NFC Card</h6>
-            {/* Additional logic for handling the Wallet NFC Card */}
+            
+            {!selectedAddress ? <PuffLoader className="m-auto" color="#109e77" size={40} /> : <p>{selectedAddress}</p>}
+            {isWriting ? <div><PuffLoader className="m-auto" color="#109e77" size={40} /><br/>Place card near phone to write...</div> : ''}
           </div>
         </div>
       )}
