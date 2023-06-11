@@ -8,7 +8,7 @@ import LogoImg from '../img/logo2x.png';
 
 const AddressBook = ({ onContactSelect, sorrelAddress}) => {
   const dummyContacts = [
-    { name: 'Alex van Anders', avatar: '/img/alex.jpg', address: 'TALaB0x123addressbook' },
+    { name: 'Alex van Anders', avatar: '/img/alex.jpg', address: 'TALaB0x123alex' },
     { name: 'Javier Reyes', avatar: '/img/javier.jpg', address: 'TBLaB0x456ab' },
     { name: 'Michelle Ge', avatar: '/img/michelle.jpg', address: 'TCLaB0x789ab' },
     { name: 'Marcus Toussaint', avatar: '/img/marcus.jpg', address: 'TDLaB0xabcab' },
@@ -16,7 +16,6 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
 
 
   const [showModal, setShowModal] = useState(false);
-  
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [scannedQR, setScannedQR] = useState(null);
@@ -33,18 +32,16 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
       handleScanNFC();
       onContactSelect(selectedAddress);
       setSelectedAddress(null);
-      // setIsWriting(false);
     }
      if (option === 'qr'){
+      // setSelectedAddress(scannedQR);
       onContactSelect(scannedQR);      
-      // setIsWriting(false);
       setScannedQR(null); // Reset the scanned QR when selecting a new option
 
     }
      if (typeof option === 'object'){
       setSelectedAddress(address);
       onContactSelect(address);
-      // setIsWriting(false);
 
     }
     setShowModal(false);
@@ -171,7 +168,7 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
             <h6 className="badge bg-success">To QR Address</h6>
             {scannedQR ? (
               <>
-                <p>{scannedQR}</p>
+                <p>{scannedQR}  {selectedAddress}</p>
                 {/* Additional logic to process the scanned QR and update the "To" section */}
               </>
             ) : (
