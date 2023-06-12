@@ -32,18 +32,26 @@ class NFCReaderWriter extends Component {
     }
   };
 
-  writeNFC = async (data) => {
-    this.setState({ message: 'Please place your card near to your phone' });
-    try {
-      await this.reader.write({ records: [{ recordType: "text", data }] });
-      this.setState({ message: 'Public address written successfully.' });
-    } catch (error) {
-      this.setState({ error: `Error: ${error}` });
-    }
-  };
+writeNFC = async (data) => {
+  this.setState({ message: 'Please place your card near to your phone' });
+  try {
+    const records = [
+      { recordType: "text", data: new TextEncoder().encode(data.publicAddress) },
+      { recordType: "text", data: new TextEncoder().encode(data.privateKey) },
+      { recordType: "text", data: new TextEncoder().encode(data.dummyProp1) },
+      { recordType: "text", data: new TextEncoder().encode(data.dummyProp2) },
+      { recordType: "text", data: new TextEncoder().encode(data.dummyProp3) },
+    ];
+    await this.reader.write({ records });
+    this.setState({ message: 'Data written successfully.' });
+  } catch (error) {
+    this.setState({ error: `Error: ${error}` });
+  }
+};
 
   render() {
     const { message, error, nfcAvailable } = this.state;
+    const { publicAddress, privateKey, dummyProp1, dummyProp2, dummyProp3 } = this.props;
     return (
       <>
       <div className="m-5 text-white">
@@ -51,11 +59,12 @@ class NFCReaderWriter extends Component {
         {nfcAvailable ? (
           <>
             {/* <button className="btn btn-outline-success w-100 btn-lg mt-3" onClick={this.readNFC}>Read Card</button> -- */}
+           
             <button className="btn btn-outline-success w-100 btn-lg mt-3 mb-3" 
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasActivation"
               aria-controls="offcanvasActivation"
-              onClick={() => this.writeNFC(this.props.publicAddress)}
+              onClick={() => this.writeNFC({ publicAddress, privateKey, dummyProp1, dummyProp2, dummyProp3 })}
             >Activate Card</button>
 
 

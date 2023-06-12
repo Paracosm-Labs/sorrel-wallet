@@ -57,7 +57,7 @@ const OffcanvasNav = () => {
       {isAuthenticated ? (
 
 
-        <section className="mb-4 ext-center">
+        <section className="mb-4 text-center">
           <div className="align-items-center">
             <img src={user.picture} alt="Avatar" className="rounded-circle m-3" height="60" />
             <h6 className="mb-0">{user.name}</h6>
