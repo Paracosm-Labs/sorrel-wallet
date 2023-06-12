@@ -11,6 +11,7 @@ class NFCReaderWriter extends Component {
       message: '',
       nfcAvailable: 'NDEFReader' in window,
       isOffcanvasOpen: true,
+      isActivated: false,
     };
     this.offcanvasElement = React.createRef(); // Create a ref for the offcanvas
   }
@@ -35,7 +36,7 @@ class NFCReaderWriter extends Component {
   };
 
 writeNFC = async (data) => {
-  this.setState({ message: 'Please place your card near to your phone for 3 to 5 seconds.', isOffcanvasOpen: true });
+  this.setState({ message: 'Please place your card near to your phone and wait.', isOffcanvasOpen: true });
   try {
     const records = [
       { recordType: "text", data: new TextEncoder().encode(data.publicAddress) },
@@ -45,7 +46,7 @@ writeNFC = async (data) => {
       { recordType: "text", data: new TextEncoder().encode(data.dummyProp3) },
     ];
     await this.reader.write({ records });
-    this.setState({ message: 'Card Successfully Activated.', isOffcanvasOpen: false });
+    this.setState({ message: 'Card Successfully Activated.', isOffcanvasOpen: false, isActivated:true });
     toast.success(`Card Successfully Activated.`, {
       icon: ({ theme, type }) => <img src={LogoImg} alt="Sorrel Logo" className="rounded-circle me-5" height="24" />,
       theme: 'dark',
@@ -60,7 +61,7 @@ writeNFC = async (data) => {
 };
 
   render() {
-    const { message, nfcAvailable, isOffcanvasOpen } = this.state;
+    const { message, nfcAvailable, isOffcanvasOpen, isActivated } = this.state;
     const { publicAddress, privateKey, dummyProp1, dummyProp2, dummyProp3 } = this.props;
     return (
       <>
@@ -70,12 +71,12 @@ writeNFC = async (data) => {
           <>
             {/* <button className="btn btn-outline-success w-100 btn-lg mt-3" onClick={this.readNFC}>Read Card</button> -- */}
            
-            <button className={`btn w-100 btn-lg mt-3 mb-3 btn-outline-success`}
+            <button className={`btn w-100 btn-lg mt-3 mb-3 btn-outline-success ${isActivated ? `disabled`: ``}`}
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasActivation"
               aria-controls="offcanvasActivation"
               onClick={() => this.writeNFC({ publicAddress, privateKey, dummyProp1, dummyProp2, dummyProp3 })}
-            >Activate Card</button>
+            >{isActivated ? `Card Activated` : `Activate Card`}</button>
 
 
         </>
@@ -83,7 +84,7 @@ writeNFC = async (data) => {
           <button className="btn btn-outline-success w-100 btn-lg mt-3 mb-5 disabled">Activate Card</button>
           <p className="text-muted pb-5">NFC Reader was not found.<br/>Please use a NFC enabled device to activate.</p>
         </>)}
-        {message && <p className=" text-small text-success pb-5">{message}</p>}
+        {message && <p className={`text-small p-2 ${isActivated ? `text-success`:``}`}>{message}</p>}
       </div>
         {isOffcanvasOpen && (
         <div className={`offcanvas nfc-reader offcanvas-top`}
@@ -99,7 +100,7 @@ writeNFC = async (data) => {
               <PuffLoader className="m-auto" color="#109e77" size={120} />
             </div>
             <div className="align-items-center mb-3">
-              {message && <p className=" text-small p-2">{message}</p>}
+              {message && <p className={`text-small p-2 ${isActivated ? `text-success`:``}`}>{message}</p>}
             </div>
           </div>
         </div>
