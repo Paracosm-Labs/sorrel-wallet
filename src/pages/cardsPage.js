@@ -48,8 +48,8 @@ const CardsPage = () => {
         publicAddress={wallet.address.base58}
         privateKey={wallet.privateKey}
         checksum={wallet.checksum}
-        data01="Dummy Data 1"
-        data02="Dummy Data 2"
+        data01="local data sources"
+        data02="global data sources"
       />}
       </div>
       </div>
