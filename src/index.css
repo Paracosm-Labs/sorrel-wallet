@@ -71,6 +71,7 @@ code {
 }
 
 .wallet-cards{min-height: 900px;}
+/*.wallet-cards .content {max-height: 700px; overflow-y:auto;}*/
 
 .wallet-cards .card {;
     background-color: #242435;

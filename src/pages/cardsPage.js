@@ -36,12 +36,13 @@ const CardsPage = () => {
         </div>
       </div>
       <div className="m-1 text-white">
+      <div className="content">
         <img src="/img/cards-mockup.jpg" alt="Sorrel Wallet NFC Cards" className="w-100" />
         <h4>Benefits</h4>
         <p>Keeps your private keys safely on NFC Chip</p>
         <p>Payments made easily with just a tap</p>
         <p>Exciting expansion possiblities</p>
-      </div>
+      
       <CreateWallet onWalletCreation={setWallet} />
       {wallet && <NFCCards
         publicAddress={wallet.address.base58}
@@ -50,7 +51,8 @@ const CardsPage = () => {
         dummyProp2="Dummy Data 2"
         dummyProp3="Dummy Data 3"
       />}
-
+      </div>
+      </div>
       <OffcanvasBuy
         shopId={shopId}
         shopName={shopName}

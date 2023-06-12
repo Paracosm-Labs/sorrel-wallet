@@ -12,7 +12,7 @@ const CreateWallet = ({ onWalletCreation }) => {
   }, [onWalletCreation]);
 
   return wallet ? (
-    <div className="text-white m-5">
+    <div className="text-white m-3">
       <small>Public Address: {wallet.address.base58}</small><br/>
       <small>Private Key: ****** {/* wallet.privateKey */}</small>
     </div>
