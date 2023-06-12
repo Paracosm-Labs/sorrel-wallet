@@ -82,7 +82,7 @@ writeNFC = async (data) => {
         </>
         ) : (<>
           <button className="btn btn-outline-success w-100 btn-lg mt-3 mb-5 disabled">Activate Card</button>
-          <p className="text-muted pb-5">NFC Reader was not found.<br/>Please use a NFC enabled device to activate.</p>
+          <p className="text-muted pb-5">NFC Reader is not available.<br/>Please use a NFC enabled device to activate.</p>
         </>)}
         {message && <p className={`text-small p-2 ${isActivated ? `text-success`:``}`}>{message}</p>}
       </div>
