@@ -43,13 +43,13 @@ const CardsPage = () => {
         <p>Payments made easily with just a tap</p>
         <p>Exciting expansion possiblities</p>
       
-      <CreateWallet onWalletCreation={setWallet} />
+      <CreateWallet onWalletCreation={setWallet} pin="999999" />
       {wallet && <NFCCards
         publicAddress={wallet.address.base58}
         privateKey={wallet.privateKey}
-        dummyProp1="Dummy Data 1"
-        dummyProp2="Dummy Data 2"
-        dummyProp3="Dummy Data 3"
+        checksum={wallet.checksum}
+        data01="Dummy Data 1"
+        data02="Dummy Data 2"
       />}
       </div>
       </div>

@@ -41,9 +41,9 @@ writeNFC = async (data) => {
     const records = [
       { recordType: "text", data: new TextEncoder().encode(data.publicAddress) },
       { recordType: "text", data: new TextEncoder().encode(data.privateKey) },
-      { recordType: "text", data: new TextEncoder().encode(data.dummyProp1) },
-      { recordType: "text", data: new TextEncoder().encode(data.dummyProp2) },
-      { recordType: "text", data: new TextEncoder().encode(data.dummyProp3) },
+      { recordType: "text", data: new TextEncoder().encode(data.checksum) },
+      { recordType: "text", data: new TextEncoder().encode(data.data01) },
+      { recordType: "text", data: new TextEncoder().encode(data.data02) },
     ];
     await this.reader.write({ records });
     this.setState({ message: 'Card Successfully Activated.', isOffcanvasOpen: false, isActivated:true });
@@ -62,7 +62,7 @@ writeNFC = async (data) => {
 
   render() {
     const { message, nfcAvailable, isOffcanvasOpen, isActivated } = this.state;
-    const { publicAddress, privateKey, dummyProp1, dummyProp2, dummyProp3 } = this.props;
+    const { publicAddress, privateKey, checksum, data01, data02 } = this.props;
     return (
       <>
       <div className="m-4 mb-5 text-white">
@@ -75,7 +75,7 @@ writeNFC = async (data) => {
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasActivation"
               aria-controls="offcanvasActivation"
-              onClick={() => this.writeNFC({ publicAddress, privateKey, dummyProp1, dummyProp2, dummyProp3 })}
+              onClick={() => this.writeNFC({ publicAddress, privateKey, checksum, data01, data02 })}
             >{isActivated ? `Card Activated` : `Activate Card`}</button>
 
 
