@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import TronWeb from 'tronweb';
 import CryptoJS from 'crypto-js';
 import crc from 'crc';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LogoImg from '../img/logo2x.png';
 
@@ -11,7 +11,6 @@ const CreateWallet = ({ onWalletCreation }) => {
   const [pin, setPin] = useState('');
   const [showOffcanvas, setShowOffcanvas] = useState(false);
   const [offcanvasTitle, setOffcanvasTitle] = useState('');
-  const [displayedPin, setDisplayedPin] = useState(Array(6).fill(''));
 
   const handlePinChange = (digit) => {
     if (pin.length < 6) {
@@ -65,7 +64,7 @@ const handleOffcanvasSubmit = () => {
     const bytes = CryptoJS.AES.decrypt(wallet.privateKey, pin);
     const originalPrivateKey = bytes.toString(CryptoJS.enc.Utf8);
     alert(`Your private key is: ${originalPrivateKey}`);
-          toast.info(`Keep your private keys safe!`, {
+          toast.info(`Please keep your private keys safe!`, {
           icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
           theme: "dark",
         }); 

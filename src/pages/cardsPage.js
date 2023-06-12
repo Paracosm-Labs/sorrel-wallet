@@ -45,12 +45,13 @@ const CardsPage = () => {
       
       <CreateWallet onWalletCreation={setWallet} />
       {wallet && <NFCCards
-        publicAddress={wallet.address.base58}
-        privateKey={wallet.privateKey}
-        checksum={wallet.checksum}
-        data01="local data sources"
-        data02="global data sources"
-      />}
+        publicAddress={JSON.stringify({publicAddress: wallet.address.base58})}
+        privateKey={JSON.stringify({privateKey: wallet.privateKey})}
+        checksum={JSON.stringify({checksum: wallet.checksum})}
+        data01={JSON.stringify({data01: "local data sources"})}
+        data02={JSON.stringify({data02: "global data sources"})}
+      />
+      }
       </div>
       </div>
       <OffcanvasBuy

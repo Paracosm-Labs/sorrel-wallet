@@ -27,7 +27,9 @@ class NFCReaderWriter extends Component {
       await this.reader.scan();
       this.reader.onreading = ({ message, serialNumber }) => {
         const decoder = new TextDecoder();
-        const addr = decoder.decode(message.records[0].data);
+        const data = decoder.decode(message.records[0].data);
+        const parsedData = JSON.parse(data);
+        const addr = parsedData.publicAddress;
         this.setState({ message: `Public address: ${addr}` });
       };
     } catch (error) {
@@ -36,7 +38,7 @@ class NFCReaderWriter extends Component {
   };
 
 writeNFC = async (data) => {
-  this.setState({ message: 'Please place your card near to your phone and wait.', isOffcanvasOpen: true });
+  this.setState({ message: 'Please place card near to your device and wait.', isOffcanvasOpen: true });
   try {
     const records = [
       { recordType: "text", data: new TextEncoder().encode(data.publicAddress) },

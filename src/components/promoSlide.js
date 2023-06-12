@@ -14,7 +14,7 @@ const PromoSlide = () => {
     <div className="carousel-item active">
     <a href="/cards">
       <img src="/img/cards-mockup.jpg" className="d-block w-100" width="380" height="220" alt=""/>
-      <div className="carousel-caption bg-primary">Coming Soon!
+      <div className="carousel-caption bg-primary">Get yours today!
       </div>
     </a>
     </div>
