@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TronWeb from 'tronweb';
 import CryptoJS from 'crypto-js';
 import crc from 'crc';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import LogoImg from '../img/logo2x.png';
 
 const CreateWallet = ({ onWalletCreation }) => {
   const [wallet, setWallet] = useState(null);
   const [pin, setPin] = useState(Array(6).fill(''));
   const [showOffcanvas, setShowOffcanvas] = useState(false);
   const [offcanvasTitle, setOffcanvasTitle] = useState('');
+  const [displayedPin, setDisplayedPin] = useState(Array(6).fill(''));
 
   const handlePinChange = (digit, index) => {
     const newPin = [...pin];
     newPin[index] = digit;
     setPin(newPin);
-    console.log(digit);
+    console.log(newPin);
   };
 
   const handleOffcanvasClose = () => {
@@ -23,7 +27,10 @@ const CreateWallet = ({ onWalletCreation }) => {
   const handleOffcanvasSubmit = () => {
     const pinString = pin.join('');
     if (pinString.length !== 6) {
-      alert('PIN must be 6 digits');
+        toast.warning(`PIN must be 6 digits`, {
+          icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
+          theme: "dark",
+        });
       return;
     }
     if (offcanvasTitle === 'Set PIN') {
@@ -55,6 +62,11 @@ const CreateWallet = ({ onWalletCreation }) => {
     const bytes = CryptoJS.AES.decrypt(wallet.privateKey, pin);
     const originalPrivateKey = bytes.toString(CryptoJS.enc.Utf8);
     alert(`Your private key is: ${originalPrivateKey}`);
+          toast.info(`Remember to keep your private keys safe!`, {
+          icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
+          theme: "dark",
+        }); 
+
   };
 
   const handleCreateWallet = () => {
@@ -67,12 +79,21 @@ const CreateWallet = ({ onWalletCreation }) => {
       setOffcanvasTitle('Check Private Key');
       setShowOffcanvas(true);
     } else {
-      alert('Please create a wallet first.');
+          toast.warning(`Please create a wallet first.`, {
+          icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
+          theme: "dark",
+        });    
     }
   };
   const handleClearPin = () => {
     setPin(Array(6).fill(''));
   };
+
+  // Use useEffect to update the displayed PIN when the PIN state changes
+  useEffect(() => {
+    setDisplayedPin(pin.map(digit => digit ? '9999' : '99'));
+    
+  }, [pin]);
 
   return (
     <div className="">
@@ -88,12 +109,12 @@ const CreateWallet = ({ onWalletCreation }) => {
           <div className="row">
             <div className="col d-none d-md-block d-sm-none"></div>
             <div className="col">
-              <div className="d-flex justify-content-around">
-                {pin.map((digit, index) => (
-                  <div key={index} className="border border-secondary text-center text-white mx-2 p-4">
-                    <p className="text-white">{digit ? '*' : ''}</p>
-                  </div>
-                ))}
+              <div className="d-flex justify-content-between">
+        {displayedPin.map((digit, index) => (
+          <div key={`${digit}-${index}`} className="border border-secondary text-center bg-black mx-0 p-4">
+            <h1 className="text-success">{pin}</h1>
+          </div>
+        ))}
               </div>
               <div className="row justify-content-between mt-4">
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((digit) => (
@@ -108,7 +129,7 @@ const CreateWallet = ({ onWalletCreation }) => {
                 </div>
               </div>
               
-              <button className="btn btn-outline-success btn-lg w-100 mt-4" onClick={handleOffcanvasSubmit}>Submit</button>
+              <button className="btn btn-success btn-lg w-100 mt-4" onClick={handleOffcanvasSubmit}>Submit</button>
             </div>
             <div className="col d-none d-md-block d-sm-none"></div>
           </div>
