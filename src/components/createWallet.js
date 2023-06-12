@@ -8,38 +8,40 @@ import LogoImg from '../img/logo2x.png';
 
 const CreateWallet = ({ onWalletCreation }) => {
   const [wallet, setWallet] = useState(null);
-  const [pin, setPin] = useState(Array(6).fill(''));
+  const [pin, setPin] = useState('');
   const [showOffcanvas, setShowOffcanvas] = useState(false);
   const [offcanvasTitle, setOffcanvasTitle] = useState('');
   const [displayedPin, setDisplayedPin] = useState(Array(6).fill(''));
 
-  const handlePinChange = (digit, index) => {
-    const newPin = [...pin];
-    newPin[index] = digit;
-    setPin(newPin);
-    console.log(newPin);
+  const handlePinChange = (digit) => {
+    if (pin.length < 6) {
+      setPin(pin + digit);
+    }
+    console.log(digit);
   };
+
 
   const handleOffcanvasClose = () => {
     setShowOffcanvas(false);
   };
 
-  const handleOffcanvasSubmit = () => {
-    const pinString = pin.join('');
-    if (pinString.length !== 6) {
+
+const handleOffcanvasSubmit = () => {
+  if (pin.length !== 6) {
         toast.warning(`PIN must be 6 digits`, {
           icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
           theme: "dark",
         });
-      return;
-    }
-    if (offcanvasTitle === 'Set PIN') {
-      createWallet(pinString);
-    } else if (offcanvasTitle === 'Check Private Key' && wallet) {
-      checkPrivateKey(pinString);
-    }
-    setShowOffcanvas(false);
-  };
+    return;
+  }
+  if (offcanvasTitle === 'Set PIN') {
+    createWallet(pin);
+  } else if (offcanvasTitle === 'Check Private Key' && wallet) {
+    checkPrivateKey(pin);
+  }
+  setShowOffcanvas(false);
+};
+
 
   const createWallet = (pin) => {
     TronWeb.createAccount().then(newWallet => {
@@ -62,7 +64,7 @@ const CreateWallet = ({ onWalletCreation }) => {
     const bytes = CryptoJS.AES.decrypt(wallet.privateKey, pin);
     const originalPrivateKey = bytes.toString(CryptoJS.enc.Utf8);
     alert(`Your private key is: ${originalPrivateKey}`);
-          toast.info(`Remember to keep your private keys safe!`, {
+          toast.info(`Keep your private keys safe!`, {
           icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
           theme: "dark",
         }); 
@@ -86,14 +88,9 @@ const CreateWallet = ({ onWalletCreation }) => {
     }
   };
   const handleClearPin = () => {
-    setPin(Array(6).fill(''));
+    setPin('');
   };
 
-  // Use useEffect to update the displayed PIN when the PIN state changes
-  useEffect(() => {
-    setDisplayedPin(pin.map(digit => digit ? '*' : ''));
-    
-  }, [pin]);
 
   return (
     <div className="">
@@ -110,9 +107,9 @@ const CreateWallet = ({ onWalletCreation }) => {
             <div className="col d-none d-md-block d-sm-none"></div>
             <div className="col">
               <div className="d-flex justify-content-between">
-        {displayedPin.map((digit, index) => (
-          <div key={`${digit}-${index}`} className="border border-secondary text-center bg-black mx-0 p-4">
-            <h1 className="text-success">{digit}</h1>
+        {Array(6).fill().map((_, index) => (
+          <div key={index} className="border border-secondary text-center text-white mx-2 p-4">
+            <span className="text-white">{pin[index] ? '*' : ''}</span>
           </div>
         ))}
               </div>
