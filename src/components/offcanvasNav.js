@@ -57,11 +57,11 @@ const OffcanvasNav = () => {
       {isAuthenticated ? (
 
 
-        <section className="mb-4 text-center">
+        <section className="mb-4 ext-center">
           <div className="align-items-center">
             <img src={user.picture} alt="Avatar" className="rounded-circle m-3" height="60" />
             <h6 className="mb-0">{user.name}</h6>
-            <p className="badge bg-success p-1"><i className="fa-solid fa-wifi"></i>&nbsp;Connected</p>
+            <p className="badge bg-success p-1 mt-3"><i className="fa-solid fa-wifi"></i>&nbsp;Connected</p>
           </div>
           <div className="mt-3">
             <label htmlFor="countrySelect" className="form-label">Switch Country</label>
@@ -76,10 +76,9 @@ const OffcanvasNav = () => {
           <button onClick={() => logout({ returnTo: `/explore` })} className="btn btn-xs btn-outline-secondary mt-3" type="button">
             Logout
           </button>
-          <hr/>
         </section> ):(
 
-        <section className="mb-4 text-center">
+        <section className="mb-3 text-center">
           <div className="align-items-center">
             <p className="badge bg-warning p-1"><i className="fa-solid fa-wifi"></i>&nbsp;Not Connected</p>
           </div>

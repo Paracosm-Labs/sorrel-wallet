@@ -31,8 +31,8 @@ const OffcanvasBuy = ({ shopId, shopName, shopPic }) => {
           <h5 className="offcanvas-title" id="offcanvasBuyLabel">Order Now</h5>
           <button type="button" className="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div className="offcanvas-body">
-          <div className="mb-5  justify-content-center">
+        <div className="offcanvas-body m-2">
+          <div className="mb-5  justify-content-center text-center">
             <img src={shopPic} alt={shopName} className="rounded-circle" width="50" height="50" />
             <div className="text-center">
               <p>{shopName}</p>
@@ -72,7 +72,7 @@ const OffcanvasBuy = ({ shopId, shopName, shopPic }) => {
             {/* Display order details and total */}
           </div>
           <div className="text-center mt-5">
-            <button className="btn btn-lg btn-success w-100 p-2" onClick={handleConfirmOrder}>Confirm Order</button>
+            <button  data-bs-dismiss="offcanvas" className="btn btn-lg btn-success w-100 p-2" onClick={handleConfirmOrder}>Confirm Order</button>
           </div>
         </div>
       </div>
