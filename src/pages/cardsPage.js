@@ -5,21 +5,17 @@ import Navigation from '../components/navMenu';
 import CreateWallet from '../components/createWallet';
 
 const CardsPage = () => {
-  const [selectedAddress, setSelectedAddress] = useState(null);
   const [wallet, setWallet] = useState(null);
 
   const handleWalletCreation = (newWallet) => {
     setWallet(newWallet);
   };
 
-  const handleScanNFC = (data) => {
-    setSelectedAddress(data);
-  };
 
   // Shop details
   const shopId = 'sorrel';
   const shopName = 'Sorrel Store';
-  const shopPic = 'logo2x.png'; // Replace with the actual logo URL
+  const shopPic = 'logo2x.png';
 
   return (
     <div className="text-center wallet-cards">
@@ -39,8 +35,8 @@ const CardsPage = () => {
           </div>
         </div>
       </div>
-      <div className="m-1 text-white d-none">
-        <img src="/img/cards-mockup.jpg" className="w-100" />
+      <div className="m-1 text-white">
+        <img src="/img/cards-mockup.jpg" alt="Sorrel Wallet NFC Cards" className="w-100" />
         <h4>Benefits</h4>
         <p>Keeps your private keys safely on NFC Chip</p>
         <p>Payments made easily with just a tap</p>
@@ -53,8 +49,8 @@ const CardsPage = () => {
         dummyProp1="Dummy Data 1"
         dummyProp2="Dummy Data 2"
         dummyProp3="Dummy Data 3"
-        onRead={handleScanNFC}
       />}
+
       <OffcanvasBuy
         shopId={shopId}
         shopName={shopName}

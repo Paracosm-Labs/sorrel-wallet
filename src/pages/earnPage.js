@@ -27,7 +27,7 @@ const EarnPage = () => {
   const handleRedeem = (address) => {
     console.log(`Redeeming from Vault ${address}`);
     toast.success(`Successfully redeemed from ${address}`, {
-      icon: ({theme, type}) =>  <img src={LogoImg} className="rounded-circle me-5" height="24"/>,
+      icon: ({theme, type}) =>  <img src={LogoImg} alt="Sorrel Logo" className="rounded-circle me-5" height="24"/>,
       theme: "dark",
     });
   };

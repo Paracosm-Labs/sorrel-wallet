@@ -18,7 +18,7 @@ const OffcanvasBuy = ({ shopId, shopName, shopPic }) => {
   const handleConfirmOrder = () => {
     // Process order with the selected details
     toast.success(`Order confirmed for ${orderQuantity} item(s) from ${shopName} delivering to ${deliveryAddress}`, {
-      icon: ({ theme, type }) => <img src={LogoImg} className="rounded-circle me-5" height="24" />,
+      icon: ({ theme, type }) => <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24" />,
       theme: 'dark',
     });
     console.log(`Order confirmed: ${orderQuantity} item(s) from ${shopName}, Delivery Address: ${deliveryAddress}`);

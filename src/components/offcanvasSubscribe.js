@@ -19,7 +19,7 @@ const OffcanvasSubscribe = ({ shopId, shopName, shopPic }) => {
   const handleSubscribe = () => {
     // Process subscription logic
     toast.success(`Subscribed to ${selectedPlan.name} from ${shopName}!`, {
-      icon: ({ theme, type }) => <img src={LogoImg} className="rounded-circle me-5" height="24" />,
+      icon: ({ theme, type }) => <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24" />,
       theme: 'dark',
     });
     console.log(`Subscribed to ${selectedPlan.name} from ${shopName}`);

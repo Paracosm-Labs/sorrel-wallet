@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LogoImg from '../img/logo2x.png';
 import PuffLoader from "react-spinners/PuffLoader";
 
 class NFCReaderWriter extends Component {
@@ -8,9 +9,9 @@ class NFCReaderWriter extends Component {
     super(props);
     this.state = {
       message: '',
-      error: '',
       nfcAvailable: 'NDEFReader' in window,
     };
+    this.offcanvasElement = React.createRef(); // Create a ref for the offcanvas
   }
 
   componentDidMount() {
@@ -43,14 +44,24 @@ writeNFC = async (data) => {
       { recordType: "text", data: new TextEncoder().encode(data.dummyProp3) },
     ];
     await this.reader.write({ records });
-    this.setState({ message: 'Data written successfully.' });
+    this.setState({ message: 'Card Successfully Activated.' });
+    const offcanvasInstance = new window.bootstrap.Offcanvas(this.offcanvasElement.current);
+    offcanvasInstance.hide(); // Hide the offcanvas
+    toast.success(`Card Successfully Activated.`, {
+      icon: ({ theme, type }) => <img src={LogoImg} alt="Sorrel Logo" className="rounded-circle me-5" height="24" />,
+      theme: 'dark',
+    });
   } catch (error) {
     this.setState({ error: `Error: ${error}` });
+    toast.error(`${error}`, {
+      icon: ({ theme, type }) => <img src={LogoImg} alt="Sorrel Logo" className="rounded-circle me-5" height="24" />,
+      theme: 'dark',
+    });
   }
 };
 
   render() {
-    const { message, error, nfcAvailable } = this.state;
+    const { message, nfcAvailable } = this.state;
     const { publicAddress, privateKey, dummyProp1, dummyProp2, dummyProp3 } = this.props;
     return (
       <>
@@ -74,10 +85,9 @@ writeNFC = async (data) => {
           <p className="text-muted">NFC Reader was not found.<br/>Please use a NFC enabled device to activate.</p>
         </>)}
         {message && <p>{message}</p>}
-        {/* error && <p>{error}</p> */} 
       </div>
 
-        <div className="offcanvas nfc-reader offcanvas-top" tabIndex="-1" id="offcanvasActivation" aria-labelledby="offcanvasActivationLabel">
+        <div ref={this.offcanvasElement} className="offcanvas nfc-reader offcanvas-top" tabIndex="-1" id="offcanvasActivation" aria-labelledby="offcanvasActivationLabel">
           <div className="offcanvas-header">
             <h5 className="offcanvas-title text-center m-auto" id="offcanvasActivationLabel">
             Card Activation

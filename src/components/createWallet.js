@@ -14,7 +14,7 @@ const CreateWallet = ({ onWalletCreation }) => {
   return wallet ? (
     <div className="text-white m-5">
       <small>Public Address: {wallet.address.base58}</small><br/>
-      <small>Private Key: Hidden {/* wallet.privateKey */}</small>
+      <small>Private Key: ****** {/* wallet.privateKey */}</small>
     </div>
   ) : (
     <p>Creating wallet...</p>
