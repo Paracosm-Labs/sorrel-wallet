@@ -17,12 +17,12 @@ const CreateWallet = ({ onWalletCreation }) => {
     if (pin.length < 6) {
       setPin(pin + digit);
     }
-    console.log(digit);
   };
 
 
   const handleOffcanvasClose = () => {
     setShowOffcanvas(false);
+    setPin('');
   };
 
 
@@ -40,6 +40,7 @@ const handleOffcanvasSubmit = () => {
     checkPrivateKey(pin);
   }
   setShowOffcanvas(false);
+  setPin('');
 };
 
 
@@ -106,10 +107,10 @@ const handleOffcanvasSubmit = () => {
           <div className="row">
             <div className="col d-none d-md-block d-sm-none"></div>
             <div className="col">
-              <div className="d-flex justify-content-between">
+              <div className="row justify-content-between">
         {Array(6).fill().map((_, index) => (
-          <div key={index} className="border border-secondary text-center text-white mx-2 p-4">
-            <span className="text-white">{pin[index] ? '*' : ''}</span>
+          <div key={index} className={`col border text-center text-white mx-2 p-3 ${pin[index] ? 'border-success' : 'border-primary'}`}>
+            <h4 className="text-success m-auto">{pin[index] ? '*' : '_'}</h4>
           </div>
         ))}
               </div>
@@ -126,7 +127,7 @@ const handleOffcanvasSubmit = () => {
                 </div>
               </div>
               
-              <button className="btn btn-success btn-lg w-100 mt-4" onClick={handleOffcanvasSubmit}>Submit</button>
+              <button className="btn btn-success btn-lg w-100 mt-5" onClick={handleOffcanvasSubmit}>Continue</button>
             </div>
             <div className="col d-none d-md-block d-sm-none"></div>
           </div>
