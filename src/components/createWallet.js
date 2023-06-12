@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import TronWeb from 'tronweb';
 import CryptoJS from 'crypto-js';
 import crc from 'crc';
@@ -7,7 +7,8 @@ import { Modal, Button, Form } from 'react-bootstrap';
 const CreateWallet = ({ onWalletCreation }) => {
   const [wallet, setWallet] = useState(null);
   const [pin, setPin] = useState('');
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [modalTitle, setModalTitle] = useState('');
 
   const handlePinChange = (event) => {
     setPin(event.target.value);
@@ -15,7 +16,15 @@ const CreateWallet = ({ onWalletCreation }) => {
 
   const handleModalClose = () => {
     setShowModal(false);
-    createWallet();
+  };
+
+  const handleModalSubmit = () => {
+    if (modalTitle === 'Set PIN') {
+      createWallet();
+    } else if (modalTitle === 'Check Private Key' && wallet) {
+      checkPrivateKey();
+    }
+    setShowModal(false);
   };
 
   const createWallet = () => {
@@ -35,11 +44,33 @@ const CreateWallet = ({ onWalletCreation }) => {
     });
   };
 
+  const checkPrivateKey = () => {
+    const bytes = CryptoJS.AES.decrypt(wallet.privateKey, pin);
+    const originalPrivateKey = bytes.toString(CryptoJS.enc.Utf8);
+    alert(`Your private key is: ${originalPrivateKey}`);
+  };
+
+  const handleCreateWallet = () => {
+    setModalTitle('Set PIN');
+    setShowModal(true);
+  };
+
+  const handleCheckPrivateKey = () => {
+    if (wallet) {
+      setModalTitle('Check Private Key');
+      setShowModal(true);
+    } else {
+      alert('Please create a wallet first.');
+    }
+  };
+
   return (
     <div>
+      <Button className="btn btn-outline-success m-2" onClick={handleCreateWallet}>Create Wallet</Button>
+      <Button className="btn btn-outline-secondary m-2" onClick={handleCheckPrivateKey}>Check Private Key</Button>
       <Modal show={showModal} onHide={handleModalClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Set PIN</Modal.Title>
+          <Modal.Title>{modalTitle}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -50,8 +81,8 @@ const CreateWallet = ({ onWalletCreation }) => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={handleModalClose}>
-            Save Changes
+          <Button variant="primary" onClick={handleModalSubmit}>
+            Submit
           </Button>
         </Modal.Footer>
       </Modal>
