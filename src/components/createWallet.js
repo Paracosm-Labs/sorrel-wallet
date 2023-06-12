@@ -13,6 +13,7 @@ const CreateWallet = ({ onWalletCreation }) => {
     const newPin = [...pin];
     newPin[index] = digit;
     setPin(newPin);
+    console.log(digit);
   };
 
   const handleOffcanvasClose = () => {
@@ -69,38 +70,48 @@ const CreateWallet = ({ onWalletCreation }) => {
       alert('Please create a wallet first.');
     }
   };
+  const handleClearPin = () => {
+    setPin(Array(6).fill(''));
+  };
 
   return (
-    <div>
+    <div className="">
       <button className="btn btn-outline-success m-2" onClick={handleCreateWallet}>Create Wallet</button>
       <button className="btn btn-outline-secondary m-2" onClick={handleCheckPrivateKey}>Check Private Key</button>
       
-      <div className={`offcanvas offcanvas-bottom ${showOffcanvas ? 'show' : ''}`} tabIndex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+      <div className={`offcanvas pinpad offcanvas-bottom ${showOffcanvas ? 'show' : ''}`} tabIndex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
         <div className="offcanvas-header">
           <h5 className="offcanvas-title" id="offcanvasBottomLabel">{offcanvasTitle}</h5>
           <button type="button" className="btn-close btn-close-white text-reset" onClick={handleOffcanvasClose}></button>
         </div>
-        <div className="offcanvas-body">
-        <div className="row">
-        <div className="col"></div>
-        <div className="col-4">
-          <div className="d-flex justify-content-between">
-            {pin.map((digit, index) => (
-              <input key={index} type="password" className="form-control m-3 form-control-lg" value={digit} onChange={(e) => handlePinChange(e.target.value, index)} />
-))}
-          </div>
-          <div className="row justify-content-between mt-2">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((digit) => (
-              <div className="col-4 mt-2">
-                <button key={digit} className="btn btn-outline-secondary btn-md w-100" onClick={() => handlePinChange(digit)}>{digit}</button>
+        <div className="offcanvas-body container">
+          <div className="row">
+            <div className="col d-none d-md-block d-sm-none"></div>
+            <div className="col">
+              <div className="d-flex justify-content-around">
+                {pin.map((digit, index) => (
+                  <div key={index} className="border border-secondary text-center text-white mx-2 p-4">
+                    <p className="text-white">{digit ? '*' : ''}</p>
+                  </div>
+                ))}
               </div>
-            ))}
+              <div className="row justify-content-between mt-4">
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((digit) => (
+                  <div className="col-4 mt-2">
+                    <button key={digit} className="btn btn-outline-secondary btn-lg w-100" onClick={() => handlePinChange(digit)}>{digit}</button>
+                  </div>
+                ))}
+                <div className="col-4 mt-2">
+                  <button className="btn btn-outline-secondary btn-lg w-100" onClick={handleClearPin}>
+                    <i className="fa-solid fa-delete-left"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <button className="btn btn-outline-success btn-lg w-100 mt-4" onClick={handleOffcanvasSubmit}>Submit</button>
+            </div>
+            <div className="col d-none d-md-block d-sm-none"></div>
           </div>
-          <button className="btn btn-outline-success btn-lg w-100 mt-3" onClick={handleOffcanvasSubmit}>Submit</button>
-        </div>
-        
-        <div className="col"></div>
-        </div>
         </div>
       </div>
 
