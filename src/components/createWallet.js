@@ -91,7 +91,7 @@ const CreateWallet = ({ onWalletCreation }) => {
 
   // Use useEffect to update the displayed PIN when the PIN state changes
   useEffect(() => {
-    setDisplayedPin(pin.map(digit => digit ? '9999' : '99'));
+    setDisplayedPin(pin.map(digit => digit ? '*' : ''));
     
   }, [pin]);
 
@@ -112,7 +112,7 @@ const CreateWallet = ({ onWalletCreation }) => {
               <div className="d-flex justify-content-between">
         {displayedPin.map((digit, index) => (
           <div key={`${digit}-${index}`} className="border border-secondary text-center bg-black mx-0 p-4">
-            <h1 className="text-success">{pin}</h1>
+            <h1 className="text-success">{digit}</h1>
           </div>
         ))}
               </div>
