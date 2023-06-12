@@ -109,7 +109,7 @@ const handleOffcanvasSubmit = () => {
             <div className="col">
               <div className="row justify-content-between">
         {Array(6).fill().map((_, index) => (
-          <div key={index} className={`col border text-center text-white mx-2 p-3 ${pin[index] ? 'border-success' : 'border-primary'}`}>
+          <div key={index} className={`col border text-center text-light mx-2 p-3 ${pin[index] ? 'border-success' : 'border-primary'}`}>
             <h4 className="text-success m-auto">{pin[index] ? '*' : '_'}</h4>
           </div>
         ))}
@@ -135,9 +135,9 @@ const handleOffcanvasSubmit = () => {
       </div>
 
       {wallet && (
-        <div className="text-white m-3">
-          <small>Public Address: {wallet.address.base58}</small><br/>
-          <small>Private Key: ******</small>
+        <div className="text-light text-start m-3 bg-black p-3 border border-info">
+          <small>Your Public Address: {wallet.address.base58}</small><br/>
+          <small>PIN: ******</small>
         </div>
       )}
     </div>
