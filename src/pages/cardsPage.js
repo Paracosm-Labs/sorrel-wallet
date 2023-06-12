@@ -7,9 +7,9 @@ import CreateWallet from '../components/createWallet';
 const CardsPage = () => {
   const [wallet, setWallet] = useState(null);
 
-  const handleWalletCreation = (newWallet) => {
-    setWallet(newWallet);
-  };
+  // const handleWalletCreation = (newWallet) => {
+  //   setWallet(newWallet);
+  // };
 
 
   // Shop details
