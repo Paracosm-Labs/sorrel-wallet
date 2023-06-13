@@ -23,7 +23,7 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
   const readNFC = async () => {
     if (!nfcReader) {alert("NFC Reader is not available.")};
     setMessage('Please place card near to device and wait.');
-    setIsOffcanvasOpen(true);
+    // setIsOffcanvasOpen(true);
       try {
         await nfcReader.scan();
         nfcReader.onreading = ({ message, serialNumber }) => {
@@ -33,17 +33,21 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
           const nfcEncryptedPrivateKey = parsedData.encryptedPrivateKey;
           const nfcChecksum = parsedData.checksum;
           const nfcPublicAddress = parsedData.publicAddress;
-          setMessage(`Public address: ${nfcPublicAddress}`);
+          setMessage(`Public address: ${nfcPublicAddress.base58}`);
           onNFCRead(parsedData);
-          alert(`${parsedData} - ${nfcPublicAddress}`);
-          
-          this.state({ encryptedPrivateKey: nfcEncryptedPrivateKey, checksum: nfcChecksum });
+          // alert(`${nfcPublicAddress.base58}`);
+          // return parsedData;     
+          // encryptedPrivateKey(nfcEncryptedPrivateKey);
+          // checksum(nfcChecksum);
+          setIsOffcanvasOpen(false); 
         };
+       
       } catch (error) {
         setIsOffcanvasOpen(false);
         setMessage(`Error: ${error}`);
         alert(`${error}`);
       }
+
   };
 
 
@@ -82,7 +86,10 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
   };
 
   const handleOffcanvasClose = () => {
-    setIsOffcanvasOpen(false);
+    if (setIsOffcanvasOpen === true ) {
+      setIsOffcanvasOpen(false);
+    }
+    
   };
 
     return (
@@ -115,11 +122,11 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
         {message && <p className={`text-small p-2 ${isActivated ? `text-success`:``}`}>{message}</p>}
       </div>
         
-        <div onHide={handleOffcanvasClose} className={`offcanvas nfc-reader offcanvas-top ${isActivated} `}
+        <div onHide={handleOffcanvasClose} className={`offcanvas nfc-reader offcanvas-top ${isActivated}`}
         data-bs-scroll="true" data-bs-backdrop="false" tabIndex="-1" id="offcanvasActivation" aria-labelledby="offcanvasActivationLabel">
           <div className="offcanvas-header">
             <h5 className="offcanvas-title text-center m-auto" id="offcanvasActivationLabel">
-            Card Activation
+            Tap Card to Scan
             </h5>
 
           </div>

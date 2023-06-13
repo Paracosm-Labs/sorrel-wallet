@@ -51,7 +51,7 @@ const CardsPage = () => {
        <CreateWallet onWalletCreation={setWallet} /> 
        <hr className="mx-2"/>
       {wallet && (<NFCCards
-        publicAddress={wallet.address.base58}
+        publicAddress={wallet.address}
         encryptedPrivateKey={wallet.encryptedPrivateKey}
         checksum={wallet.checksum}
         onNFCRead={handleNFCRead}

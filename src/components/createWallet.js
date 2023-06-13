@@ -66,16 +66,28 @@ const handleOffcanvasSubmit = () => {
 
   const checkPrivateKey = (pin) => {
     const bytesCheck = CryptoJS.AES.decrypt(wallet.encryptedPrivateKey, pin);
-    const originalPrivateKey = bytesCheck.toString(CryptoJS.enc.Utf8);
-
     try {
+        let originalPrivateKey;
+
+        try {
+          originalPrivateKey = bytesCheck.toString(CryptoJS.enc.Utf8);
+        } catch (error) {
+          alert('Invalid PIN.');
+          toast.warning(`Please keep your private keys safe!`, {
+          icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
+          theme: "dark",
+        }); 
+          return
+        }
+
         if (originalPrivateKey === '' ) {
           alert(`Invalid PIN.`);
         } 
         else {
           alert(`PIN Confirmed. This is your Private Key: ${originalPrivateKey}`);
         }
-          toast.info(`Please keep your private keys safe!`, {
+
+          toast.warning(`Please keep your private keys safe!`, {
           icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
           theme: "dark",
         }); 
@@ -83,7 +95,6 @@ const handleOffcanvasSubmit = () => {
       } catch (error) {
         alert(`${error}`);
       }
-
 
   };
 
