@@ -21,7 +21,7 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
   }, []);
 
   const readNFC = async () => {
-    if (!nfcReader) return;
+    if (!nfcReader) {alert("NFC Reader is not available.")};
     setMessage('Please place card near to device and wait.');
     setIsOffcanvasOpen(true);
       try {
@@ -36,7 +36,7 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
           setMessage(`Public address: ${nfcPublicAddress}`);
           onNFCRead(parsedData);
           alert(`${parsedData} - ${nfcPublicAddress}`);
-          setIsOffcanvasOpen(false); // Close the offcanvas
+          
           this.state({ encryptedPrivateKey: nfcEncryptedPrivateKey, checksum: nfcChecksum });
         };
       } catch (error) {
@@ -49,7 +49,7 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
 
   const writeNFC = async (data) => {
     setMessage('Please place card near to device and wait.');
-    setIsOffcanvasOpen(true);
+    // setIsOffcanvasOpen(true);
     try {
       const records = [
         { recordType: "url", data: "https://wallet.sorrelbanq.org" },
@@ -81,6 +81,10 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
     }
   };
 
+  const handleOffcanvasClose = () => {
+    setIsOffcanvasOpen(false);
+  };
+
     return (
       <>
       <div className="m-4 mb-5 text-white">
@@ -110,8 +114,8 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
         </>)}
         {message && <p className={`text-small p-2 ${isActivated ? `text-success`:``}`}>{message}</p>}
       </div>
-        {isOffcanvasOpen && (
-        <div className={`offcanvas nfc-reader offcanvas-top`}
+        
+        <div onHide={handleOffcanvasClose} className={`offcanvas nfc-reader offcanvas-top ${isActivated} `}
         data-bs-scroll="true" data-bs-backdrop="false" tabIndex="-1" id="offcanvasActivation" aria-labelledby="offcanvasActivationLabel">
           <div className="offcanvas-header">
             <h5 className="offcanvas-title text-center m-auto" id="offcanvasActivationLabel">
@@ -124,11 +128,11 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
               <PuffLoader className="m-auto" color="#109e77" size={120} />
             </div>
             <div className="align-items-center mb-3">
-              {message && <p className={`text-small p-2 ${isActivated ? `text-success`:``}`}>{message}<br/>This may take up to 5 seconds to complete.</p>}
+              {message && <p className={`text-small p-2 ${isActivated ? `text-success`:``}`}>{message}<br/>{`${isActivated ? ``: `This may take up to 5 seconds to complete`}`}</p>}
             </div>
           </div>
         </div>
-       )}
+       
 
       </>
     );

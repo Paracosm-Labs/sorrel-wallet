@@ -64,11 +64,15 @@ const handleOffcanvasSubmit = () => {
     });
   };
 
-  const checkPrivateKey = (pin) => {
-    const bytes = CryptoJS.AES.decrypt(wallet.encryptedPrivateKey, pin);
-    const originalPrivateKey = bytes.toString(CryptoJS.enc.Utf8);
-    if (originalPrivateKey === '' ) {
-      alert(`Invalid PIN`);
+  const checkPrivateKey = (incomingPin) => {
+    const bytesCheck = CryptoJS.AES.decrypt(wallet.encryptedPrivateKey, incomingPin);
+    const originalPrivateKey = bytesCheck.toString(CryptoJS.enc.Utf8);
+    const cipherCheck = CryptoJS.AES.encrypt(originalPrivateKey, incomingPin).toString();
+    const checksumCheck = crc.crc32(cipherCheck).toString(16);
+    const checksumBase  = wallet.checksum;
+
+    if (originalPrivateKey === '' || checksumBase === !checksumCheck) {
+      alert(`Invalid PIN ${checksumBase} - ${checksumCheck}`);
     } else {
       alert(`Your private key is: ${originalPrivateKey}`);
     }
