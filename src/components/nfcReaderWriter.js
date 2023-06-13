@@ -36,7 +36,7 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
           setMessage(`Public address: ${nfcPublicAddress}`);
           onNFCRead(parsedData);
           alert(`${parsedData} - ${nfcPublicAddress}`);
-          setIsOffcanvasOpen(false);
+          setIsOffcanvasOpen(false); // Close the offcanvas
           this.state({ encryptedPrivateKey: nfcEncryptedPrivateKey, checksum: nfcChecksum });
         };
       } catch (error) {

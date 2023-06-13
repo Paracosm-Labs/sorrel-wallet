@@ -19,6 +19,9 @@ const CreateWallet = ({ onWalletCreation }) => {
     }
   };
 
+  const handleNFCRead = (data) => {
+    setWallet(data);
+  };
 
   const handleOffcanvasClose = () => {
     setShowOffcanvas(false);

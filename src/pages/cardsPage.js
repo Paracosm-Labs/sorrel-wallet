@@ -8,9 +8,9 @@ import AccountBalance from '../components/accountBalance';
 const CardsPage = () => {
   const [wallet, setWallet] = useState(null);
 
-  // const handleWalletCreation = (newWallet) => {
-  //   setWallet(newWallet);
-  // };
+  const handleNFCRead = (data) => {
+    setWallet(data);
+  };
 
 
   // Shop details
@@ -54,7 +54,7 @@ const CardsPage = () => {
         publicAddress={wallet.address.base58}
         encryptedPrivateKey={wallet.encryptedPrivateKey}
         checksum={wallet.checksum}
-        onNFCRead={setWallet}
+        onNFCRead={handleNFCRead}
       />)}  
 
       {!wallet && (<div className="text-start m-3">
