@@ -64,22 +64,26 @@ const handleOffcanvasSubmit = () => {
     });
   };
 
-  const checkPrivateKey = (incomingPin) => {
-    const bytesCheck = CryptoJS.AES.decrypt(wallet.encryptedPrivateKey, incomingPin);
+  const checkPrivateKey = (pin) => {
+    const bytesCheck = CryptoJS.AES.decrypt(wallet.encryptedPrivateKey, pin);
     const originalPrivateKey = bytesCheck.toString(CryptoJS.enc.Utf8);
-    const cipherCheck = CryptoJS.AES.encrypt(originalPrivateKey, incomingPin).toString();
-    const checksumCheck = crc.crc32(cipherCheck).toString(16);
-    const checksumBase  = wallet.checksum;
 
-    if (originalPrivateKey === '' || checksumBase === !checksumCheck) {
-      alert(`Invalid PIN ${checksumBase} - ${checksumCheck}`);
-    } else {
-      alert(`Your private key is: ${originalPrivateKey}`);
-    }
-      toast.info(`Please keep your private keys safe!`, {
-      icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
-      theme: "dark",
-    }); 
+    try {
+        if (originalPrivateKey === '' ) {
+          alert(`Invalid PIN.`);
+        } 
+        else {
+          alert(`PIN Confirmed. This is your Private Key: ${originalPrivateKey}`);
+        }
+          toast.info(`Please keep your private keys safe!`, {
+          icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
+          theme: "dark",
+        }); 
+
+      } catch (error) {
+        alert(`${error}`);
+      }
+
 
   };
 
