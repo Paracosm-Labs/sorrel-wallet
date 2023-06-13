@@ -72,7 +72,7 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
       nfcReader.onreading = ({ message, serialNumber }) => {
         setSelectedOption('nfc');
         const decoder = new TextDecoder();
-        const data = decoder.decode(message.records[0].data);
+        const data = decoder.decode(message.records[1].data);
         const parsedData = JSON.parse(data);
         const addr = parsedData.publicAddress;
 

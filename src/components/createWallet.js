@@ -5,6 +5,7 @@ import crc from 'crc';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LogoImg from '../img/logo2x.png';
+import BarLoader from "react-spinners/BarLoader";
 
 const CreateWallet = ({ onWalletCreation }) => {
   const [wallet, setWallet] = useState(null);
@@ -35,7 +36,7 @@ const handleOffcanvasSubmit = () => {
   }
   if (offcanvasTitle === 'Set PIN') {
     createWallet(pin);
-  } else if (offcanvasTitle === 'Check Private Key' && wallet) {
+  } else if ((offcanvasTitle === 'Check Private Key') || (offcanvasTitle === 'Check Private Key' && wallet)) {
     checkPrivateKey(pin);
   }
   setShowOffcanvas(false);
@@ -52,7 +53,7 @@ const handleOffcanvasSubmit = () => {
       // Create a new wallet object with the encrypted private key and checksum
       const secureWallet = {
         ...newWallet,
-        privateKey: cipher,
+        encryptedPrivateKey: cipher,
         checksum: checksum
       };
       setWallet(secureWallet);
@@ -61,13 +62,17 @@ const handleOffcanvasSubmit = () => {
   };
 
   const checkPrivateKey = (pin) => {
-    const bytes = CryptoJS.AES.decrypt(wallet.privateKey, pin);
+    const bytes = CryptoJS.AES.decrypt(wallet.encryptedPrivateKey, pin);
     const originalPrivateKey = bytes.toString(CryptoJS.enc.Utf8);
-    alert(`Your private key is: ${originalPrivateKey}`);
-          toast.info(`Please keep your private keys safe!`, {
-          icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
-          theme: "dark",
-        }); 
+    if (originalPrivateKey === '' ) {
+      alert(`Invalid PIN`);
+    } else {
+      alert(`Your private key is: ${originalPrivateKey}`);
+    }
+      toast.info(`Please keep your private keys safe!`, {
+      icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
+      theme: "dark",
+    }); 
 
   };
 
@@ -77,16 +82,11 @@ const handleOffcanvasSubmit = () => {
   };
 
   const handleCheckPrivateKey = () => {
-    if (wallet) {
       setOffcanvasTitle('Check Private Key');
       setShowOffcanvas(true);
-    } else {
-          toast.warning(`Please create a wallet first.`, {
-          icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
-          theme: "dark",
-        });    
-    }
   };
+
+
   const handleClearPin = () => {
     setPin('');
   };
@@ -94,8 +94,10 @@ const handleOffcanvasSubmit = () => {
 
   return (
     <div className="">
-      <button className="btn btn-outline-success m-2" onClick={handleCreateWallet}>Create Wallet</button>
-      <button className="btn btn-outline-secondary m-2" onClick={handleCheckPrivateKey}>Check Private Key</button>
+      
+      <button className={`btn btn-outline-success btn-lg m-2 ${wallet ? `d-none` : `` }`} onClick={handleCreateWallet}>Begin Activation</button>
+      <button className={`btn btn-outline-success m-2 ${wallet ? `` : `d-none` }`} onClick={handleCheckPrivateKey}>Confirm PIN</button>
+      <BarLoader className={`m-auto bg-primary ${wallet ? `d-none` : `` }`} color="#109e77" size={120} />
       
       <div className={`offcanvas pinpad offcanvas-bottom ${showOffcanvas ? 'show' : ''}`} tabIndex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
         <div className="offcanvas-header">
