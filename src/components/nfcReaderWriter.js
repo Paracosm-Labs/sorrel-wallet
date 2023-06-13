@@ -88,6 +88,9 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
         {nfcSupported ? (
           <>
              <button className={`btn w-100 btn-lg mt-3 mb-3 btn-success ${isActivated ? ``: `d-none`}`}
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasActivation"
+              aria-controls="offcanvasActivation"
                onClick={() => readNFC()}>Read Card</button> 
            
             <button className={`btn w-100 btn-lg mt-3 mb-3 btn-success ${isActivated ? `btn-outline-success disabled`: ``}`}
@@ -121,7 +124,7 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
               <PuffLoader className="m-auto" color="#109e77" size={120} />
             </div>
             <div className="align-items-center mb-3">
-              {message && <p className={`text-small p-2 ${isActivated ? `text-success`:``}`}>{message}</p>}
+              {message && <p className={`text-small p-2 ${isActivated ? `text-success`:``}`}>{message}<br/>This may take up to 5 seconds to complete.</p>}
             </div>
           </div>
         </div>
