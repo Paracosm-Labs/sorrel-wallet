@@ -1,70 +1,66 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LogoImg from '../img/logo2x.png';
 import PuffLoader from "react-spinners/PuffLoader";
 
-class NFCReaderWriter extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      message: '',
-      nfcAvailable: 'NDEFReader' in window,
-      isOffcanvasOpen: true,
-      isActivated: false,
-    };
-    this.offcanvasElement = React.createRef(); // Create a ref for the offcanvas
-  }
+const NFCReaderWriter = ({ publicAddress, privateKey, checksum, data01, data02 }) => {
+  const [message, setMessage] = useState('');
+  const [nfcAvailable, setNfcAvailable] = useState('NDEFReader' in window);
+  const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(true);
+  const [isActivated, setIsActivated] = useState(false);
+  const offcanvasElement = useRef(); // Create a ref for the offcanvas
+  let reader;
 
-  componentDidMount() {
-    if (this.state.nfcAvailable) {
-      this.reader = new window.NDEFReader();
+  useEffect(() => {
+    if (nfcAvailable) {
+      reader = new window.NDEFReader();
     }
-  }
+  }, [nfcAvailable]);
 
-  readNFC = async () => {
+  const readNFC = async () => {
     try {
-      await this.reader.scan();
-      this.reader.onreading = ({ message, serialNumber }) => {
+      await reader.scan();
+      reader.onreading = ({ message, serialNumber }) => {
         const decoder = new TextDecoder();
         const data = decoder.decode(message.records[0].data);
         const parsedData = JSON.parse(data);
         const addr = parsedData.publicAddress;
-        this.setState({ message: `Public address: ${addr}` });
+        setMessage(`Public address: ${addr}`);
       };
     } catch (error) {
-      this.setState({ error: `Error: ${error}` });
+      setMessage(`Error: ${error}`);
     }
   };
 
-writeNFC = async (data) => {
-  this.setState({ message: 'Please place card near to your device and wait.', isOffcanvasOpen: true });
-  try {
-    const records = [
-      { recordType: "text", data: new TextEncoder().encode(data.publicAddress) },
-      { recordType: "text", data: new TextEncoder().encode(data.privateKey) },
-      { recordType: "text", data: new TextEncoder().encode(data.checksum) },
-      { recordType: "text", data: new TextEncoder().encode(data.data01) },
-      { recordType: "text", data: new TextEncoder().encode(data.data02) },
-    ];
-    await this.reader.write({ records });
-    this.setState({ message: 'Card Successfully Activated.', isOffcanvasOpen: false, isActivated:true });
-    toast.success(`Card Successfully Activated.`, {
-      icon: ({ theme, type }) => <img src={LogoImg} alt="Sorrel Logo" className="rounded-circle me-5" height="24" />,
-      theme: 'dark',
-    });
-  } catch (error) {
-    this.setState({ isOffcanvasOpen: false });
-    toast.error(`${error}`, {
-      icon: ({ theme, type }) => <img src={LogoImg} alt="Sorrel Logo" className="rounded-circle me-5" height="24" />,
-      theme: 'dark',
-    });
-  }
-};
+  const writeNFC = async (data) => {
+    setMessage('Please place card near to your device and wait.');
+    setIsOffcanvasOpen(true);
+    try {
+      const records = [
+        { recordType: "text", data: new TextEncoder().encode(data.publicAddress) },
+        { recordType: "text", data: new TextEncoder().encode(data.privateKey) },
+        { recordType: "text", data: new TextEncoder().encode(data.checksum) },
+        { recordType: "text", data: new TextEncoder().encode(data.data01) },
+        { recordType: "text", data: new TextEncoder().encode(data.data02) },
+      ];
+      await reader.write({ records });
+      setMessage('Card Successfully Activated.');
+      setIsOffcanvasOpen(false);
+      setIsActivated(true);
+      toast.success(`Card Successfully Activated.`, {
+        icon: ({ theme, type }) => <img src={LogoImg} alt="Sorrel Logo" className="rounded-circle me-5" height="24" />,
+        theme: 'dark',
+      });
+    } catch (error) {
+      setIsOffcanvasOpen(false);
+      toast.error(`${error}`, {
+        icon: ({ theme, type }) => <img src={LogoImg} alt="Sorrel Logo" className="rounded-circle me-5" height="24" />,
+        theme: 'dark',
+      });
+    }
+  };
 
-  render() {
-    const { message, nfcAvailable, isOffcanvasOpen, isActivated } = this.state;
-    const { publicAddress, privateKey, checksum, data01, data02 } = this.props;
     return (
       <>
       <div className="m-4 mb-5 text-white">
@@ -77,7 +73,7 @@ writeNFC = async (data) => {
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasActivation"
               aria-controls="offcanvasActivation"
-              onClick={() => this.writeNFC({ publicAddress, privateKey, checksum, data01, data02 })}
+              onClick={() => writeNFC({ publicAddress, privateKey, checksum, data01, data02 })}
             >{isActivated ? `Card Activated` : `Activate Card`}</button>
 
 
@@ -110,7 +106,7 @@ writeNFC = async (data) => {
 
       </>
     );
-  }
-}
+  
+};
 
 export default NFCReaderWriter;
