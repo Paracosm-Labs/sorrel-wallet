@@ -18,7 +18,7 @@ const CreateWallet = ({ onWalletLoad }) => {
 
   const handleNFCRead = (data) => {
     setWallet(data);
-    alert("Hi! Thank you for testing out Sorrel!")
+    alert("Hi! Thank you for choosing Sorrel!")
   };
 
   const handleOffcanvasSubmit = () => {
