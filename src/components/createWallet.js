@@ -14,12 +14,15 @@ const CreateWallet = ({ onWalletLoad }) => {
   const [pin, setPin] = useState('');
   const [showOffcanvas, setShowOffcanvas] = useState(false);
   const [offcanvasTitle, setOffcanvasTitle] = useState('');
+  const [isResettingPin, setIsResettingPin] = useState(false);
+  const [isConfirmingOldPin, setIsConfirmingOldPin] = useState(false);
 
 
   const handleNFCRead = (data) => {
     setWallet(data);
     alert("Hi! Thank you for choosing Sorrel!")
   };
+
 
   const handleOffcanvasSubmit = () => {
     if (pin.length !== 6) {
@@ -29,18 +32,58 @@ const CreateWallet = ({ onWalletLoad }) => {
           });
       return;
     }
-    if (offcanvasTitle === 'Set PIN') {
+
+  if (isConfirmingOldPin) {
+    const isPinCorrect = checkPrivateKey(pin);
+    if (isPinCorrect) {
+      const bytes = CryptoJS.AES.decrypt(wallet.encryptedPrivateKey, pin);
+      const originalPrivateKey = bytes.toString(CryptoJS.enc.Utf8);
+      setWallet({ ...wallet, privateKey: originalPrivateKey });
+      setIsConfirmingOldPin(false);
+      setIsResettingPin(true);
+      setOffcanvasTitle("Enter New PIN");
+      setPin('');
+    } else {
+      console.log("Invalid PIN");
+      return;
+    }
+
+  } else if (isResettingPin) {
+    resetPin(pin)
+    alert("New Pin Set");
+
+  }
+    else if (offcanvasTitle === 'Set PIN') {
       createWallet(pin);
-    } else if ((offcanvasTitle === 'Check Private Key') || (offcanvasTitle === 'Check Private Key' && wallet)) {
+  } else if ((offcanvasTitle === 'Check Private Key') || (offcanvasTitle === 'Check Private Key' && wallet)) {
       checkPrivateKey(pin);
-    }
-    if ((offcanvasTitle === 'Reset Pin') || (offcanvasTitle === 'Reset Pin' && wallet)) {
-      // resetPin(pinNow, pinNew);
-      alert("Soon!");
-    }
+  }
+    
+  if ((offcanvasTitle === 'Set PIN') || (offcanvasTitle === 'Check Private Key')) {
     setShowOffcanvas(false);
+  }
+    
     setPin('');
   };
+
+
+
+  const resetPin = (pin) => {
+    const cipher = CryptoJS.AES.encrypt(wallet.privateKey, pin).toString();
+    const checksum = crc.crc32(cipher).toString(16);
+    // Create a new wallet object with the encrypted private key and checksum
+    alert('Valid! ');
+    const secureWallet = {
+      ...wallet,
+      encryptedPrivateKey: cipher,
+      checksum: checksum
+    };
+    setWallet(secureWallet);
+    onWalletLoad(secureWallet);
+    setIsResettingPin(false);
+    setShowOffcanvas(false);
+
+  }
 
 
   const createWallet = (pin) => {
@@ -75,13 +118,14 @@ const CreateWallet = ({ onWalletLoad }) => {
             icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
             theme: "dark",
           }); 
-          return
+          return false;
           } else {
             alert(`PIN Confirmed. This is your Private Key: ${originalPrivateKey}`);
             toast.warning(`Please keep your private keys safe!`, {
             icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
             theme: "dark",
-          });  
+          }); 
+          return true; 
           }
 
         } catch (error) {
@@ -90,15 +134,13 @@ const CreateWallet = ({ onWalletLoad }) => {
             icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
             theme: "dark",
           }); 
-          return;
+          return false;
         }
-
-
 
       } catch (error) {
         alert(`${error}`);
+        return false;
       }
-
   };
 
   const handleCreateWallet = () => {
@@ -111,6 +153,11 @@ const CreateWallet = ({ onWalletLoad }) => {
       setShowOffcanvas(true);
   };
 
+  const handleResetPin = () => {
+    setOffcanvasTitle('Enter Current PIN');
+    setIsConfirmingOldPin(true);
+    setShowOffcanvas(true);
+  };
 
 
   return (
@@ -118,6 +165,7 @@ const CreateWallet = ({ onWalletLoad }) => {
       
       <button className={`btn btn-outline-success btn-lg m-2 ${wallet ? `d-none` : `` }`} onClick={handleCreateWallet}>Begin Activation</button>
       <button className={`btn btn-outline-success m-2 ${wallet ? `` : `d-none` }`} onClick={handleCheckPrivateKey}>Confirm PIN</button>
+      <button className={`btn btn-outline-success m-2 ${wallet ? `` : `d-none` }`} onClick={handleResetPin}>Reset PIN</button>
       <BarLoader className={`m-auto bg-primary ${wallet ? `d-none` : `` }`} color="#109e77" size={120} />
 
       <OffcanvasPinpad 

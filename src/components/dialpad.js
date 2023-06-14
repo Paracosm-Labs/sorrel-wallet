@@ -70,7 +70,7 @@ const Dialpad = ({ onConfirm, selectedDestination }) => {
         </div>
 
         <div className="d-flex mt-4">
-          <button data-bs-dismiss="offcanvas" className="btn btn-lg btn-success w-100 p-2" onClick={() => handleConfirmClick()} >Confirm {amount}</button>
+          <button className="btn btn-lg btn-success w-100 p-2" onClick={() => handleConfirmClick()} >Confirm {amount}</button>
         
         </div>
       </div>

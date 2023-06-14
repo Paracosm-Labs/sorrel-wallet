@@ -32,7 +32,7 @@ return (
               <div className="row justify-content-between">
               {Array(6).fill().map((_, index) => (
                 <div key={index} className={`col border text-center text-light mx-2 p-3 ${pin[index] ? 'border-success' : 'border-primary'}`}>
-                  <h4 className="text-success m-auto">{pin[index] ? '*' : '_'}</h4>
+                  <h4 className={`text-success m-auto`}>{pin[index] ? '*' : '_'}</h4>
                 </div>
               ))}
               </div>
@@ -52,7 +52,7 @@ return (
               </div>
 
                 <button className="btn btn-lg btn-success btn-lg w-100 mt-5" type="button" onClick={handleOffcanvasSubmit}>
-                  Continue
+                  {offcanvasTitle === "Enter Current PIN" ? (`Continue to Set New PIN`):(`Continue`)}
                 </button>
             </div>
             <div className="col d-none d-md-block d-sm-none"></div>
