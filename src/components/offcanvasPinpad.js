@@ -51,8 +51,8 @@ return (
                 </div>
               </div>
 
-                <button className="btn btn-lg btn-success btn-lg w-100 mt-5" type="button" onClick={handleOffcanvasSubmit}>
-                  {offcanvasTitle === "Enter Current PIN" ? (`Continue to Set New PIN`):(`Continue`)}
+                <button className={`btn btn-lg ${offcanvasTitle === "Enter Current PIN" ? `btn-outline-success`:`btn-success`} btn-lg w-100 mt-5`} type="button" onClick={handleOffcanvasSubmit}>
+                  {offcanvasTitle === "Enter Current PIN" ? (`Next`):(`Continue`)}
                 </button>
             </div>
             <div className="col d-none d-md-block d-sm-none"></div>
