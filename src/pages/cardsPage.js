@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import NFCCards from '../components/nfcReaderWriter';
 import OffcanvasBuy from '../components/offcanvasBuy'; // Import the OffcanvasBuy component
 import Navigation from '../components/navMenu';
 import CreateWallet from '../components/createWallet';
@@ -7,10 +6,6 @@ import AccountBalance from '../components/accountBalance';
 
 const CardsPage = () => {
   const [wallet, setWallet] = useState(null);
-
-  const handleNFCRead = (data) => {
-    setWallet(data);
-  };
 
 
   // Shop details
@@ -48,14 +43,8 @@ const CardsPage = () => {
       <div className="content pb-3">
       
         <img src="/img/cards-mockup.jpg" alt="Sorrel Wallet NFC Cards" className="w-100 mb-2" />
-       <CreateWallet onWalletCreation={setWallet} /> 
-       <hr className="mx-2"/>
-      {wallet && (<NFCCards
-        publicAddress={wallet.address}
-        encryptedPrivateKey={wallet.encryptedPrivateKey}
-        checksum={wallet.checksum}
-        onNFCRead={handleNFCRead}
-      />)}  
+       <CreateWallet onWalletLoad={setWallet} /> 
+       
 
       {!wallet && (<div className="text-start m-3">
         <h4 className="mt-5">Benefits</h4>

@@ -7,8 +7,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import LogoImg from '../img/logo2x.png';
 import BarLoader from "react-spinners/BarLoader";
 import OffcanvasPinpad from './offcanvasPinpad';
+import NFCReaderWriter from './nfcReaderWriter';
 
-const CreateWallet = ({ onWalletCreation }) => {
+const CreateWallet = ({ onWalletLoad }) => {
   const [wallet, setWallet] = useState(null);
   const [pin, setPin] = useState('');
   const [showOffcanvas, setShowOffcanvas] = useState(false);
@@ -17,6 +18,7 @@ const CreateWallet = ({ onWalletCreation }) => {
 
   const handleNFCRead = (data) => {
     setWallet(data);
+    alert("Hi! Thank you for testing out Sorrel!")
   };
 
   const handleOffcanvasSubmit = () => {
@@ -33,7 +35,7 @@ const CreateWallet = ({ onWalletCreation }) => {
       checkPrivateKey(pin);
     }
     if ((offcanvasTitle === 'Reset Pin') || (offcanvasTitle === 'Reset Pin' && wallet)) {
-      // resetPin(pinOriginal, pinNew);
+      // resetPin(pinNow, pinNew);
       alert("Soon!");
     }
     setShowOffcanvas(false);
@@ -54,7 +56,7 @@ const CreateWallet = ({ onWalletCreation }) => {
         checksum: checksum
       };
       setWallet(secureWallet);
-      onWalletCreation(secureWallet);
+      onWalletLoad(secureWallet);
     });
   };
 
@@ -127,12 +129,25 @@ const CreateWallet = ({ onWalletCreation }) => {
         handleOffcanvasSubmit={handleOffcanvasSubmit} 
       />
 
-      {wallet && (
+      {wallet && (<>
         <div className="text-light text-start m-3 bg-black p-3 border border-info">
-          <small>Your Public Address: {wallet.address.base58}</small><br/>
+          <small>Your Address: {wallet.address.base58}</small><br/>
           <small>PIN: <span className="text-wrap">******</span></small>
         </div>
+        <hr className="mx-2"/>
+      <NFCReaderWriter
+        address={wallet.address}
+        encryptedPrivateKey={wallet.encryptedPrivateKey}
+        checksum={wallet.checksum}
+        onNFCRead={handleNFCRead}
+      />
+      </>
+
       )}
+
+
+
+
     </div>
   );
 };

@@ -1,7 +1,4 @@
-import React, { useState } from 'react';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import LogoImg from '../img/logo2x.png';
+import React from 'react';
 
 const PinPad = ({ showOffcanvas, setShowOffcanvas, offcanvasTitle, pin, setPin, handleOffcanvasSubmit }) => {
 

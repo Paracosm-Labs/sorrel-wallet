@@ -4,12 +4,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import LogoImg from '../img/logo2x.png';
 import BarLoader from "react-spinners/BarLoader";
 import PuffLoader from "react-spinners/PuffLoader";
-import OffcanvasPinpad from './offcanvasPinpad';
 
-const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checksum }) => {
+const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum }) => {
   const [message, setMessage] = useState('');
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
   const [isActivated, setIsActivated] = useState(false);
+  const [isScanning, setIsScanning] = useState(false);
   const [nfcSupported, setNfcSupported] = useState(false);
   const [nfcReader, setNfcReader] = useState(null);
 
@@ -24,6 +24,7 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
   const readNFC = async () => {
     if (!nfcReader) {alert("NFC Reader is not available.")};
     setIsOffcanvasOpen(true);
+    setIsScanning(true);
     setMessage(`Please place card near to device and wait.`);
 
       try {
@@ -33,14 +34,8 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
           const decoder = new TextDecoder();
           const data = decoder.decode(message.records[1].data);
           const parsedData = JSON.parse(data);
-          const nfcEncryptedPrivateKey = parsedData.encryptedPrivateKey;
-          const nfcChecksum = parsedData.checksum;
-          const nfcPublicAddress = parsedData.publicAddress;
-          setMessage(`Public address: ${nfcPublicAddress.base58}`);
+          setMessage(``);
           onNFCRead(parsedData);
-          // alert(`${nfcPublicAddress.base58}`);
-          // encryptedPrivateKey(nfcEncryptedPrivateKey);
-          // checksum(nfcChecksum);
           setIsOffcanvasOpen(false);
           toast.success(`Card Successfully Read.`, {
             icon: ({ theme, type }) => <img src={LogoImg} alt="Sorrel Logo" className="rounded-circle me-5" height="24" />,
@@ -68,7 +63,7 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
         {
           recordType: "text", 
           data: new TextEncoder().encode(JSON.stringify({
-            publicAddress: data.publicAddress, 
+            address: data.address, 
             encryptedPrivateKey: data.encryptedPrivateKey,
             checksum: data.checksum
           }))
@@ -95,29 +90,25 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
   };
 
 
-  const handleOffcanvasClose = () => {
-    if (setIsOffcanvasOpen === true ) {
-      setIsOffcanvasOpen(false);
-    }
-    
-  };
-
-
     return (
       <>
       <div className="m-4 mb-5 text-white">
       
         {nfcSupported ? (
           <>
-             <button className={`btn w-100 btn-lg mt-3 mb-3 btn-success ${isActivated ? ``: `d-none`}`}
-               onClick={() => readNFC()}>Read Card</button> 
+             <button className={`btn w-100 btn-lg mt-3 mb-3 ${isActivated ? ``: `d-none`} ${isScanning ? `disabled btn-outline-success`: `btn-success`}`}
+               onClick={() => readNFC()}>
+                {isScanning ? (<><PuffLoader className="m-auto bg-outline-primary" color="#109e77" size={40} /><br/><small>Tap Card to Read Anytime</small></>) : (`Read Card`)}
+              </button>
+
+          {!isScanning ? (<>
             <button className={`btn w-100 btn-lg mt-3 mb-3 btn-success ${isActivated ? `btn-outline-success disabled`: ``}`}
-              onClick={() => writeNFC({ publicAddress, encryptedPrivateKey, checksum })}
+              onClick={() => writeNFC({ address, encryptedPrivateKey, checksum })}
             >
               {isActivated ? (<>Activated&nbsp;&nbsp;<i className="fa-solid fa-circle-check"></i></>) : `Activate Card`}
             </button>
             <BarLoader className={`m-auto bg-primary ${isActivated ? `d-none` : `` }`} color="#109e77" size={120} />
-
+            </>):(``)}
         </>
         ) : (<>
           <button className="btn btn-outline-success w-100 btn-lg mt-3 mb-5 disabled">Activate Card</button>
