@@ -83,10 +83,13 @@ const handleOffcanvasSubmit = () => {
         if (originalPrivateKey === '' ) {
           alert(`Invalid PIN.`);
         } 
-        else {
-          alert(`PIN Confirmed. This is your Private Key: ${originalPrivateKey}`);
-        }
 
+        // Check if the decrypted private key is a valid Tron private key
+        if (!/^([A-Fa-f0-9]{64})$/.test(originalPrivateKey)) {
+          alert(`Invalid PIN.`);
+        } else {
+          alert(`PIN Confirmed. This is your Private Key: ${originalPrivateKey}`); 
+        }
           toast.warning(`Please keep your private keys safe!`, {
           icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
           theme: "dark",
