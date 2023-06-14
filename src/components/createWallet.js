@@ -71,29 +71,33 @@ const handleOffcanvasSubmit = () => {
 
         try {
           originalPrivateKey = bytesCheck.toString(CryptoJS.enc.Utf8);
-        } catch (error) {
-          alert('Invalid PIN.');
-          toast.warning(`Please keep your private keys safe!`, {
-          icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
-          theme: "dark",
-        }); 
+
+          // Check if the decrypted private key is a valid Tron private key
+          if (!/^([A-Fa-f0-9]{64})$/.test(originalPrivateKey) || originalPrivateKey === '' ) {
+            alert(`Invalid PIN.`);
+            toast.warning(`Please keep your private keys safe!`, {
+            icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
+            theme: "dark",
+          }); 
           return
+          } else {
+            alert(`PIN Confirmed. This is your Private Key: ${originalPrivateKey}`);
+            toast.warning(`Please keep your private keys safe!`, {
+            icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
+            theme: "dark",
+          });  
+          }
+
+        } catch (error) {
+          alert(`Invalid PIN.`);
+            toast.warning(`Please keep your private keys safe!`, {
+            icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
+            theme: "dark",
+          }); 
+          return;
         }
 
-        if (originalPrivateKey === '' ) {
-          alert(`Invalid PIN.`);
-        } 
 
-        // Check if the decrypted private key is a valid Tron private key
-        if (!/^([A-Fa-f0-9]{64})$/.test(originalPrivateKey)) {
-          alert(`Invalid PIN.`);
-        } else {
-          alert(`PIN Confirmed. This is your Private Key: ${originalPrivateKey}`); 
-        }
-          toast.warning(`Please keep your private keys safe!`, {
-          icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
-          theme: "dark",
-        }); 
 
       } catch (error) {
         alert(`${error}`);
