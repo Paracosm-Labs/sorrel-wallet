@@ -3,9 +3,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LogoImg from '../img/logo2x.png';
 
-const PinPad = ({ onPinSubmit, offcanvasTitle }) => {
-  const [pin, setPin] = useState('');
-  const [showOffcanvas, setShowOffcanvas] = useState(false);
+const PinPad = ({ showOffcanvas, setShowOffcanvas, offcanvasTitle, pin, setPin, handleOffcanvasSubmit }) => {
 
   const handlePinChange = (digit) => {
     if (pin.length < 6) {
@@ -18,18 +16,6 @@ const PinPad = ({ onPinSubmit, offcanvasTitle }) => {
     setPin('');
   };
 
-  const handleOffcanvasSubmit = () => {
-    if (pin.length !== 6) {
-      toast.warning(`PIN must be 6 digits`, {
-        icon: ({theme, type}) => <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
-        theme: "dark",
-      });
-      return;
-    }
-    onPinSubmit(pin);
-    setShowOffcanvas(false);
-    setPin('');
-  };
 
   const handleClearPin = () => {
     setPin('');
@@ -37,7 +23,7 @@ const PinPad = ({ onPinSubmit, offcanvasTitle }) => {
 
 // Rest of the JSX code for rendering the PinPad component
 return (
-  <div className="offcanvas pinpad offcanvas-bottom" tabIndex="-1" id="offcanvasPinPad" aria-labelledby="offcanvasPinPadLabel">
+  <div className={`offcanvas pinpad offcanvas-bottom ${showOffcanvas ? 'show' : ''}`} tabIndex="-1" id="offcanvasPinPad" aria-labelledby="offcanvasPinPadLabel">
     <div className="offcanvas-header">
       <h5 className="offcanvas-title" id="offcanvasPinPadLabel">{offcanvasTitle}</h5>
       <button type="button" className="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close" onClick={handleOffcanvasClose}></button>
@@ -47,7 +33,13 @@ return (
             <div className="col d-none d-md-block d-sm-none"></div>
             <div className="col">
               <div className="row justify-content-between">
-
+              {Array(6).fill().map((_, index) => (
+                <div key={index} className={`col border text-center text-light mx-2 p-3 ${pin[index] ? 'border-success' : 'border-primary'}`}>
+                  <h4 className="text-success m-auto">{pin[index] ? '*' : '_'}</h4>
+                </div>
+              ))}
+              </div>
+              <div className="row justify-content-between mt-4">
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((digit) => (
                   <div className="col-4 mt-2">
                     <button key={digit} className="btn btn-outline-secondary btn-lg w-100" type="button" onClick={() => handlePinChange(digit)}>

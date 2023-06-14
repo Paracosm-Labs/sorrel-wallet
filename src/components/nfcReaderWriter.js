@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import LogoImg from '../img/logo2x.png';
 import BarLoader from "react-spinners/BarLoader";
 import PuffLoader from "react-spinners/PuffLoader";
+import OffcanvasPinpad from './offcanvasPinpad';
 
 const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checksum }) => {
   const [message, setMessage] = useState('');
