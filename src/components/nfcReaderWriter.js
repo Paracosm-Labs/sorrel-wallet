@@ -7,7 +7,7 @@ import PuffLoader from "react-spinners/PuffLoader";
 
 const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checksum }) => {
   const [message, setMessage] = useState('');
-  const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(true);
+  const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
   const [isActivated, setIsActivated] = useState(false);
   const [nfcSupported, setNfcSupported] = useState(false);
   const [nfcReader, setNfcReader] = useState(null);
@@ -22,10 +22,12 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
 
   const readNFC = async () => {
     if (!nfcReader) {alert("NFC Reader is not available.")};
-    setMessage('Please place card near to device and wait.');
-    // setIsOffcanvasOpen(true);
+    setIsOffcanvasOpen(true);
+    setMessage(`Please place card near to device and wait.`);
+
       try {
         await nfcReader.scan();
+        
         nfcReader.onreading = ({ message, serialNumber }) => {
           const decoder = new TextDecoder();
           const data = decoder.decode(message.records[1].data);
@@ -36,24 +38,29 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
           setMessage(`Public address: ${nfcPublicAddress.base58}`);
           onNFCRead(parsedData);
           // alert(`${nfcPublicAddress.base58}`);
-          // return parsedData;     
           // encryptedPrivateKey(nfcEncryptedPrivateKey);
           // checksum(nfcChecksum);
-          setIsOffcanvasOpen(false); 
+          setIsOffcanvasOpen(false);
+          toast.success(`Card Successfully Read.`, {
+            icon: ({ theme, type }) => <img src={LogoImg} alt="Sorrel Logo" className="rounded-circle me-5" height="24" />,
+            theme: 'dark',
+          });
         };
-       
+
       } catch (error) {
         setIsOffcanvasOpen(false);
-        setMessage(`Error: ${error}`);
-        alert(`${error}`);
+        setMessage(`Failed to read. Please try again.: ${error}`);
+        return;
+        // alert(`${error}`);
       }
+
 
   };
 
 
   const writeNFC = async (data) => {
     setMessage('Please place card near to device and wait.');
-    // setIsOffcanvasOpen(true);
+    setIsOffcanvasOpen(true);
     try {
       const records = [
         { recordType: "url", data: "https://wallet.sorrelbanq.org" },
@@ -69,7 +76,7 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
 
       ];
       await nfcReader.write({ records });
-      setMessage('Card Successfully Activated.');
+      setMessage(`Card Successfully Activated.`);
       setIsOffcanvasOpen(false);
       setIsActivated(true);
       toast.success(`Your card is ready to use!`, {
@@ -77,13 +84,15 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
         theme: 'dark',
       });
     } catch (error) {
+      setMessage('Activation did not complete. Please try again.');
       setIsOffcanvasOpen(false);
-      toast.error(`${error}`, {
+      toast.error(`Please Try Again.`, {
         icon: ({ theme, type }) => <img src={LogoImg} alt="Sorrel Logo" className="rounded-circle me-5" height="24" />,
         theme: 'dark',
       });
     }
   };
+
 
   const handleOffcanvasClose = () => {
     if (setIsOffcanvasOpen === true ) {
@@ -92,6 +101,7 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
     
   };
 
+
     return (
       <>
       <div className="m-4 mb-5 text-white">
@@ -99,15 +109,8 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
         {nfcSupported ? (
           <>
              <button className={`btn w-100 btn-lg mt-3 mb-3 btn-success ${isActivated ? ``: `d-none`}`}
-              data-bs-toggle="offcanvas"
-              data-bs-target="#offcanvasActivation"
-              aria-controls="offcanvasActivation"
                onClick={() => readNFC()}>Read Card</button> 
-           
             <button className={`btn w-100 btn-lg mt-3 mb-3 btn-success ${isActivated ? `btn-outline-success disabled`: ``}`}
-              data-bs-toggle="offcanvas"
-              data-bs-target="#offcanvasActivation"
-              aria-controls="offcanvasActivation"
               onClick={() => writeNFC({ publicAddress, encryptedPrivateKey, checksum })}
             >
               {isActivated ? (<>Activated&nbsp;&nbsp;<i className="fa-solid fa-circle-check"></i></>) : `Activate Card`}
@@ -122,7 +125,8 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
         {message && <p className={`text-small p-2 ${isActivated ? `text-success`:``}`}>{message}</p>}
       </div>
         
-        <div onHide={handleOffcanvasClose} className={`offcanvas nfc-reader offcanvas-top ${isActivated}`}
+
+        <div className={`offcanvas nfc-reader offcanvas-top ${isOffcanvasOpen ? `show` :``}`}
         data-bs-scroll="true" data-bs-backdrop="false" tabIndex="-1" id="offcanvasActivation" aria-labelledby="offcanvasActivationLabel">
           <div className="offcanvas-header">
             <h5 className="offcanvas-title text-center m-auto" id="offcanvasActivationLabel">
@@ -130,11 +134,11 @@ const NFCReaderWriter = ({ onNFCRead, publicAddress, encryptedPrivateKey, checks
             </h5>
 
           </div>
-          <div className="offcanvas-body mb-5">
+          <div className="offcanvas-body mb-3">
             <div className="align-items-center mb-3">
               <PuffLoader className="m-auto" color="#109e77" size={120} />
             </div>
-            <div className="align-items-center mb-3">
+            <div className="align-items-center ">
               {message && <p className={`text-small p-2 ${isActivated ? `text-success`:``}`}>{message}<br/>{`${isActivated ? ``: `This may take up to 5 seconds to complete`}`}</p>}
             </div>
           </div>
