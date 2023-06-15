@@ -80,7 +80,8 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
           <AddressBook onContactSelect={handleDestinationChange} sorrelAddress={selectedSorrelAddress}/>
           <Dialpad onConfirm={handlePinConfirmation} selectedDestination={selectedDestination} />
           </>):(
-          <><div className="text-center m-5"><i className="fa fa-solid fa-circle-check fa-lg text-success"></i></div>
+          <>
+          <div className="text-center m-5"><i className="fa fa-solid fa-circle-check fa-lg text-success"></i></div>
           <button onClick={resetPane} type="button" className={`mt-5 btn btn-lg w-100 btn-success`} data-bs-dismiss="offcanvas">
             Finish
           </button>
