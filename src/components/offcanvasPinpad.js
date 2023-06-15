@@ -19,7 +19,7 @@ const PinPad = ({ showOffcanvas, setShowOffcanvas, offcanvasTitle, pin, setPin, 
   };
 
 // Rest of the JSX code for rendering the PinPad component
-return (
+return (<>
   <div className={`offcanvas pinpad offcanvas-bottom ${showOffcanvas ? 'show' : ''}`} tabIndex="-1" id="offcanvasPinPad" aria-labelledby="offcanvasPinPadLabel">
     <div className="offcanvas-header">
       <h5 className="offcanvas-title" id="offcanvasPinPadLabel">{offcanvasTitle}</h5>
@@ -31,7 +31,7 @@ return (
             <div className="col">
               <div className="row justify-content-between">
               {Array(6).fill().map((_, index) => (
-                <div key={index} className={`col border text-center text-light mx-2 p-3 ${pin[index] ? 'border-success' : 'border-primary'}`}>
+                <div key={`${index}`} className={`col border text-center text-light mx-2 p-3 ${pin[index] ? 'border-success' : 'border-primary'}`}>
                   <h4 className={`text-success m-auto`}>{pin[index] ? '*' : '_'}</h4>
                 </div>
               ))}
@@ -39,7 +39,7 @@ return (
               <div className="row justify-content-between mt-4">
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((digit) => (
                   <div className="col-4 mt-2">
-                    <button key={digit} className="btn btn-outline-secondary btn-lg w-100" type="button" onClick={() => handlePinChange(digit)}>
+                    <button id={digit} className="btn btn-outline-secondary btn-lg w-100" type="button" onClick={() => handlePinChange(digit)}>
                       {digit}
                     </button>
                   </div>
@@ -60,7 +60,7 @@ return (
 
     </div>
   </div>
-);
+</>);
 
 };
 

@@ -74,6 +74,7 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
         setShowOffcanvas={setShowOffcanvas} 
         offcanvasTitle={offcanvasTitle} 
         pin={pin}
+        setPin={setPin}
         handleOffcanvasSubmit={handleConfirmTransfer} 
       />
 

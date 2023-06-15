@@ -5,10 +5,11 @@ import LogoImg from '../img/logo2x.png';
 import BarLoader from "react-spinners/BarLoader";
 import PuffLoader from "react-spinners/PuffLoader";
 
-const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum }) => {
+const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pinToReset }) => {
   const [message, setMessage] = useState('');
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
   const [isActivated, setIsActivated] = useState(false);
+  const [isPinReset, setIsPinReset] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
   const [nfcSupported, setNfcSupported] = useState(false);
   const [nfcReader, setNfcReader] = useState(null);
@@ -16,8 +17,7 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum }) 
   useEffect(() => {
     if ('NDEFReader' in window) {
       setNfcSupported(true);
-      setNfcReader(new window.NDEFReader());
-      
+      setNfcReader(new window.NDEFReader());     
     }
   }, []);
 
@@ -42,7 +42,7 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum }) 
             theme: 'dark',
           });
         };
-
+        setIsPinReset(false);
       } catch (error) {
         setIsOffcanvasOpen(false);
         setMessage(`Failed to read. Please try again.: ${error}`);
@@ -75,6 +75,10 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum }) 
       setMessage(`Card Successfully Activated.`);
       setIsOffcanvasOpen(false);
       setIsActivated(true);
+      if (pinToReset) {
+        setIsPinReset(true);
+      }
+      
       toast.success(`Your card is ready to use!`, {
         icon: ({ theme, type }) => <img src={LogoImg} alt="Sorrel Logo" className="rounded-circle me-5" height="24" />,
         theme: 'dark',
@@ -96,19 +100,49 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum }) 
       
         {nfcSupported ? (
           <>
-             <button className={`btn w-100 btn-lg mt-3 mb-3 ${isActivated ? ``: `d-none`} ${isScanning ? `disabled btn-outline-success`: `btn-success`}`}
-               onClick={() => readNFC()}>
-                {isScanning ? (<><PuffLoader className="m-auto bg-outline-primary" color="#109e77" size={40} /><br/><small>Tap Card to Read Anytime</small></>) : (`Read Card`)}
-              </button>
 
-          {!isScanning ? (<>
-            <button className={`btn w-100 btn-lg mt-3 mb-3 btn-success ${isActivated ? `btn-outline-success disabled`: ``}`}
+          {!isActivated || (isActivated && pinToReset) && !isPinReset ? (<>
+
+            <button className={`btn w-100 btn-lg mt-3 mb-3 btn-success`}
               onClick={() => writeNFC({ address, encryptedPrivateKey, checksum })}
             >
-              {isActivated ? (<>Activated&nbsp;&nbsp;<i className="fa-solid fa-circle-check"></i></>) : `Activate Card`}
+              {`Activate Card`}
             </button>
-            <BarLoader className={`m-auto bg-primary ${isActivated ? `d-none` : `` }`} color="#109e77" size={120} />
-            </>):(``)}
+            <BarLoader className={`m-auto bg-primary`} color="#109e77" size={120} />
+
+          </>):(``)}
+            
+          {isActivated && !isScanning && !isPinReset ? (<>
+
+            <button className={`btn w-100 btn-lg mt-3 mb-3 btn-success`}
+               onClick={() => readNFC()}>
+               {`Read Card`}
+            </button>
+
+            <button className={`btn w-100 btn-lg mt-3 mb-3 btn-outline-success disabled`}
+              onClick={() => writeNFC({ address, encryptedPrivateKey, checksum })}
+            >
+              Activated&nbsp;&nbsp;<i className="fa-solid fa-circle-check"></i>
+            </button>
+
+          </>):(``)}
+
+          {isActivated && isScanning ? (<>
+
+             <button className={`btn w-100 btn-lg mt-3 mb-3 disabled btn-outline-success`}
+               onClick={() => readNFC()}>
+                <PuffLoader className="m-auto bg-outline-primary" color="#109e77" size={40} /><br/>
+                <small>Tap Card to Read Anytime</small>
+              </button>
+
+
+          </>):(``)}
+
+          
+
+
+
+
         </>
         ) : (<>
           <button className="btn btn-outline-success w-100 btn-lg mt-3 mb-5 disabled">Activate Card</button>

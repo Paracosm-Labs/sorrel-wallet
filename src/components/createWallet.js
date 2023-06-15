@@ -20,6 +20,7 @@ const CreateWallet = ({ onWalletLoad }) => {
 
   const handleNFCRead = (data) => {
     setWallet(data);
+    setIsResettingPin(false);
     alert("Hi! Welcome to Sorrel!")
   };
 
@@ -82,7 +83,7 @@ const CreateWallet = ({ onWalletLoad }) => {
     };
     setWallet(secureWallet);
     onWalletLoad(secureWallet);
-    // setIsResettingPin(false);
+    // setIsResettingPin(true);
     setShowOffcanvas(false);
   }
 
@@ -184,7 +185,7 @@ const CreateWallet = ({ onWalletLoad }) => {
       {wallet && (<>
         <div className="text-light text-start m-3 bg-black p-3 border border-info">
           <small>Your Address: {wallet.address.base58}</small><br/>
-          <small>PIN: <span className="text-wrap">******</span></small><br/>
+          <small>PIN: <span className="text-wrap">*****************</span></small><br/>
           <small>CRC: {wallet.checksum}</small><br/>
           <small>Data: {wallet.dataSources}</small><br/>
         </div>
@@ -193,7 +194,7 @@ const CreateWallet = ({ onWalletLoad }) => {
         address={wallet.address}
         encryptedPrivateKey={wallet.encryptedPrivateKey}
         checksum={wallet.checksum}
-        wasPinReset={isResettingPin}
+        pinToReset={isResettingPin}
         onNFCRead={handleNFCRead}
       />
       </>
