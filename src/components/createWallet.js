@@ -20,7 +20,7 @@ const CreateWallet = ({ onWalletLoad }) => {
 
   const handleNFCRead = (data) => {
     setWallet(data);
-    alert("Hi! Thank you for choosing Sorrel!")
+    alert("Hi! Welcome to Sorrel!")
   };
 
 
@@ -32,7 +32,6 @@ const CreateWallet = ({ onWalletLoad }) => {
           });
       return;
     }
-
   if (isConfirmingOldPin) {
     const isPinCorrect = checkPrivateKey(pin);
     if (isPinCorrect) {
@@ -48,8 +47,11 @@ const CreateWallet = ({ onWalletLoad }) => {
       return;
     }
 
-  } else if (isResettingPin) {
-    resetPin(pin)
+  } else if ((isResettingPin && offcanvasTitle === 'Check Private Key') || (isResettingPin && offcanvasTitle === 'Set PIN')) {
+      checkPrivateKey(pin);
+  }
+  else if (isResettingPin) {
+    resetPin(pin);
     alert("New Pin Set");
 
   }
@@ -61,6 +63,7 @@ const CreateWallet = ({ onWalletLoad }) => {
     
   if ((offcanvasTitle === 'Set PIN') || (offcanvasTitle === 'Check Private Key')) {
     setShowOffcanvas(false);
+    // setIsResettingPin(false);
   }
     
     setPin('');
@@ -72,7 +75,6 @@ const CreateWallet = ({ onWalletLoad }) => {
     const cipher = CryptoJS.AES.encrypt(wallet.privateKey, pin).toString();
     const checksum = crc.crc32(cipher).toString(16);
     // Create a new wallet object with the encrypted private key and checksum
-    alert('Valid! ');
     const secureWallet = {
       ...wallet,
       encryptedPrivateKey: cipher,
@@ -80,9 +82,8 @@ const CreateWallet = ({ onWalletLoad }) => {
     };
     setWallet(secureWallet);
     onWalletLoad(secureWallet);
-    setIsResettingPin(false);
+    // setIsResettingPin(false);
     setShowOffcanvas(false);
-
   }
 
 
@@ -117,7 +118,8 @@ const CreateWallet = ({ onWalletLoad }) => {
             toast.warning(`Please keep your private keys safe!`, {
             icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
             theme: "dark",
-          }); 
+          });
+          setPin('');
           return false;
           } else {
             alert(`PIN Confirmed. This is your Private Key: ${originalPrivateKey}`);
@@ -125,6 +127,7 @@ const CreateWallet = ({ onWalletLoad }) => {
             icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
             theme: "dark",
           }); 
+          setPin('');
           return true; 
           }
 
@@ -134,6 +137,7 @@ const CreateWallet = ({ onWalletLoad }) => {
             icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
             theme: "dark",
           }); 
+          setPin('');
           return false;
         }
 
@@ -141,6 +145,7 @@ const CreateWallet = ({ onWalletLoad }) => {
         alert(`${error}`);
         return false;
       }
+
   };
 
   const handleCreateWallet = () => {
@@ -167,7 +172,6 @@ const CreateWallet = ({ onWalletLoad }) => {
       <button className={`btn btn-outline-success m-2 ${wallet ? `` : `d-none` }`} onClick={handleCheckPrivateKey}>Confirm PIN</button>
       <button className={`btn btn-outline-success m-2 ${wallet ? `` : `d-none` }`} onClick={handleResetPin}>Reset PIN</button>
       <BarLoader className={`m-auto bg-primary ${wallet ? `d-none` : `` }`} color="#109e77" size={120} />
-
       <OffcanvasPinpad 
         showOffcanvas={showOffcanvas} 
         setShowOffcanvas={setShowOffcanvas} 
@@ -180,13 +184,16 @@ const CreateWallet = ({ onWalletLoad }) => {
       {wallet && (<>
         <div className="text-light text-start m-3 bg-black p-3 border border-info">
           <small>Your Address: {wallet.address.base58}</small><br/>
-          <small>PIN: <span className="text-wrap">******</span></small>
+          <small>PIN: <span className="text-wrap">******</span></small><br/>
+          <small>CRC: {wallet.checksum}</small><br/>
+          <small>Data: {wallet.dataSources}</small><br/>
         </div>
         <hr className="mx-2"/>
       <NFCReaderWriter
         address={wallet.address}
         encryptedPrivateKey={wallet.encryptedPrivateKey}
         checksum={wallet.checksum}
+        wasPinReset={isResettingPin}
         onNFCRead={handleNFCRead}
       />
       </>
