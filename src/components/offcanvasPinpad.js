@@ -31,7 +31,7 @@ return (<>
             <div className="col">
               <div className="row justify-content-between">
               {Array(6).fill().map((_, index) => (
-                <div key={`${index}`} className={`col border text-center text-light mx-2 p-3 ${pin[index] ? 'border-success' : 'border-primary'}`}>
+                <div key={`pin-${index}`} className={`col border text-center text-light mx-2 p-3 ${pin[index] ? 'border-success' : 'border-primary'}`}>
                   <h4 className={`text-success m-auto`}>{pin[index] ? '*' : '_'}</h4>
                 </div>
               ))}
