@@ -7,7 +7,6 @@ import AccountBalance from '../components/accountBalance';
 const CardsPage = () => {
   const [wallet, setWallet] = useState(null);
 
-
   // Shop details
   const shopId = 'sorrel';
   const shopName = 'Sorrel Store';
@@ -46,18 +45,19 @@ const CardsPage = () => {
        <CreateWallet onWalletLoad={setWallet} /> 
        
 
-      {!wallet && (<div className="text-start m-3">
+      {!wallet && (<>
+        <div className="text-start m-3">
         <h4 className="mt-5">Benefits</h4>
         <p><i className="fa-solid fa-circle-check text-success"></i>&nbsp;&nbsp;Stores your private keys encrypted & offline</p>
         <p><i className="fa-solid fa-circle-check text-success"></i>&nbsp;&nbsp;Payments made simple with just a tap & PIN</p>
         <p><i className="fa-solid fa-circle-check text-success"></i>&nbsp;&nbsp;Upgradable via p2p cloud or internet</p>
         <p><i className="fa-solid fa-circle-check text-success"></i>&nbsp;&nbsp;Re/Upcyclable with no expiry date</p>
         <p><i className="fa-solid fa-circle-check text-success"></i>&nbsp;&nbsp;Simple Activation Process</p>
-        </div>)
-      }
+        </div>
 
+      </>)}
       </div>
-      
+
       </div>
       <OffcanvasBuy
         shopId={shopId}

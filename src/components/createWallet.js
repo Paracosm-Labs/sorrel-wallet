@@ -64,7 +64,6 @@ const CreateWallet = ({ onWalletLoad }) => {
     
   if ((offcanvasTitle === 'Set PIN') || (offcanvasTitle === 'Check Private Key')) {
     setShowOffcanvas(false);
-    // setIsResettingPin(false);
   }
     
     setPin('');
@@ -182,7 +181,7 @@ const CreateWallet = ({ onWalletLoad }) => {
         handleOffcanvasSubmit={handleOffcanvasSubmit} 
       />
 
-      {wallet && (<>
+      {wallet  ? (<>
         <div className="text-light text-start m-3 bg-black p-3 border border-info">
           <small>Your Address: {wallet.address.base58}</small><br/>
           <small>PIN: <span className="text-wrap">*****************</span></small><br/>
@@ -199,7 +198,9 @@ const CreateWallet = ({ onWalletLoad }) => {
       />
       </>
 
-      )}
+      ):(<>
+
+      </>)}
 
 
 

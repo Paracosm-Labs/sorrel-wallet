@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 const Dialpad = ({ onConfirm, selectedDestination }) => {
   const [amount, setAmount] = useState('');
-  const [selectedAddress, setSelectedAddress] = useState(null);
+  // const [selectedAddress, setSelectedAddress] = useState(null);
 
   const handleNumberClick = (number) => {
     setAmount(amount + number);

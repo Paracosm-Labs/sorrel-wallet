@@ -27,10 +27,22 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
 
   const resetPane  = () => {
     setCloseTransferPane(false);
+    setPin(``);
+  }
+
+
+  const confirmPin  = (data) => {
+    setPin(data)
   }
 
   const handleConfirmTransfer = async () => {
     // Process transfer using thet selected address
+
+  // const isValidPin = await checkPrivateKey(pin);
+  const  validPin = '000000';
+  const isValidPin = (pin  === validPin);
+  if (isValidPin) {
+
     setShowOffcanvas(false)
     setCloseTransferPane(true);
 
@@ -47,6 +59,13 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
         });
         console.log(`Transferred ${sendAmount}, to address: ${selectedDestination}`);
     }
+  }
+  else {
+    // show error message
+    setPin('');
+    alert(`invalid PIN!! Use test pin: ${validPin}`);
+  }
+
   };
 
   return (
@@ -62,7 +81,7 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
           <Dialpad onConfirm={handlePinConfirmation} selectedDestination={selectedDestination} />
           </>):(
           <><div className="text-center m-5"><i className="fa fa-solid fa-circle-check fa-lg text-success"></i></div>
-          <button onClick={resetPane} type="button" className={`mt-5 btn btn-lg w-100 btn-success`} data-bs-dismiss="offcanvas" aria-label="Close">
+          <button onClick={resetPane} type="button" className={`mt-5 btn btn-lg w-100 btn-success`} data-bs-dismiss="offcanvas">
             Finish
           </button>
           </>)}
@@ -74,7 +93,7 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
         setShowOffcanvas={setShowOffcanvas} 
         offcanvasTitle={offcanvasTitle} 
         pin={pin}
-        setPin={setPin}
+        setPin={confirmPin}
         handleOffcanvasSubmit={handleConfirmTransfer} 
       />
 

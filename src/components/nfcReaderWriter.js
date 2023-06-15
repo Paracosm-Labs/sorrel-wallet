@@ -5,6 +5,7 @@ import LogoImg from '../img/logo2x.png';
 import BarLoader from "react-spinners/BarLoader";
 import PuffLoader from "react-spinners/PuffLoader";
 
+
 const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pinToReset }) => {
   const [message, setMessage] = useState('');
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
@@ -13,6 +14,7 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pi
   const [isScanning, setIsScanning] = useState(false);
   const [nfcSupported, setNfcSupported] = useState(false);
   const [nfcReader, setNfcReader] = useState(null);
+  const [iswalletLoaded, setIsWalletLoaded] = useState(false);
 
   useEffect(() => {
     if ('NDEFReader' in window) {
@@ -31,12 +33,20 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pi
         await nfcReader.scan();
         
         nfcReader.onreading = ({ message, serialNumber }) => {
+        try{
           const decoder = new TextDecoder();
-          const data = decoder.decode(message.records[1].data);
-          const parsedData = JSON.parse(data);
+          const data1 = decoder.decode(message.records[1].data);
+          const data2 = decoder.decode(message.records[2].data);
+          const parsedData1 = JSON.parse(data1);
+          const parsedData2 = JSON.parse(data2);
+          const parsedData = {...parsedData1, ...parsedData2};
           setMessage(``);
           onNFCRead(parsedData);
+          setIsWalletLoaded(true);
           setIsOffcanvasOpen(false);
+        } catch (error){
+          setMessage(`Failed to read. Please refresh and try again.: ${error}`);
+        }
           toast.success(`Card Successfully Read.`, {
             icon: ({ theme, type }) => <img src={LogoImg} alt="Sorrel Logo" className="rounded-circle me-5" height="24" />,
             theme: 'dark',
@@ -101,7 +111,9 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pi
         {nfcSupported ? (
           <>
 
-          {!isActivated || (isActivated && pinToReset) && !isPinReset ? (<>
+
+
+          {(!isActivated || (isActivated && pinToReset)) && (!isPinReset) ? (<>
 
             <button className={`btn w-100 btn-lg mt-3 mb-3 btn-success`}
               onClick={() => writeNFC({ address, encryptedPrivateKey, checksum })}
