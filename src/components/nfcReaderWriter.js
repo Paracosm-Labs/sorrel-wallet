@@ -14,7 +14,6 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pi
   const [isScanning, setIsScanning] = useState(false);
   const [nfcSupported, setNfcSupported] = useState(false);
   const [nfcReader, setNfcReader] = useState(null);
-  const [iswalletLoaded, setIsWalletLoaded] = useState(false);
 
   useEffect(() => {
     if ('NDEFReader' in window) {
@@ -45,7 +44,6 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pi
           const parsedData = {...parsedData1, ...parsedData2};
           setMessage(``);
           onNFCRead(parsedData);
-          setIsWalletLoaded(true);
           setIsOffcanvasOpen(false);
         } catch (error){
           setMessage(`Failed to read. Please refresh and try again.: ${error}`);

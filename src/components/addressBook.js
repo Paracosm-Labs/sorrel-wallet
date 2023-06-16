@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { QrReader } from 'react-qr-reader';
 import PuffLoader from "react-spinners/PuffLoader";
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import LogoImg from '../img/logo2x.png';
 
 const AddressBook = ({ onContactSelect, sorrelAddress}) => {
   const dummyContacts = [
@@ -18,7 +15,6 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [scannedQR, setScannedQR] = useState(null);
-  const [isScanning, setIsScanning] = useState(false);
   const [nfcSupported, setNfcSupported] = useState(false);
   const [nfcReader, setNfcReader] = useState(null);
 
@@ -27,7 +23,6 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
     setSelectedOption(option);
 
     if (option === 'nfc') {
-      setIsScanning(true);
       handleScanNFC();
       onContactSelect(selectedAddress);
       setSelectedAddress(null);
@@ -74,15 +69,13 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
         const decoder = new TextDecoder();
         const data = decoder.decode(message.records[1].data);
         const parsedData = JSON.parse(data);
-        const addr = parsedData.publicAddress;
+        const addr = parsedData.address.base58;
 
         setSelectedAddress(addr);
-        setIsScanning(false);
         onContactSelect(addr);
       };
     } catch (error) {
       console.error(`Error: ${error}`);
-      setIsScanning(false);
     }
   };
 

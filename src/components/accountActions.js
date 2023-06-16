@@ -1,55 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import ModalQRCode from './modalQRCode';
 import OffcanvasDeposit from './offcanvasDeposit';
 import OffcanvasTransfer from './offcanvasTransfer';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { WalletContext } from '../context/walletContext';
 
 const AccountActions = () => {
-  const [balance, setBalance] = useState(0);
-  const [showTransfer, setShowTransfer] = useState(false);
   const [showQRCode, setShowQRCode] = useState(false);
+  const walletContext = useContext(WalletContext);
 
-  useEffect(() => {
-    // Fetch user's gStableId 1 balance from the contract
-    const fetchBalance = async () => {
-      // Call the contract's function to retrieve the balance
-      // Replace `contractMethod()` with the actual method from the contract ABI
-      // const userBalance = await bank.gStableBalanceMap(gStableId, address);
-
-      // Update the balance state
-      setBalance(3000.00);
-    };
-
-    // Call the fetchBalance function
-    fetchBalance();
-  }, []);
 
   const deposit = async (amount) => {
     // Call the contract's deposit function
-    // Replace `contractMethod()` with the actual method from the contract ABI
     // await bank.deposit(amount);
-
-    // Update the balance state
-    setBalance(balance + amount);
   };
 
   const withdraw = async (gStableId, amount) => {
     // Call the contract's withdraw function
-    // Replace `contractMethod()` with the actual method from the contract ABI
     // await bank.withdraw(gStableId, amount);
-
-    // Update the balance state
-    setBalance(balance - amount);
   };
 
-  const moveGL = async (fromAddress, toAddress, gStableId, amount) => {
+  const moveGL = async (toAddress, gStableId, amount) => {
     // Call the contract's moveGL function
-    // Replace `contractMethod()` with the actual method from the contract ABI
-    // await bank.moveGL(fromAddress, toAddress, gStableId, amount);
-
-    // Update the balance state
-    setBalance(balance - amount);
+    // await bank.moveGL(walletContext.walletData.base58, toAddress, gStableId, amount);
   };
 
   const handleQRCodeClick = () => {
@@ -58,7 +32,7 @@ const AccountActions = () => {
 
   const offcanvasExchange = () => {
     toast.info("Welcome to Sorrel! I'm Jes, Your Concierge. What would you like to do today?", {
-      icon: ({theme, type}) =>  <img src="/img/jes.jpg" className="rounded-circle" height="24"/>,
+      icon: ({theme, type}) =>  <img src="/img/jes.jpg" alt="Jes Concierge" className="rounded-circle" height="24"/>,
       theme: "dark",
     });
 

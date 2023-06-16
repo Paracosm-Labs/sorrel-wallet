@@ -6,7 +6,6 @@ import OffcanvasPinpad from './offcanvasPinpad';
 import { WalletContext } from '../context/walletContext';
 
 const OffcanvasSubscribe = ({ shopId, shopName, shopPic }) => {
-  const [sendAmount, setSendAmount] = useState('');
   const [pin, setPin] = useState('');
   const [showOffcanvas, setShowOffcanvas] = useState(false);
   const [closeTransferPane, setCloseTransferPane] = useState(null);
@@ -15,7 +14,8 @@ const OffcanvasSubscribe = ({ shopId, shopName, shopPic }) => {
 
   const selectedPlan = {
     name: 'Premium Plan',
-    price: '$12.00/month',
+    price: '12.00',
+    frequency: 'month',
     description: 'Unlock premium features and exclusive content.',
     features: [
       'Ad-free experience',
@@ -28,9 +28,7 @@ const OffcanvasSubscribe = ({ shopId, shopName, shopPic }) => {
 
   const handlePinConfirmation = (amount) => {
     setOffcanvasTitle('Enter PIN to Confirm');
-    // setSendAmount(amount);
     setShowOffcanvas(true);
-    // alert("yea");
   }
 
   const resetPane  = () => {
@@ -97,7 +95,7 @@ const OffcanvasSubscribe = ({ shopId, shopName, shopPic }) => {
 
       <div className="offcanvas-body m-2">
       {!closeTransferPane ? (<>
-        <div className="justify-content-center mb-5">
+        <div className="justify-content-center mb-5 text-center">
           <img src={shopPic} alt={shopName} className="rounded-circle" width="50" height="50" />
             <div className="text-center">
               <p>{shopName}</p>
@@ -113,7 +111,7 @@ const OffcanvasSubscribe = ({ shopId, shopName, shopPic }) => {
           ))}
         </ul>
         <h6 className="text-center">{selectedPlan.name}</h6>
-        <h5 className="text-center">{selectedPlan.price}</h5>
+        <h5 className="text-center">${selectedPlan.price}/{selectedPlan.frequency}</h5>
         <div className="text-center mt-5">
           <button  className="btn btn-lg btn-success w-100 p-2" type="button" onClick={handlePinConfirmation}>
             Subscribe Now

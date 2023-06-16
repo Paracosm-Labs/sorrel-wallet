@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import RingLoader from "react-spinners/RingLoader";
@@ -6,9 +6,9 @@ import NFCCards from './nfcReaderWriter';
 import { WalletContext } from '../context/walletContext';
 
 
-const redirectToURL = (url) => {
-  window.location.href = url;
-};
+// const redirectToURL = (url) => {
+//   window.location.href = url;
+// };
 
 const WelcomeOnboarding = () => {
 
@@ -18,7 +18,7 @@ const WelcomeOnboarding = () => {
 
 
   if (isAuthenticated) {
-    return redirectToURL('/welcome');
+    return navigate('/welcome');
   };
 
 
@@ -53,7 +53,9 @@ const WelcomeOnboarding = () => {
 
     <>
 	<div className="onboarding">
-	<div className="skipper position-fixed text-end mt-3 mx-3"><a href="#" data-bs-target="#homeCarousel" data-bs-slide-to="4" aria-label="Slide 4">Skip</a></div>
+	<div className="skipper position-fixed text-end mt-3 mx-3">
+		<button className="btn btn-outline-success btn-sm" data-bs-target="#homeCarousel" data-bs-slide-to="4" aria-label="Slide 4">Skip</button>
+	</div>
 		<div id="homeCarousel" className="carousel carousel-light slide" data-bs-ride="carousel">
 		  <div className="carousel-indicators">
 		    <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
@@ -65,7 +67,7 @@ const WelcomeOnboarding = () => {
 		  <div className="carousel-inner">
 		    <div className="carousel-item active" data-bs-interval="10000">
 
-		      <img src="/img/onboard6.jpg" className="d-block mx-auto w-100" width="420" height="800"/>
+		      <img src="/img/onboard6.jpg" alt="Sorrel Onboarding" className="d-block mx-auto w-100" width="420" height="800"/>
 		      <div className="carousel-caption">
 				  <button className="btn btn-lg btn-outline-success w-100 mt-3 mb-3" type="button"  data-bs-target="#homeCarousel" data-bs-slide="next">
 				    Get Started&nbsp;&nbsp;>
@@ -76,7 +78,7 @@ const WelcomeOnboarding = () => {
 		    </div>
 		    <div className="carousel-item" data-bs-interval="10000">
 
-		      <img src="/img/onboard2.jpg" className="d-block mx-auto w-100" width="420" height="800"/>
+		      <img src="/img/onboard2.jpg" alt="Sorrel Onboarding" className="d-block mx-auto w-100" width="420" height="800"/>
 		      <div className="carousel-caption">
 		        <h5>Earn a steady APR interest, credited monthly to your<br/> Sorrel account</h5>
 
@@ -89,7 +91,7 @@ const WelcomeOnboarding = () => {
 		    </div>
 		    <div className="carousel-item" data-bs-interval="10000">
 
-		      <img src="/img/onboard3.jpg" className="d-block mx-auto w-100" width="420" height="800"/>
+		      <img src="/img/onboard3.jpg" alt="Sorrel Onboarding" className="d-block mx-auto w-100" width="420" height="800"/>
 		      <div className="carousel-caption">
 		        <h5>Jes, Your Sorrel Concierge will be available to assist you 24/7</h5>
 
@@ -102,7 +104,7 @@ const WelcomeOnboarding = () => {
 		    </div>
 		    <div className="carousel-item" data-bs-interval="10000">
 
-		      <img src="/img/onboard4b.jpg" className="d-block mx-auto w-100" width="420" height="800"/>
+		      <img src="/img/onboard4b.jpg" alt="Sorrel Onboarding"  className="d-block mx-auto w-100" width="420" height="800"/>
 		      <div className="carousel-caption">
 		        <h3>Coming Soon</h3>
 		        <h5>Wallet NFC Cards and zero to low interest credit facility</h5>
@@ -118,7 +120,7 @@ const WelcomeOnboarding = () => {
 
 				<div className="carousel-item" data-bs-interval="50000">
 
-				    <img src="/img/onboard5.jpg" className="d-block mx-auto w-100" width="420" height="800"/>
+				    <img src="/img/onboard5.jpg" alt="Sorrel Onboarding" className="d-block mx-auto w-100" width="420" height="800"/>
 				      <div className="carousel-caption pb-5">
 				        <h5>Get Started Here</h5>
 
@@ -128,7 +130,7 @@ const WelcomeOnboarding = () => {
 				            <i className="fa-solid fa-user-plus me-2"></i>Signup | Login
 				          </button>
 				        
-									<NFCCards  onNFCRead={handleNfcLogin} mode="alternative" />
+									<NFCCards onNFCRead={handleNfcLogin} mode="alternative" />
 
 				        </div>
 

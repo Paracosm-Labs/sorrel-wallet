@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import OffcanvasBuy from '../components/offcanvasBuy'; // Import the OffcanvasBuy component
 import Navigation from '../components/navMenu';
 import CreateWallet from '../components/createWallet';

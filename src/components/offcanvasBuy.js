@@ -8,7 +8,6 @@ import { WalletContext } from '../context/walletContext';
 const OffcanvasBuy = ({ shopId, shopName, shopPic }) => {
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const [orderQuantity, setOrderQuantity] = useState(1);
-  const [sendAmount, setSendAmount] = useState('');
   const [pin, setPin] = useState('');
   const [showOffcanvas, setShowOffcanvas] = useState(false);
   const [closeTransferPane, setCloseTransferPane] = useState(null);
@@ -26,9 +25,7 @@ const OffcanvasBuy = ({ shopId, shopName, shopPic }) => {
 
   const handlePinConfirmation = (amount) => {
     setOffcanvasTitle('Enter PIN to Confirm');
-    // setSendAmount(amount);
     setShowOffcanvas(true);
-    // alert("yea");
   }
 
   const resetPane  = () => {

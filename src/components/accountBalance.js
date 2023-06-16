@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext} from 'react';
 import gTTDImg from '../img/gttd.png';
-import { formatM } from '../utils/currencyFormatter';
+// import { formatM } from '../utils/currencyFormatter';
 import { BeatLoader } from 'react-spinners';
 import TronWeb from 'tronweb';
 import { WalletContext } from '../context/walletContext';
@@ -85,7 +85,7 @@ const AccountBalance = () => {
     <div className="account-balance mb-4">
       <div className="card">
         <div className="card-body mx-5 text-center">
-          <h6 className="mt-2"><img src={gTTDImg} alt="" className="currency-icon rounded-circle px-1" height="24" />
+          <h6 className="mt-2"><img src={gTTDImg} alt="Currency" className="currency-icon rounded-circle px-1" height="24" />
             TTD Balance</h6>
           <h1 className="card-text">
             {balance ? <span className={isAnimated ? 'vibrate-1' : '' }>{formattedBalance}</span> 
