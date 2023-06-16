@@ -27,6 +27,7 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pi
 
   const readNFC = async () => {
     if (!nfcReader) {alert("NFC Reader is not available.")};
+
     setIsOffcanvasOpen(true);
     setIsScanning(true);
     setMessage(`Please place card near to device and wait.`);

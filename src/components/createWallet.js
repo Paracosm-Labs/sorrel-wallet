@@ -34,6 +34,11 @@ const CreateWallet = ({ onWalletLoad }) => {
           });
       return;
     }
+    if (!walletContext.checkPIN(pin)) {
+      alert('Incorrect PIN. Please try again.');
+      return;
+    }
+
   if (isConfirmingOldPin) {
     const isPinCorrect = checkPrivateKey(pin);
     if (isPinCorrect) {

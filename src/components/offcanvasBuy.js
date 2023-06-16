@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LogoImg from '../img/logo2x.png';
 import OffcanvasPinpad from './offcanvasPinpad';
+import { WalletContext } from '../context/walletContext';
 
 const OffcanvasBuy = ({ shopId, shopName, shopPic }) => {
   const [deliveryAddress, setDeliveryAddress] = useState('');
@@ -12,6 +13,7 @@ const OffcanvasBuy = ({ shopId, shopName, shopPic }) => {
   const [showOffcanvas, setShowOffcanvas] = useState(false);
   const [closeTransferPane, setCloseTransferPane] = useState(null);
   const [offcanvasTitle, setOffcanvasTitle] = useState('');
+  const walletContext = useContext(WalletContext);
 
   const handleAddressChange = (event) => {
     setDeliveryAddress(event.target.value);
@@ -43,26 +45,49 @@ const OffcanvasBuy = ({ shopId, shopName, shopPic }) => {
 
   const handleConfirmOrder = () => {
 
-    // const isValidPin = await checkPrivateKey(pin);
-    const  validPin = '000000';
-    const isValidPin = (pin  === validPin);
-    if (isValidPin) {
+    if (walletContext.walletData) {
 
-      setShowOffcanvas(false)
-      setCloseTransferPane(true);
+      if (walletContext.checkPIN(pin)) { // Check the pin before proceeding
+            setShowOffcanvas(false)
+            setCloseTransferPane(true);
 
-      // Process order with the selected details
-      toast.success(`Order confirmed for ${orderQuantity} item(s) from ${shopName} delivering to ${deliveryAddress}`, {
-        icon: ({ theme, type }) => <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24" />,
-        theme: 'dark',
-      });
-      console.log(`Order confirmed: ${orderQuantity} item(s) from ${shopName}, Delivery Address: ${deliveryAddress}`);
-    }
-    else {
-      // show error message
-      setPin('');
-      alert(`invalid PIN!! Use test pin: ${validPin}`);
-    } 
+            // Process order with the selected details
+            toast.success(`Order confirmed for ${orderQuantity} item(s) from ${shopName} delivering to ${deliveryAddress}`, {
+              icon: ({ theme, type }) => <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24" />,
+              theme: 'dark',
+            });
+            console.log(`Order confirmed: ${orderQuantity} item(s) from ${shopName}, Delivery Address: ${deliveryAddress}`);
+      }
+
+      else {
+        setPin('');
+        alert(`invalid PIN.`);
+        return;
+      }
+      
+      } else  {
+          //demo mode if there is no wallet loaded
+          const  validPin = '000000';
+          const isValidPin = (pin  === validPin);
+          if (isValidPin) {
+
+            setShowOffcanvas(false)
+            setCloseTransferPane(true);
+
+            // Process order with the selected details
+            toast.success(`Order confirmed for ${orderQuantity} item(s) from ${shopName} delivering to ${deliveryAddress}`, {
+              icon: ({ theme, type }) => <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24" />,
+              theme: 'dark',
+            });
+            console.log(`Order confirmed: ${orderQuantity} item(s) from ${shopName}, Delivery Address: ${deliveryAddress}`);
+          }
+          else {
+            // show error message
+            setPin('');
+            alert(`invalid PIN!! Use test pin: ${validPin}`);
+          } 
+
+      }
 
   };
 

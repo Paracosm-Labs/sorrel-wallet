@@ -16,7 +16,7 @@ const AccountBalance = () => {
 
   // Nile
   const contractAddress = 'TQoiUFedkHM2RiBNCbDCMBFwAf8HTX8qKc';
-  const walletAddress = (walletContext.walletData ? walletContext.walletData.address.base58 : "TCiJCtTBhGSw8mMYYts67vCXUjdoFLLuYw");
+  const walletAddress = (walletContext.walletData ? walletContext.walletData.address.base58 : `no-0x-t-address`);
 
   useEffect(() => {
     const HttpProvider = TronWeb.providers.HttpProvider;

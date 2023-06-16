@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LogoImg from '../img/logo2x.png';
 import OffcanvasPinpad from './offcanvasPinpad';
+import { WalletContext } from '../context/walletContext';
 
 const OffcanvasSubscribe = ({ shopId, shopName, shopPic }) => {
   const [sendAmount, setSendAmount] = useState('');
@@ -10,6 +11,7 @@ const OffcanvasSubscribe = ({ shopId, shopName, shopPic }) => {
   const [showOffcanvas, setShowOffcanvas] = useState(false);
   const [closeTransferPane, setCloseTransferPane] = useState(null);
   const [offcanvasTitle, setOffcanvasTitle] = useState('');
+  const walletContext = useContext(WalletContext);
 
   const selectedPlan = {
     name: 'Premium Plan',
@@ -44,25 +46,44 @@ const OffcanvasSubscribe = ({ shopId, shopName, shopPic }) => {
 
   const handleConfirmSubscribe = () => {
     // Process subscription logic
+    if (walletContext.walletData) {
 
-   // const isValidPin = await checkPrivateKey(pin);
-    const  validPin = '000000';
-    const isValidPin = (pin  === validPin);
-    if (isValidPin) {
+      if (walletContext.checkPIN(pin)) { // Check the pin before proceeding
+          setShowOffcanvas(false)
+          setCloseTransferPane(true);
 
-      setShowOffcanvas(false)
-      setCloseTransferPane(true);
+          toast.success(`Subscribed to ${selectedPlan.name} from ${shopName}!`, {
+            icon: ({ theme, type }) => <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24" />,
+            theme: 'dark',
+          });
+          console.log(`Subscribed to ${selectedPlan.name} from ${shopName}`);
+      }
+      else {
+          setPin('');
+          alert(`invalid PIN.`);
+          return;
+        }
+      } else {
+       //demo mode if there is no wallet loaded
+        const  validPin = '000000';
+        const isValidPin = (pin  === validPin);
+        if (isValidPin) {
 
-      toast.success(`Subscribed to ${selectedPlan.name} from ${shopName}!`, {
-        icon: ({ theme, type }) => <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24" />,
-        theme: 'dark',
-      });
-      console.log(`Subscribed to ${selectedPlan.name} from ${shopName}`);
-    }
-    else {
-      // show error message
-      setPin('');
-      alert(`invalid PIN!! Use test pin: ${validPin}`);
+          setShowOffcanvas(false)
+          setCloseTransferPane(true);
+
+          toast.success(`Subscribed to ${selectedPlan.name} from ${shopName}!`, {
+            icon: ({ theme, type }) => <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24" />,
+            theme: 'dark',
+          });
+          console.log(`Subscribed to ${selectedPlan.name} from ${shopName}`);
+        }
+        else {
+          // show error message
+          setPin('');
+          alert(`invalid PIN!! Use test pin: ${validPin}`);
+        }
+
     }
 
   };

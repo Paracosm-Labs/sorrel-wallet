@@ -39,34 +39,64 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
 
   const handleConfirmTransfer = async () => {
     // Process transfer using thet selected address
+    if (walletContext.walletData) {
 
-  // const isValidPin = await checkPrivateKey(pin);
-  const  validPin = '000000';
-  const isValidPin = (pin  === validPin);
-  if (isValidPin) {
+      if (walletContext.checkPIN(pin)) { // Check the pin before proceeding
+        setShowOffcanvas(false)
+        setCloseTransferPane(true);
 
-    setShowOffcanvas(false)
-    setCloseTransferPane(true);
+        if (selectedSorrelAddress) {
+            toast.success(`Sent ${sendAmount} to ${selectedSorrelAddress}`, {
+              icon: ({theme, type}) =>  <img src={LogoImg} alt="Sorrel Logo" className="rounded-circle me-5" height="24"/>,
+              theme: "dark",
+            });
+            console.log(`Transferred ${sendAmount}, to address: ${selectedSorrelAddress}`);
+        } else {
+            toast.success(`Sent ${sendAmount} to ${selectedDestination}`, {
+              icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
+              theme: "dark",
+            });
+            console.log(`Transferred ${sendAmount}, to address: ${selectedDestination}`);
+        }
 
-    if (selectedSorrelAddress) {
-        toast.success(`Sent ${sendAmount} to ${selectedSorrelAddress}`, {
-          icon: ({theme, type}) =>  <img src={LogoImg} alt="Sorrel Logo" className="rounded-circle me-5" height="24"/>,
-          theme: "dark",
-        });
-        console.log(`Transferred ${sendAmount}, to address: ${selectedSorrelAddress}`);
+
+      } else {
+        setPin('');
+        alert(`invalid PIN.`);
+        return;
+      }
+
+
     } else {
-        toast.success(`Sent ${sendAmount} to ${selectedDestination}`, {
-          icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
-          theme: "dark",
-        });
-        console.log(`Transferred ${sendAmount}, to address: ${selectedDestination}`);
+        //demo mode if there is no wallet loaded
+        const  validPin = '000000';
+        const isValidPin = (pin  === validPin);
+        if (isValidPin) {
+
+          setShowOffcanvas(false)
+          setCloseTransferPane(true);
+              if (selectedSorrelAddress) {
+                  toast.success(`Sent ${sendAmount} to ${selectedSorrelAddress}`, {
+                    icon: ({theme, type}) =>  <img src={LogoImg} alt="Sorrel Logo" className="rounded-circle me-5" height="24"/>,
+                    theme: "dark",
+                  });
+                  console.log(`Transferred ${sendAmount}, to address: ${selectedSorrelAddress}`);
+              } else {
+                  toast.success(`Sent ${sendAmount} to ${selectedDestination}`, {
+                    icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
+                    theme: "dark",
+                  });
+                  console.log(`Transferred ${sendAmount}, to address: ${selectedDestination}`);
+              }
+
+             } else {
+                // show error message
+                setPin('');
+                alert(`invalid PIN!! Use test pin: ${validPin}`);
+              }
     }
-  }
-  else {
-    // show error message
-    setPin('');
-    alert(`invalid PIN!! Use test pin: ${validPin}`);
-  }
+
+
 
   };
 
