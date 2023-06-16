@@ -43,7 +43,7 @@ const CardsPage = () => {
       <div className="content pb-3">
       
         <img src="/img/cards-mockup.jpg" alt="Sorrel Wallet NFC Cards" className="w-100 mb-2" />
-       <CreateWallet onWalletLoad={walletContext.walletData} /> 
+       <CreateWallet /> 
        
 
       {!walletContext.walletData && (<>

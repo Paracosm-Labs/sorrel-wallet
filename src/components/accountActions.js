@@ -102,7 +102,7 @@ const AccountActions = () => {
 
       <ToastContainer
         position="top-center"
-        autoClose={8000}
+        autoClose={5000}
         newestOnTop={false}
         closeOnClick
         pauseOnFocusLoss

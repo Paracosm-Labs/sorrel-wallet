@@ -120,6 +120,7 @@ code {
 }
 
 
+.transfer .contact-select{height:80px!important;}
 
 .offcanvas, .contacts .modal-content {background-color: #242435!important;}
 .offcanvas p, .offcanvas h1, .offcanvas h5, .offcanvas h6, .offcanvas .fa-solid, .offcanvas label { color: #eee;}

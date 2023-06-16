@@ -34,10 +34,7 @@ const CreateWallet = ({ onWalletLoad }) => {
           });
       return;
     }
-    if (!walletContext.checkPIN(pin)) {
-      alert('Incorrect PIN. Please try again.');
-      return;
-    }
+
 
   if (isConfirmingOldPin) {
     const isPinCorrect = checkPrivateKey(pin);
@@ -87,7 +84,6 @@ const CreateWallet = ({ onWalletLoad }) => {
       checksum: checksum
     };
     walletContext.setWalletData(secureWallet);
-    onWalletLoad(secureWallet);
     // setIsResettingPin(true);
     setShowOffcanvas(false);
   }
@@ -106,7 +102,6 @@ const CreateWallet = ({ onWalletLoad }) => {
         checksum: checksum
       };
       walletContext.setWalletData(secureWallet);
-      onWalletLoad(secureWallet);
     });
   };
 
@@ -187,7 +182,7 @@ const CreateWallet = ({ onWalletLoad }) => {
         handleOffcanvasSubmit={handleOffcanvasSubmit} 
       />
 
-      {WalletContext.walletData  ? (<>
+      {walletContext.walletData  ? (<>
         <div className="text-light text-start m-3 bg-black p-3 border border-info">
           <small>Your Address: {walletContext.walletData.address.base58}</small><br/>
           <small>PIN: <span className="text-wrap">*****************</span></small><br/>

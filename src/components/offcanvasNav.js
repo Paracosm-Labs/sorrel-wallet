@@ -28,6 +28,9 @@ const OffcanvasNav = () => {
           <div className="align-items-center">
             <img src={user.picture} alt="Avatar" className="rounded-circle m-3" height="60" />
             <h6 className="mb-0">{user.name}</h6>
+            {walletContext.walletData ? (<>
+                <small className="text-muted d-block" >{walletContext.walletData.address.base58}</small>
+            </>):(``)}
             <p className="badge bg-success p-1 mt-3"><i className="fa-solid fa-wifi"></i>&nbsp;Connected</p>
           </div>
           <div className="mt-3">
@@ -49,15 +52,9 @@ const OffcanvasNav = () => {
         
         {walletContext.walletData ? (<>
           <div className="align-items-center">
-            <p className="badge bg-success p-1 mt-3"><i className="fa-solid fa-wifi"></i>&nbsp;Connected</p>
             <small className="text-muted d-block" >{walletContext.walletData.address.base58}</small>
+            <p className="badge bg-success p-1 mt-3"><i className="fa-solid fa-wifi"></i>&nbsp;Connected</p>
           </div>
-            
-
-          
-
-      
-
         </>):(<>
           <div className="align-items-center">
             <p className="badge bg-warning p-1"><i className="fa-solid fa-wifi"></i>&nbsp;Not Connected</p>

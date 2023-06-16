@@ -1,7 +1,7 @@
 import React, { useState,  useContext } from 'react';
 import AddressBook from './addressBook';
 import Dialpad from './dialpad';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LogoImg from '../img/logo2x.png';
 import OffcanvasPinpad from './offcanvasPinpad';
@@ -130,16 +130,6 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
         handleOffcanvasSubmit={handleConfirmTransfer} 
       />
 
-
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        newestOnTop={false}
-        closeOnClick
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
     </>
   );
 };

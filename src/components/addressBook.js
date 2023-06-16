@@ -134,7 +134,7 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
           </div>
         ))}
       </div>
-
+      <div className="contact-select">
       {selectedOption === 'qr' && (
         <div className="mt-3">
           <div className="text-center">
@@ -196,7 +196,7 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
       ):(
         <div></div>
       )}
-
+      </div>
 
 
 
