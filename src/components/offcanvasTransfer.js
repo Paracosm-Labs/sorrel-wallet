@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState,  useContext } from 'react';
 import AddressBook from './addressBook';
 import Dialpad from './dialpad';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LogoImg from '../img/logo2x.png';
 import OffcanvasPinpad from './offcanvasPinpad';
+import { WalletContext } from '../context/walletContext';
 
 const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
   const [selectedDestination, setSelectedDestination] = useState('');
@@ -13,6 +14,7 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
   const [showOffcanvas, setShowOffcanvas] = useState(false);
   const [closeTransferPane, setCloseTransferPane] = useState(null);
   const [offcanvasTitle, setOffcanvasTitle] = useState('');
+  const walletContext = useContext(WalletContext);
 
   const handleDestinationChange = (event) => {
     setSelectedDestination(event);
