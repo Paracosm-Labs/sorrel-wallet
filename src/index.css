@@ -60,6 +60,7 @@ code {
   --bs-btn-bg: #109E76!important;
 }
 
+.search-box .card {height: 80px!important;}
 
 .account-balance .card, .search-box .card {
     height: 180px;
@@ -104,10 +105,7 @@ code {
 .wallet-cards .offcanvas {min-height:450px;}
 
 .nfc-reader{
-  min-height: 360px!important;
-}
-
-.wallet-cards .nfc-reader{
+    min-height: 360px!important;
     border-radius: 0px 0px 30px 30px;
     color: #eee!important;
     border:none;

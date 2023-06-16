@@ -1,4 +1,4 @@
-import React  from 'react';
+import React, { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import RingLoader from "react-spinners/RingLoader";
 import NFCCards from './nfcReaderWriter';
@@ -10,10 +10,26 @@ const redirectToURL = (url) => {
 const WelcomeOnboarding = () => {
 
   const { isLoading, isAuthenticated, error, loginWithRedirect } = useAuth0();
+  const [wallet, setWallet] = useState(null);
 
   if (isAuthenticated) {
     return redirectToURL('/welcome');
   };
+
+
+  // Function to handle NFC card login
+  const handleNfcLogin = async (data) => {
+    try {
+      setWallet(data);
+      alert(`Hi! Welcome to Sorrel!`)
+      // Perform login with the data from the NFC card
+
+    } catch (error) {
+      console.error("Error reading NFC card to login.", error);
+    }
+    return redirectToURL('/wallet');
+  };
+
 
   if (isLoading) {
     return (
@@ -106,16 +122,9 @@ const WelcomeOnboarding = () => {
 				          <button onClick={() => loginWithRedirect()} className="btn btn-lg btn-outline-success w-100" type="button">
 				            <i className="fa-solid fa-user-plus me-2"></i>Signup | Login
 				          </button>
+				        
+									<NFCCards  onNFCRead={handleNfcLogin} mode="alternative" />
 
-				        
-				          <button className="btn btn-lg btn-outline-success w-100" type="button"
-				            data-bs-toggle="offcanvas"
-              			data-bs-target="#offcanvasActivation"
-              			aria-controls="offcanvasActivation"
-              		>
-				            <i className="fas fa-credit-card me-2"></i>Login via NFC Card<br/>
-				          </button>
-				        
 				        </div>
 
 				  </div>
@@ -123,6 +132,7 @@ const WelcomeOnboarding = () => {
 
 
 		  </div>
+
 		  <button className="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
 		    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
 		    <span className="visually-hidden">Previous</span>
@@ -135,7 +145,6 @@ const WelcomeOnboarding = () => {
 
 
 		</div>
-		<NFCCards  />
     </>
 
   );

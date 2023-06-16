@@ -6,7 +6,7 @@ import BarLoader from "react-spinners/BarLoader";
 import PuffLoader from "react-spinners/PuffLoader";
 
 
-const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pinToReset }) => {
+const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pinToReset, mode }) => {
   const [message, setMessage] = useState('');
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
   const [isActivated, setIsActivated] = useState(false);
@@ -19,9 +19,11 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pi
   useEffect(() => {
     if ('NDEFReader' in window) {
       setNfcSupported(true);
-      setNfcReader(new window.NDEFReader());     
+      setNfcReader(new window.NDEFReader());
     }
   }, []);
+
+
 
   const readNFC = async () => {
     if (!nfcReader) {alert("NFC Reader is not available.")};
@@ -104,8 +106,10 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pi
   };
 
 
-    return (
-      <>
+
+    const defaultUI = (
+    <div>
+      
       <div className="m-4 mb-5 text-white">
       
         {nfcSupported ? (
@@ -150,11 +154,6 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pi
 
           </>):(``)}
 
-          
-
-
-
-
         </>
         ) : (<>
           <button className="btn btn-outline-success w-100 btn-lg mt-3 mb-5 disabled">Activate Card</button>
@@ -162,8 +161,48 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pi
         </>)}
         {message && <p className={`text-small p-2 ${isActivated ? `text-success`:``}`}>{message}</p>}
       </div>
-        
+       
 
+      
+    </div>
+    );
+
+  
+  const alternativeUI = (
+    <div>
+
+      {!isScanning ? (<>
+          <button className={`btn btn-lg w-100 ${!nfcSupported ? `btn-outline-success disabled` : `btn-success`} `}
+          onClick={() => readNFC()}
+          >
+          <i className="fas fa-credit-card me-2"></i>Login via Card<br/>
+          {!nfcSupported ? (<small className="text-muted text-small">NFC not available on this device.</small>):(``)}
+          </button>
+      </>):(
+         <button className={`btn w-100 btn-lg mt-3 mb-3 disabled btn-outline-success`}
+           onClick={() => readNFC()}>
+            <PuffLoader className="m-auto bg-outline-primary" color="#109e77" size={40} /><br/>
+            <small>Tap Card to Read Anytime</small>
+          </button>
+      )}
+
+    </div>
+  );
+
+
+  let uiToRender;
+  switch (mode) {
+    case 'alternative':
+      uiToRender = alternativeUI;
+      break;
+    default:
+      uiToRender = defaultUI;
+  }
+
+  return (
+    <div>
+      {uiToRender}
+        
         <div className={`offcanvas nfc-reader offcanvas-top ${isOffcanvasOpen ? `show` :``}`}
         data-bs-scroll="true" data-bs-backdrop="false" tabIndex="-1" id="offcanvasActivation" aria-labelledby="offcanvasActivationLabel">
           <div className="offcanvas-header">
@@ -177,14 +216,15 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pi
               <PuffLoader className="m-auto" color="#109e77" size={120} />
             </div>
             <div className="align-items-center ">
-              {message && <p className={`text-small p-2 ${isActivated ? `text-success`:``}`}>{message}<br/>{`${isActivated ? ``: `This may take up to 5 seconds to complete`}`}</p>}
+              {message && <p className={`text-small p-2 ${isActivated ? `text-success`:``}`}>{message}<br/>{`${isActivated ? ``: `This may take up to 5 seconds to complete.`}`}</p>}
             </div>
           </div>
         </div>
-       
 
-      </>
-    );
+    </div>
+  );
+
+
   
 };
 
