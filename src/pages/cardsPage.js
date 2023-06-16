@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import OffcanvasBuy from '../components/offcanvasBuy'; // Import the OffcanvasBuy component
 import Navigation from '../components/navMenu';
 import CreateWallet from '../components/createWallet';
 import AccountBalance from '../components/accountBalance';
+import { WalletContext } from '../context/walletContext';
 
 const CardsPage = () => {
-  const [wallet, setWallet] = useState(null);
+  const walletContext = useContext(WalletContext);
 
   // Shop details
   const shopId = 'sorrel';
@@ -15,7 +16,7 @@ const CardsPage = () => {
   return (
     <div className="text-center wallet-cards">
       <Navigation />
-      {wallet ? (
+      {walletContext.walletData ? (
       <AccountBalance />
       ) : (<>
 
@@ -42,10 +43,10 @@ const CardsPage = () => {
       <div className="content pb-3">
       
         <img src="/img/cards-mockup.jpg" alt="Sorrel Wallet NFC Cards" className="w-100 mb-2" />
-       <CreateWallet onWalletLoad={setWallet} /> 
+       <CreateWallet onWalletLoad={walletContext.walletData} /> 
        
 
-      {!wallet && (<>
+      {!walletContext.walletData && (<>
         <div className="text-start m-3">
         <h4 className="mt-5">Benefits</h4>
         <p><i className="fa-solid fa-circle-check text-success"></i>&nbsp;&nbsp;Stores your private keys encrypted & offline</p>

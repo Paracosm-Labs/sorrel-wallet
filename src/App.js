@@ -10,10 +10,12 @@ import Shop from './pages/shopPage';
 import Addons from './pages/addonsPage';
 import Contract from './components/contractInterface';
 import WalletCards from './pages/cardsPage';
+import { WalletProvider } from './context/walletContext';
 
 const App = () => {
 
     return (
+    <WalletProvider>
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Intro />} />
@@ -28,6 +30,7 @@ const App = () => {
         <Route element={<Wallet />} />
       </Routes>
     </BrowserRouter>
+    </WalletProvider>
 
   );
 

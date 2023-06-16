@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import AccountBalance from '../components/accountBalance';
 import AccountActions from '../components/accountActions';
 // import CurrencyBalance from '../components/currencyBalance';
@@ -6,8 +6,10 @@ import PromoSlide from '../components/promoSlide'
 import TxnHistory from '../components/txnHistory'
 import Navigation from '../components/navMenu';
 import { withAuth0 } from '@auth0/auth0-react';
+import { WalletContext } from '../context/walletContext';
 
 const AccountsPage = () => {
+  const walletContext = useContext(WalletContext);
 
   return (
     <>

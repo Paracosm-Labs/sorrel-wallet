@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import RingLoader from "react-spinners/RingLoader";
 import NFCCards from './nfcReaderWriter';
+import { WalletContext } from '../context/walletContext';
+
 
 const redirectToURL = (url) => {
   window.location.href = url;
@@ -10,7 +13,9 @@ const redirectToURL = (url) => {
 const WelcomeOnboarding = () => {
 
   const { isLoading, isAuthenticated, error, loginWithRedirect } = useAuth0();
-  const [wallet, setWallet] = useState(null);
+  const walletContext = useContext(WalletContext);
+  const navigate = useNavigate();
+
 
   if (isAuthenticated) {
     return redirectToURL('/welcome');
@@ -20,14 +25,14 @@ const WelcomeOnboarding = () => {
   // Function to handle NFC card login
   const handleNfcLogin = async (data) => {
     try {
-      setWallet(data);
+      walletContext.setWalletData(data);
       alert(`Hi! Welcome to Sorrel!`)
       // Perform login with the data from the NFC card
+      navigate('/wallet');
 
     } catch (error) {
       console.error("Error reading NFC card to login.", error);
     }
-    return redirectToURL('/wallet');
   };
 
 

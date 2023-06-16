@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import TronWeb from 'tronweb';
 import CryptoJS from 'crypto-js';
 import crc from 'crc';
@@ -8,9 +8,10 @@ import LogoImg from '../img/logo2x.png';
 import BarLoader from "react-spinners/BarLoader";
 import OffcanvasPinpad from './offcanvasPinpad';
 import NFCReaderWriter from './nfcReaderWriter';
+import { WalletContext } from '../context/walletContext';
 
 const CreateWallet = ({ onWalletLoad }) => {
-  const [wallet, setWallet] = useState(null);
+  const walletContext = useContext(WalletContext);
   const [pin, setPin] = useState('');
   const [showOffcanvas, setShowOffcanvas] = useState(false);
   const [offcanvasTitle, setOffcanvasTitle] = useState('');
@@ -19,7 +20,7 @@ const CreateWallet = ({ onWalletLoad }) => {
 
 
   const handleNFCRead = (data) => {
-    setWallet(data);
+    walletContext.setWalletData(data);
     setIsResettingPin(false);
     alert("Hi! Welcome to Sorrel!")
   };
@@ -36,9 +37,9 @@ const CreateWallet = ({ onWalletLoad }) => {
   if (isConfirmingOldPin) {
     const isPinCorrect = checkPrivateKey(pin);
     if (isPinCorrect) {
-      const bytes = CryptoJS.AES.decrypt(wallet.encryptedPrivateKey, pin);
+      const bytes = CryptoJS.AES.decrypt(walletContext.walletData.encryptedPrivateKey, pin);
       const originalPrivateKey = bytes.toString(CryptoJS.enc.Utf8);
-      setWallet({ ...wallet, privateKey: originalPrivateKey });
+      walletContext.setWalletData({ ...walletContext.walletData, privateKey: originalPrivateKey });
       setIsConfirmingOldPin(false);
       setIsResettingPin(true);
       setOffcanvasTitle("Enter New PIN");
@@ -58,7 +59,7 @@ const CreateWallet = ({ onWalletLoad }) => {
   }
     else if (offcanvasTitle === 'Set PIN') {
       createWallet(pin);
-  } else if ((offcanvasTitle === 'Check Private Key') || (offcanvasTitle === 'Check Private Key' && wallet)) {
+  } else if ((offcanvasTitle === 'Check Private Key') || (offcanvasTitle === 'Check Private Key' && walletContext.walletData)) {
       checkPrivateKey(pin);
   }
     
@@ -72,15 +73,15 @@ const CreateWallet = ({ onWalletLoad }) => {
 
 
   const resetPin = (pin) => {
-    const cipher = CryptoJS.AES.encrypt(wallet.privateKey, pin).toString();
+    const cipher = CryptoJS.AES.encrypt(walletContext.walletData.privateKey, pin).toString();
     const checksum = crc.crc32(cipher).toString(16);
     // Create a new wallet object with the encrypted private key and checksum
     const secureWallet = {
-      ...wallet,
+      ...walletContext.walletData,
       encryptedPrivateKey: cipher,
       checksum: checksum
     };
-    setWallet(secureWallet);
+    walletContext.setWalletData(secureWallet);
     onWalletLoad(secureWallet);
     // setIsResettingPin(true);
     setShowOffcanvas(false);
@@ -99,13 +100,13 @@ const CreateWallet = ({ onWalletLoad }) => {
         encryptedPrivateKey: cipher,
         checksum: checksum
       };
-      setWallet(secureWallet);
+      walletContext.setWalletData(secureWallet);
       onWalletLoad(secureWallet);
     });
   };
 
   const checkPrivateKey = (pin) => {
-    const bytesCheck = CryptoJS.AES.decrypt(wallet.encryptedPrivateKey, pin);
+    const bytesCheck = CryptoJS.AES.decrypt(walletContext.walletData.encryptedPrivateKey, pin);
     try {
         let originalPrivateKey;
 
@@ -168,10 +169,10 @@ const CreateWallet = ({ onWalletLoad }) => {
   return (
     <div className="text-white">
       
-      <button className={`btn btn-outline-success btn-lg m-2 ${wallet ? `d-none` : `` }`} onClick={handleCreateWallet}>Begin Activation</button>
-      <button className={`btn btn-outline-success m-2 ${wallet ? `` : `d-none` }`} onClick={handleCheckPrivateKey}>Confirm PIN</button>
-      <button className={`btn btn-outline-success m-2 ${wallet ? `` : `d-none` }`} onClick={handleResetPin}>Reset PIN</button>
-      <BarLoader className={`m-auto bg-primary ${wallet ? `d-none` : `` }`} color="#109e77" size={120} />
+      <button className={`btn btn-outline-success btn-lg m-2 ${walletContext.walletData ? `d-none` : `` }`} onClick={handleCreateWallet}>Begin Activation</button>
+      <button className={`btn btn-outline-success m-2 ${walletContext.walletData ? `` : `d-none` }`} onClick={handleCheckPrivateKey}>Confirm PIN</button>
+      <button className={`btn btn-outline-success m-2 ${walletContext.walletData ? `` : `d-none` }`} onClick={handleResetPin}>Reset PIN</button>
+      <BarLoader className={`m-auto bg-primary ${walletContext.walletData ? `d-none` : `` }`} color="#109e77" size={120} />
       <OffcanvasPinpad 
         showOffcanvas={showOffcanvas} 
         setShowOffcanvas={setShowOffcanvas} 
@@ -181,18 +182,18 @@ const CreateWallet = ({ onWalletLoad }) => {
         handleOffcanvasSubmit={handleOffcanvasSubmit} 
       />
 
-      {wallet  ? (<>
+      {WalletContext.walletData  ? (<>
         <div className="text-light text-start m-3 bg-black p-3 border border-info">
-          <small>Your Address: {wallet.address.base58}</small><br/>
+          <small>Your Address: {walletContext.walletData.address.base58}</small><br/>
           <small>PIN: <span className="text-wrap">*****************</span></small><br/>
-          <small>CRC: {wallet.checksum}</small><br/>
-          <small>Data: {wallet.dataSources}</small><br/>
+          <small>CRC: {walletContext.walletData.checksum}</small><br/>
+          <small>Data: {walletContext.walletData.dataSources}</small><br/>
         </div>
         <hr className="mx-2"/>
       <NFCReaderWriter
-        address={wallet.address}
-        encryptedPrivateKey={wallet.encryptedPrivateKey}
-        checksum={wallet.checksum}
+        address={walletContext.walletData.address}
+        encryptedPrivateKey={walletContext.walletData.encryptedPrivateKey}
+        checksum={walletContext.walletData.checksum}
         pinToReset={isResettingPin}
         onNFCRead={handleNFCRead}
       />

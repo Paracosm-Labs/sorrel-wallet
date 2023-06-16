@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
+import { WalletContext } from '../context/walletContext';
 
 const OffcanvasNav = () => {
   const [selectedCountry, setSelectedCountry] = useState('1');
   const { isAuthenticated, user, logout, loginWithRedirect } =
     useAuth0();
+  const walletContext = useContext(WalletContext);
 
   const handleCountryChange = async (event) => {
     setSelectedCountry(event.target.value);
@@ -43,15 +46,31 @@ const OffcanvasNav = () => {
         </section> ):(
 
         <section className="mb-3 text-center">
+        
+        {walletContext.walletData ? (<>
+          <div className="align-items-center">
+            <p className="badge bg-success p-1 mt-3"><i className="fa-solid fa-wifi"></i>&nbsp;Connected</p>
+            <small className="text-muted d-block" >{walletContext.walletData.address.base58}</small>
+          </div>
+            
+
+          
+
+      
+
+        </>):(<>
           <div className="align-items-center">
             <p className="badge bg-warning p-1"><i className="fa-solid fa-wifi"></i>&nbsp;Not Connected</p>
           </div>
           <button onClick={() => loginWithRedirect()} className="btn btn-xs btn-outline-secondary mt-3" type="button">
             Login | Sign Up
           </button>
-          <hr/>
-        </section>
 
+        </>) }
+        <hr/>
+        
+        </section>
+        
         )
 
       }
@@ -60,20 +79,20 @@ const OffcanvasNav = () => {
           <div className="row">
             <div className="col mt-2">
             
-              <a href="/addons">
+              <Link to="/addons" className="nav-link">
               <button className="btn btn lg btn-outline-primary w-100" type="button">
                 <i className="fa-solid fa-lg fa-puzzle-piece mt-4"></i><p className="">Addons</p>
               </button>
-              </a>
+              </Link>
 
 
             </div>
             <div className="col mt-2">
-            <a href="/cards">
+            <Link to="/cards" className="nav-link">
               <button className="btn btn lg btn-outline-primary w-100">
                 <i className="fa-solid fa-credit-card mt-4 fa-lg"></i><p className="">NFC Cards</p>
               </button>
-            </a>
+            </Link>
             </div>
             <div className="col mt-2">
               <button className="btn btn lg btn-outline-primary disabled w-100">

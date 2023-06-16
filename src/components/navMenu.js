@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import OffcanvasNav from './offcanvasNav';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import DappLogo from "../img/sorrel-logo.png";
@@ -19,13 +20,13 @@ const NavMenu = () => {
 
           <Nav className="m-auto text-center">
             <NavItem className="px-3">
-              <Nav.Link href="/wallet"><i className="fa-solid fa-wallet"></i><br/>Wallet</Nav.Link>
+              <Link to="/wallet" className="nav-link"><i className="fa-solid fa-wallet"></i><br/>Wallet</Link>
             </NavItem>
             <NavItem className="px-3">
-              <Nav.Link href="/earn"><i className="fa-solid fa-vault"></i><br/>Earn</Nav.Link>
+              <Link to="/earn" className="nav-link"><i className="fa-solid fa-vault"></i><br/>Earn</Link>
             </NavItem>
             <NavItem className="px-3">
-              <Nav.Link href="/explore"><i className="fa-solid fa-store"></i><br/>Explore</Nav.Link>
+              <Link to="/explore" className="nav-link"><i className="fa-solid fa-store"></i><br/>Explore</Link>
             </NavItem>
           </Nav>
           <Nav className="ml-auto">

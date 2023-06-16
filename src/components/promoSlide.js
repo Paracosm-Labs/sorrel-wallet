@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const PromoSlide = () => {
   return (<>
@@ -12,32 +13,32 @@ const PromoSlide = () => {
   </div>
   <div className="carousel-inner">
     <div className="carousel-item active">
-    <a href="/cards">
+    <Link to="/cards">
       <img src="/img/cards-mockup.jpg" className="d-block w-100" width="380" height="220" alt=""/>
       <div className="carousel-caption bg-primary">Get yours today!
       </div>
-    </a>
+    </Link>
     </div>
     <div className="carousel-item">
-    <a href="/earn">
+    <Link to="/earn">
       <img src="/img/earn-yield.jpg" className="d-block w-100" width="380" height="220" alt=""/>
       <div className="carousel-caption bg-primary">Earn Base <span className="text-success">2% APR</span> and more!
       </div>
-    </a>
+    </Link>
     </div>
     <div className="carousel-item">
-    <a href="/addons">
+    <Link to="/addons">
       <img src="/img/jes-concierge.jpg" className="d-block w-100" width="380" height="220" alt=""/>
       <div className="carousel-caption bg-primary">Hi I'm Jes, Your Sorrel Concierge
       </div>
-    </a>
+    </Link>
     </div>
     <div className="carousel-item">
-      <a href="/addons">
+      <Link to="/addons">
         <img src="/img/crowdfund.jpg" className="d-block w-100" width="380" height="220" alt=""/>
         <div className="carousel-caption bg-primary">Crowdfund addons to enhance your Sorrel Experience
         </div>
-      </a>
+      </Link>
     </div>
   </div>
   <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">

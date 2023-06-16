@@ -1,19 +1,22 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useContext} from 'react';
 import gTTDImg from '../img/gttd.png';
 import { formatM } from '../utils/currencyFormatter';
 import { BeatLoader } from 'react-spinners';
 import TronWeb from 'tronweb';
+import { WalletContext } from '../context/walletContext';
 
 const AccountBalance = () => {
   const [tronWeb, setTronWeb] = useState(null);
   const [balance, setBalance] = useState(0);
   const [isAnimated, setIsAnimated] = useState(false);
+  const walletContext = useContext(WalletContext);
 
   //Mainnet
   // const contractAddress = 'TNYsTzEyH5Jr2BuagKhfTCTjeaLRaRu1Av';
 
   // Nile
   const contractAddress = 'TQoiUFedkHM2RiBNCbDCMBFwAf8HTX8qKc';
+  const walletAddress = (walletContext.walletData ? walletContext.walletData.address.base58 : "TCiJCtTBhGSw8mMYYts67vCXUjdoFLLuYw");
 
   useEffect(() => {
     const HttpProvider = TronWeb.providers.HttpProvider;
