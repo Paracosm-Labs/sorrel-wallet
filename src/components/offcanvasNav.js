@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
+import NFCCards from './nfcReaderWriter';
 import { WalletContext } from '../context/walletContext';
 
 const OffcanvasNav = () => {
@@ -12,6 +13,23 @@ const OffcanvasNav = () => {
   const handleCountryChange = async (event) => {
     setSelectedCountry(event.target.value);
     console.log('Selected Country:', selectedCountry);
+  };
+
+  const handleLogout = async () => {
+      walletContext.setWalletData(null);
+      logout({ returnTo: `/explore` });
+      alert("Thank you for choosing Sorrel! See you Soon!")
+  };
+
+  // Function to handle NFC card login
+  const handleNfcLogin = async (data) => {
+    try {
+      walletContext.setWalletData(data);
+      alert(`Hi! Welcome to Sorrel!`)
+      // Perform login with the data from the NFC card
+    } catch (error) {
+      console.error("Error reading NFC card to login.", error);
+    }
   };
 
   return (
@@ -43,7 +61,7 @@ const OffcanvasNav = () => {
               <option value="Other Countries">other countries</option>
             </select>
           </div>
-          <button onClick={() => logout({ returnTo: `/explore` })} className="btn btn-xs btn-outline-secondary mt-3" type="button">
+          <button onClick={handleLogout} className="btn btn-xs btn-outline-secondary mt-3" type="button">
             Logout
           </button>
         </section> ):(
@@ -59,9 +77,10 @@ const OffcanvasNav = () => {
           <div className="align-items-center">
             <p className="badge bg-warning p-1"><i className="fa-solid fa-wifi"></i>&nbsp;Not Connected</p>
           </div>
-          <button onClick={() => loginWithRedirect()} className="btn btn-xs btn-outline-secondary mt-3" type="button">
+          <button onClick={() => loginWithRedirect()} className="btn btn-xs btn-outline-secondary m-2 mt-3" type="button">
             Login | Sign Up
           </button>
+          <NFCCards  onNFCRead={handleNfcLogin} mode="alternative" />
 
         </>) }
         <hr/>
