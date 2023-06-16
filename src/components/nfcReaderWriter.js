@@ -171,14 +171,14 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pi
     <div>
 
       {!isScanning ? (<>
-          <button className={`btn btn-lg w-100 ${!nfcSupported ? `btn-outline-success disabled` : `btn-success`} `}
+          <button className={`btn btn-md w-100 ${!nfcSupported ? `btn-outline-success disabled` : `btn-success`} `}
           onClick={() => readNFC()}
           >
           <i className="fas fa-credit-card me-2"></i>Login via Card<br/>
           {!nfcSupported ? (<small className="text-muted text-small">NFC not available on this device.</small>):(``)}
           </button>
       </>):(
-         <button className={`btn w-100 btn-lg mt-3 mb-3 disabled btn-outline-success`}
+         <button className={`btn w-100 btn-md mt-3 mb-3 disabled btn-outline-success`}
            onClick={() => readNFC()}>
             <PuffLoader className="m-auto bg-outline-primary" color="#109e77" size={40} /><br/>
             <small>Tap Card to Read Anytime</small>

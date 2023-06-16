@@ -71,13 +71,13 @@ const OffcanvasNav = () => {
         {walletContext.walletData ? (<>
           <div className="align-items-center">
             <small className="text-muted d-block" >{walletContext.walletData.address.base58}</small>
-            <p className="badge bg-success p-1 mt-3"><i className="fa-solid fa-wifi"></i>&nbsp;Connected</p>
+            <p className="badge bg-success p-2 mt-3"><i className="fa-solid fa-wifi"></i>&nbsp;Connected</p>
           </div>
         </>):(<>
           <div className="align-items-center">
-            <p className="badge bg-warning p-1"><i className="fa-solid fa-wifi"></i>&nbsp;Not Connected</p>
+            <p className="badge bg-info p-2"><i className="fa-solid fa-wifi"></i>&nbsp;Not Connected</p>
           </div>
-          <button onClick={() => loginWithRedirect()} className="btn btn-xs btn-outline-secondary m-2 mt-3" type="button">
+          <button onClick={() => loginWithRedirect()} className="btn btn-xs btn-outline-secondary m-2 mt-3 mb-3" type="button">
             Login | Sign Up
           </button>
           <NFCCards  onNFCRead={handleNfcLogin} mode="alternative" />
