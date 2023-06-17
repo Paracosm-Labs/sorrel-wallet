@@ -75,7 +75,7 @@ const OffcanvasNav = () => {
           </div>
         </>):(<>
           <div className="align-items-center">
-            <p className="badge bg-info p-2"><i className="fa-solid fa-wifi"></i>&nbsp;Not Connected</p>
+            <p className="badge bg-info p-2"><i className="fa-solid fa-toggle-off"></i>&nbsp;Not Connected</p>
           </div>
           <button onClick={() => loginWithRedirect()} className="btn btn-xs btn-outline-secondary m-2 mt-3 mb-3" type="button">
             Login | Sign Up

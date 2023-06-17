@@ -196,6 +196,7 @@ const CreateWallet = ({ onWalletLoad }) => {
         checksum={walletContext.walletData.checksum}
         pinToReset={isResettingPin}
         onNFCRead={handleNFCRead}
+        mode="defaultUI"
       />
       </>
 

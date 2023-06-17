@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { withAuth0, useAuth0 } from '@auth0/auth0-react';
-import LogoImg from '../img/logo2x.png';
-
-const redirectToURL = (url) => {
-  window.location.href = url;
-};
+import { useNavigate } from 'react-router-dom';
+import { WalletContext } from '../context/walletContext';
 
 const CountryPage = () => {
   const { user, isAuthenticated } = useAuth0();
   const [selectedCountry, setSelectedCountry] = useState('1');
+  const walletContext = useContext(WalletContext);
+  const navigate = useNavigate();
 
   const createWallets = async () => {
     // Handle on-chain wallet creation logic
     console.log('Your wallet is being created...');
-    redirectToURL('/wallet');
+    return navigate('/wallet');
   };
 
   const handleCountryChange = (event) => {
@@ -25,7 +24,7 @@ const CountryPage = () => {
     <>
       <div className="onboarding text-center welcome">
         <div className="carousel-inner">
-          <img src="/img/onboard5.jpg" className="d-block mx-auto w-100" width="420" height="800" />
+          <img src="/img/onboard5.jpg" alt="Sorrel Onboarding" className="d-block mx-auto w-100" width="420" height="800" />
           <div className="carousel-caption">
           {isAuthenticated ? (
 	         <div className="align-items-center">

@@ -5,11 +5,6 @@ import RingLoader from "react-spinners/RingLoader";
 import NFCCards from './nfcReaderWriter';
 import { WalletContext } from '../context/walletContext';
 
-
-// const redirectToURL = (url) => {
-//   window.location.href = url;
-// };
-
 const WelcomeOnboarding = () => {
 
   const { isLoading, isAuthenticated, error, loginWithRedirect } = useAuth0();

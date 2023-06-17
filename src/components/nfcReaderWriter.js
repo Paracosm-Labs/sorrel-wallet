@@ -89,7 +89,6 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pi
       if (pinToReset) {
         setIsPinReset(true);
       }
-      
       toast.success(`Your card is ready to use!`, {
         icon: ({ theme, type }) => <img src={LogoImg} alt="Sorrel Logo" className="rounded-circle me-5" height="24" />,
         theme: 'dark',
@@ -104,7 +103,15 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pi
     }
   };
 
-
+  const setToReadOnly = async() => {
+    try {
+      await nfcReader.makeReadOnly();
+      alert("Card is now read only.");
+    }catch(error){
+      alert(error);
+    }
+    
+  };
 
     const defaultUI = (
     <div>
@@ -114,7 +121,7 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pi
         {nfcSupported ? (
           <>
 
-
+          {/*`${isActivated} - ${pinToReset} - ${isPinReset}` */}
 
           {(!isActivated || (isActivated && pinToReset)) && (!isPinReset) ? (<>
 
@@ -132,6 +139,12 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pi
             <button className={`btn w-100 btn-lg mt-3 mb-3 btn-success`}
                onClick={() => readNFC()}>
                {`Read Card`}
+            </button>
+
+            <button className={`btn w-100 btn-lg mt-3 mb-3 btn-outline-success disabled d-none`}
+              onClick={setToReadOnly}
+            >
+              Lock Card
             </button>
 
             <button className={`btn w-100 btn-lg mt-3 mb-3 btn-outline-success disabled`}
@@ -171,7 +184,28 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pi
     <div>
 
       {!isScanning ? (<>
-          <button className={`btn btn-md w-100 ${!nfcSupported ? `btn-outline-success disabled` : `btn-success`} `}
+          <button className={`btn btn-lg w-100 ${!nfcSupported ? `btn-outline-success disabled` : `btn-success`} `}
+          onClick={() => readNFC()}
+          >
+          <i className="fas fa-credit-card me-2"></i>Login via Card<br/>
+          {!nfcSupported ? (<small className="text-muted text-small">NFC not available on this device.</small>):(``)}
+          </button>
+      </>):(
+         <button className={`btn w-100 btn-md mt-3 mb-3 disabled btn-outline-success`}
+           onClick={() => readNFC()}>
+            <PuffLoader className="m-auto bg-outline-primary" color="#109e77" size={40} /><br/>
+            <small>Tap Card to Read Anytime</small>
+          </button>
+      )}
+
+    </div>
+  );  
+
+  const miniUI = (
+    <div>
+
+      {!isScanning ? (<>
+          <button className={`btn btn-lg w-100 ${!nfcSupported ? `btn-outline-success disabled` : `btn-success`} `}
           onClick={() => readNFC()}
           >
           <i className="fas fa-credit-card me-2"></i>Login via Card<br/>
@@ -193,6 +227,9 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pi
   switch (mode) {
     case 'alternative':
       uiToRender = alternativeUI;
+      break;
+    case 'mini':
+      uiToRender = miniUI;
       break;
     default:
       uiToRender = defaultUI;
