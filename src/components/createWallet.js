@@ -193,7 +193,7 @@ const CreateWallet = ({ onWalletLoad }) => {
           <small>PIN: <span className="text-wrap">*****************</span></small><br/>
           <small>CRC: {walletContext.walletData.checksum}</small><br/>
           <small>Data: {walletContext.walletData.dataSources}</small><br/>
-          {walletContext.walletData.activated ? (<small className="text-success">Activated</small>):(``)}
+          {walletContext.walletData.activated ==="true" ? (<small className="text-success">Activated</small>):(``)}
         </div>
         <hr className="mx-2"/>
       <NFCReaderWriter

@@ -11,7 +11,7 @@ const NFCReaderWriter = ({onNFCRead, pinToReset, mode }) => {
   const { walletData, setWalletData } = useContext(WalletContext);
   const [message, setMessage] = useState('');
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
-  const [isActivated, setIsActivated] = useState(walletData ? walletData.activated : false);
+  const [isActivated, setIsActivated] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
   const [nfcSupported, setNfcSupported] = useState(false);
   const [nfcReader, setNfcReader] = useState(null);
