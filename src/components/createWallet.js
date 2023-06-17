@@ -191,11 +191,8 @@ const CreateWallet = ({ onWalletLoad }) => {
         </div>
         <hr className="mx-2"/>
       <NFCReaderWriter
-        address={walletContext.walletData.address}
-        encryptedPrivateKey={walletContext.walletData.encryptedPrivateKey}
-        checksum={walletContext.walletData.checksum}
-        pinToReset={isResettingPin}
         onNFCRead={handleNFCRead}
+        pinToReset={isResettingPin}
         mode="defaultUI"
       />
       </>

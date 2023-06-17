@@ -19,15 +19,10 @@ const WelcomeOnboarding = () => {
 
   // Function to handle NFC card login
   const handleNfcLogin = async (data) => {
-    try {
-      walletContext.setWalletData(data);
-      alert(`Hi! Welcome to Sorrel!`)
-      // Perform login with the data from the NFC card
-      navigate('/wallet');
-
-    } catch (error) {
-      console.error("Error reading NFC card to login.", error);
-    }
+    if (data) {
+    	alert(`Hi! Welcome to Sorrel!`);
+    	return navigate('/wallet');
+    } 
   };
 
 

@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LogoImg from '../img/logo2x.png';
 import BarLoader from "react-spinners/BarLoader";
 import PuffLoader from "react-spinners/PuffLoader";
+import { WalletContext } from '../context/walletContext';
 
 
-const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pinToReset, mode }) => {
+const NFCReaderWriter = ({onNFCRead, pinToReset, mode }) => {
+  const { walletData, setWalletData } = useContext(WalletContext);
   const [message, setMessage] = useState('');
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
   const [isActivated, setIsActivated] = useState(false);
@@ -43,7 +45,8 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pi
           const parsedData2 = JSON.parse(data2);
           const parsedData = {...parsedData1, ...parsedData2};
           setMessage(``);
-          onNFCRead(parsedData);
+          setWalletData(parsedData);
+          onNFCRead(true);
           setIsOffcanvasOpen(false);
         } catch (error){
           setMessage(`Failed to read. Please refresh and try again.: ${error}`);
@@ -74,9 +77,9 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pi
         {
           recordType: "text", 
           data: new TextEncoder().encode(JSON.stringify({
-            address: data.address, 
-            encryptedPrivateKey: data.encryptedPrivateKey,
-            checksum: data.checksum
+            address: walletData.address, 
+            encryptedPrivateKey: walletData.encryptedPrivateKey,
+            checksum: walletData.checksum
           }))
         },
         { recordType: "text", data: new TextEncoder().encode(JSON.stringify({dataSources: "data-sources-0x"})) },
@@ -103,6 +106,7 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pi
     }
   };
 
+  //not used currently due to freezing up on mobile
   const setToReadOnly = async() => {
     try {
       await nfcReader.makeReadOnly();
@@ -121,12 +125,12 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pi
         {nfcSupported ? (
           <>
 
-          {/*`${isActivated} - ${pinToReset} - ${isPinReset}` */}
+          {`${isActivated} - ${pinToReset} - ${isPinReset}` }
 
           {(!isActivated || (isActivated && pinToReset)) && (!isPinReset) ? (<>
 
             <button className={`btn w-100 btn-lg mt-3 mb-3 btn-success`}
-              onClick={() => writeNFC({ address, encryptedPrivateKey, checksum })}
+              onClick={() => writeNFC()}
             >
               {`Activate Card`}
             </button>
@@ -148,7 +152,7 @@ const NFCReaderWriter = ({ onNFCRead, address, encryptedPrivateKey, checksum, pi
             </button>
 
             <button className={`btn w-100 btn-lg mt-3 mb-3 btn-outline-success disabled`}
-              onClick={() => writeNFC({ address, encryptedPrivateKey, checksum })}
+              onClick={() => writeNFC()}
             >
               Activated&nbsp;&nbsp;<i className="fa-solid fa-circle-check"></i>
             </button>

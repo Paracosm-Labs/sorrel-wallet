@@ -23,17 +23,13 @@ const OffcanvasNav = () => {
 
   // Function to handle NFC card login
   const handleNfcLogin = async (data) => {
-    try {
-      walletContext.setWalletData(data);
-      alert(`Hi! Welcome to Sorrel!`)
-      // Perform login with the data from the NFC card
-    } catch (error) {
-      console.error("Error reading NFC card to login.", error);
+    if (data) {
+      alert(`Hi! Welcome to Sorrel!`);
     }
   };
 
   return (
-    <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
+    <div className="offcanvas navpane offcanvas-end" tabIndex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
       <div className="offcanvas-header">
         <h5 className="offcanvas-title" id="offcanvasNavLabel">Explore Sorrel</h5>
         <button type="button" className="btn-close  btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -96,7 +92,7 @@ const OffcanvasNav = () => {
             <div className="col mt-2">
             
               <Link to="/addons" className="nav-link">
-              <button className="btn btn lg btn-outline-primary w-100" type="button">
+              <button className="btn btn lg btn-outline-primary w-100" type="button" data-bs-dismiss="offcanvas" aria-label="Close">
                 <i className="fa-solid fa-lg fa-puzzle-piece mt-4"></i><p className="">Addons</p>
               </button>
               </Link>
@@ -105,28 +101,28 @@ const OffcanvasNav = () => {
             </div>
             <div className="col mt-2">
             <Link to="/cards" className="nav-link">
-              <button className="btn btn lg btn-outline-primary w-100">
+              <button className="btn btn lg btn-outline-primary w-100" data-bs-dismiss="offcanvas" aria-label="Close">
                 <i className="fa-solid fa-credit-card mt-4 fa-lg"></i><p className="">NFC Cards</p>
               </button>
             </Link>
             </div>
             <div className="col mt-2">
-              <button className="btn btn lg btn-outline-primary disabled w-100">
+              <button className="btn btn lg btn-outline-primary disabled w-100" data-bs-dismiss="offcanvas" aria-label="Close">
                 <i className="fa-solid fa-bell-concierge mt-4 fa-lg"></i><p className="">Concierge</p>
               </button>
             </div>
             <div className="col mt-2">
-              <button className="btn btn lg btn-outline-primary disabled w-100">
+              <button className="btn btn lg btn-outline-primary disabled w-100" data-bs-dismiss="offcanvas" aria-label="Close">
                 <i className="fa-solid fa-plus mt-4 fa-lg"></i><p className="">Sorrel Lounges</p>
               </button>
             </div>
             <div className="col mt-2">
-              <button className="btn btn lg btn-outline-primary disabled w-100">
+              <button className="btn btn lg btn-outline-primary disabled w-100" data-bs-dismiss="offcanvas" aria-label="Close">
                 <i className="fa-solid fa-plus mt-4 fa-lg"></i><p className="">Sorrel <br/>Pay</p>
               </button>
             </div>
             <div className="col mt-2">
-              <button className="btn btn lg btn-outline-primary disabled w-100">
+              <button className="btn btn lg btn-outline-primary disabled w-100" data-bs-dismiss="offcanvas" aria-label="Close">
                 <i className="fa-solid fa-plus mt-4 fa-lg"></i><p className="">Family Office</p>
               </button>
             </div>
@@ -134,7 +130,7 @@ const OffcanvasNav = () => {
         </section>
 
         <a href="https://discord.gg/kBtNQ9dtFV" rel="noreferrer" target="_blank">
-          <button className="btn btn lg btn-outline-primary w-100 mt-3" type="button">
+          <button className="btn btn lg btn-outline-primary w-100 mt-3" type="button" data-bs-dismiss="offcanvas" aria-label="Close">
             <i className="fa-solid fa-xl fa-satellite-dish mt-4"></i><p>Join Community</p>
           </button>
         </a>
