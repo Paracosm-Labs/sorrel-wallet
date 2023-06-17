@@ -11,8 +11,7 @@ const NFCReaderWriter = ({onNFCRead, pinToReset, mode }) => {
   const { walletData, setWalletData } = useContext(WalletContext);
   const [message, setMessage] = useState('');
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
-  const [isActivated, setIsActivated] = useState(false);
-  const [isPinReset, setIsPinReset] = useState(false);
+  const [isActivated, setIsActivated] = useState(walletData ? walletData.activated : false);
   const [isScanning, setIsScanning] = useState(false);
   const [nfcSupported, setNfcSupported] = useState(false);
   const [nfcReader, setNfcReader] = useState(null);
@@ -28,7 +27,10 @@ const NFCReaderWriter = ({onNFCRead, pinToReset, mode }) => {
 
   const readNFC = async () => {
     if (!nfcReader) {alert("NFC Reader is not available.")};
-
+    if (pinToReset) {
+      setMessage(``);
+      return
+    }
     setIsOffcanvasOpen(true);
     setIsScanning(true);
     setMessage(`Please place card near to device and wait.`);
@@ -46,7 +48,7 @@ const NFCReaderWriter = ({onNFCRead, pinToReset, mode }) => {
           const parsedData = {...parsedData1, ...parsedData2};
           setMessage(``);
           setWalletData(parsedData);
-          onNFCRead(true);
+          onNFCRead(parsedData);
           setIsOffcanvasOpen(false);
         } catch (error){
           setMessage(`Failed to read. Please refresh and try again.: ${error}`);
@@ -56,7 +58,6 @@ const NFCReaderWriter = ({onNFCRead, pinToReset, mode }) => {
             theme: 'dark',
           });
         };
-        setIsPinReset(false);
       } catch (error) {
         setIsOffcanvasOpen(false);
         setMessage(`Failed to read. Please try again.: ${error}`);
@@ -79,7 +80,8 @@ const NFCReaderWriter = ({onNFCRead, pinToReset, mode }) => {
           data: new TextEncoder().encode(JSON.stringify({
             address: walletData.address, 
             encryptedPrivateKey: walletData.encryptedPrivateKey,
-            checksum: walletData.checksum
+            checksum: walletData.checksum,
+            activated: "true"
           }))
         },
         { recordType: "text", data: new TextEncoder().encode(JSON.stringify({dataSources: "data-sources-0x"})) },
@@ -89,9 +91,6 @@ const NFCReaderWriter = ({onNFCRead, pinToReset, mode }) => {
       setMessage(`Card Successfully Activated.`);
       setIsOffcanvasOpen(false);
       setIsActivated(true);
-      if (pinToReset) {
-        setIsPinReset(true);
-      }
       toast.success(`Your card is ready to use!`, {
         icon: ({ theme, type }) => <img src={LogoImg} alt="Sorrel Logo" className="rounded-circle me-5" height="24" />,
         theme: 'dark',
@@ -125,9 +124,9 @@ const NFCReaderWriter = ({onNFCRead, pinToReset, mode }) => {
         {nfcSupported ? (
           <>
 
-          {`${isActivated} - ${pinToReset} - ${isPinReset}` }
+          {/*`${isActivated} - ${pinToReset}`*/}
 
-          {(!isActivated || (isActivated && pinToReset)) && (!isPinReset) ? (<>
+          {(!isActivated || (isActivated && pinToReset)) ? (<>
 
             <button className={`btn w-100 btn-lg mt-3 mb-3 btn-success`}
               onClick={() => writeNFC()}
@@ -138,7 +137,7 @@ const NFCReaderWriter = ({onNFCRead, pinToReset, mode }) => {
 
           </>):(``)}
             
-          {isActivated && !isScanning && !isPinReset ? (<>
+          {isActivated && !isScanning && !pinToReset ? (<>
 
             <button className={`btn w-100 btn-lg mt-3 mb-3 btn-success`}
                onClick={() => readNFC()}>
@@ -159,7 +158,7 @@ const NFCReaderWriter = ({onNFCRead, pinToReset, mode }) => {
 
           </>):(``)}
 
-          {isActivated && isScanning ? (<>
+          {isActivated && isScanning && !pinToReset ? (<>
 
              <button className={`btn w-100 btn-lg mt-3 mb-3 disabled btn-outline-success`}
                onClick={() => readNFC()}>

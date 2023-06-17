@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import TronWeb from 'tronweb';
 import CryptoJS from 'crypto-js';
 import crc from 'crc';
@@ -17,12 +18,14 @@ const CreateWallet = ({ onWalletLoad }) => {
   const [offcanvasTitle, setOffcanvasTitle] = useState('');
   const [isResettingPin, setIsResettingPin] = useState(false);
   const [isConfirmingOldPin, setIsConfirmingOldPin] = useState(false);
+  const navigate = useNavigate();
 
 
   const handleNFCRead = (data) => {
-    walletContext.setWalletData(data);
+    // walletContext.setWalletData(data);
     setIsResettingPin(false);
-    alert("Hi! Welcome to Sorrel!")
+    navigate('/cards');
+    // alert("Hi! Welcome to Sorrel!")
   };
 
 
@@ -81,7 +84,8 @@ const CreateWallet = ({ onWalletLoad }) => {
     const secureWallet = {
       ...walletContext.walletData,
       encryptedPrivateKey: cipher,
-      checksum: checksum
+      checksum: checksum,
+      activated: "false"
     };
     walletContext.setWalletData(secureWallet);
     // setIsResettingPin(true);
@@ -99,7 +103,8 @@ const CreateWallet = ({ onWalletLoad }) => {
       const secureWallet = {
         ...newWallet,
         encryptedPrivateKey: cipher,
-        checksum: checksum
+        checksum: checksum,
+        activated: "false"
       };
       walletContext.setWalletData(secureWallet);
     });
@@ -188,6 +193,7 @@ const CreateWallet = ({ onWalletLoad }) => {
           <small>PIN: <span className="text-wrap">*****************</span></small><br/>
           <small>CRC: {walletContext.walletData.checksum}</small><br/>
           <small>Data: {walletContext.walletData.dataSources}</small><br/>
+          {walletContext.walletData.activated ? (<small className="text-success">Activated</small>):(``)}
         </div>
         <hr className="mx-2"/>
       <NFCReaderWriter

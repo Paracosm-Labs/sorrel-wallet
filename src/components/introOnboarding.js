@@ -13,16 +13,19 @@ const WelcomeOnboarding = () => {
 
 
   if (isAuthenticated) {
-    return navigate('/welcome');
+    return navigate('/wallet');
   };
 
 
   // Function to handle NFC card login
   const handleNfcLogin = async (data) => {
     if (data) {
-    	alert(`Hi! Welcome to Sorrel!`);
-    	return navigate('/wallet');
-    } 
+    	walletContext.setWalletData(data)
+    		alert(`Hi! Welcome to Sorrel!`);
+    		navigate('/wallet');
+    } else{
+    	alert("No Wallet Data found.")
+    }
   };
 
 
