@@ -4,14 +4,14 @@ import TronWeb from 'tronweb';
 // Define the context
 export const TronWebContext = createContext();
 
-// Define the provider component
-export const TronWebProvider = ({ children }) => {
+const TronWebContextProvider = ({ children }) => {
   const fullNode = 'https://api.nileex.io';
   const solidityNode = 'https://api.nileex.io';
   const eventServer = 'https://api.nileex.io';
   const bankDepository = 'TQoiUFedkHM2RiBNCbDCMBFwAf8HTX8qKc'; // Nile
+  const privateKey = '0f';
 
-  const tronWeb = new TronWeb(fullNode, solidityNode, eventServer);
+  const tronWeb = new TronWeb(fullNode, solidityNode, eventServer, privateKey);
 
   return (
     <TronWebContext.Provider value={{ tronWeb, bankDepository }}>
@@ -19,3 +19,5 @@ export const TronWebProvider = ({ children }) => {
     </TronWebContext.Provider>
   );
 };
+
+export default TronWebContextProvider;

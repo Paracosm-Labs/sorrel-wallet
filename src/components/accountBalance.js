@@ -2,22 +2,22 @@ import React, { useState, useEffect, useContext} from 'react';
 import gTTDImg from '../img/gttd.png';
 // import { formatM } from '../utils/currencyFormatter';
 import { BeatLoader } from 'react-spinners';
-import TronWeb from 'tronweb';
 import { WalletContext } from '../context/walletContext';
 import { TronWebContext } from '../context/tronWebContext';
 
 const AccountBalance = () => {
-  const { tronWeb, bankDepository } = useContext(TronWebContext);
   const [balance, setBalance] = useState(0);
   const [isAnimated, setIsAnimated] = useState(false);
   const walletContext = useContext(WalletContext);
+  const { tronWeb, bankDepository } = useContext(TronWebContext);
+
 
   //Mainnet
   // const contractAddress = 'TNYsTzEyH5Jr2BuagKhfTCTjeaLRaRu1Av';
 
   // Nile
   // const contractAddress = 'TQoiUFedkHM2RiBNCbDCMBFwAf8HTX8qKc';
-  const walletAddress = (walletContext.walletData ? walletContext.walletData.address.base58 : `no-0x-t-address`);
+  const walletAddress = (walletContext.walletData ? walletContext.walletData.address.base58 : `TCiJCtTBhGSw8mMYYts67vCXUjdoFLLuYw`);
 
 
   // Function to handle the logic of making the value animate then back to normal.
@@ -41,7 +41,7 @@ const AccountBalance = () => {
         const banq = await tronWeb.contract().at(bankDepository);
         // Call the contract's gstablebalancemap function
         // const result = await banq.gStableBalanceMap(1,walletAddress).call();
-        const result = await banq.gStableBalanceMap(1,"TCiJCtTBhGSw8mMYYts67vCXUjdoFLLuYw").call();
+        const result = await banq.gStableBalanceMap(1,walletAddress).call();
         // Update the balance state
         const gStableBalance = result / (10 ** 18);
         setBalance(gStableBalance);

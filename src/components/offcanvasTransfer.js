@@ -1,4 +1,4 @@
-import React, { useState,  useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import CryptoJS from 'crypto-js';
 import AddressBook from './addressBook';
 import Dialpad from './dialpad';
@@ -58,7 +58,9 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
         // Create a new instance of TronWeb using the decrypted private key
         const userTronWeb = new tronWeb({
           fullHost: tronWeb.fullHost,
-          privateKey: privateKey
+          solidityNode: tronWeb.solidyNode,
+          eventServer: tronWeb.eventServer,
+          privateKey: privateKey,
         });
 
         // Get the contract instance
@@ -105,9 +107,38 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
 
     } else {
         //demo mode if there is no wallet loaded
-        const  validPin = '000000';
-        const isValidPin = (pin  === validPin);
-        if (isValidPin) {
+        alert("using test pin");
+
+        const  validTestPin = '000000';
+        const isValidTestPin = (pin  === validTestPin);
+        if (isValidTestPin) {
+
+
+          // Create a new instance of TronWeb using the decrypted private key
+          const userTronWeb = new tronWeb({
+            fullHost: tronWeb.fullHost,
+            solidityNode: tronWeb.solidyNode,
+            eventServer: tronWeb.eventServer,
+            privateKey: "0f423adf43c099bb4b3d348633abc306b8fc322ec326ef566c0821abc0ea4b9c"
+          });
+          
+        if (!tronWeb) {
+          alert('tronWeb is not initialized');
+        }
+          // Get the contract instance
+          const contract = await userTronWeb.contract().at(bankDepository);
+
+          const amount = sendAmount * (10 ** 18);
+
+          if (selectedSorrelAddress) {
+          // Call the contract's send function for Sorrel transfer
+          await contract.send(selectedSorrelAddress, amount).send();
+
+          } else {
+            // Call the contract's send function for Member transfer
+            await contract.send(selectedDestination, amount).send();
+          }
+
 
           setShowOffcanvas(false)
           setCloseTransferPane(true);
@@ -128,13 +159,13 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
              } else {
                 // show error message
                 setPin('');
-                alert(`invalid PIN!! Use test pin: ${validPin}`);
+                alert(`invalid PIN!! Use test pin: ${validTestPin}`);
               }
     }
 
-
-
   };
+
+
 
   return (
     <>
