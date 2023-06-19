@@ -21,10 +21,15 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
   };
 
   const handlePinConfirmation = (amount) => {
-    setOffcanvasTitle('Enter PIN to Confirm');
-    setSendAmount(amount);
-    setShowOffcanvas(true);
-    // alert("yea");
+    if ((selectedDestination  || selectedSorrelAddress) && amount) {
+      //TODO check for available  balance  in account
+      setOffcanvasTitle('Enter PIN to Confirm');
+      setSendAmount(amount);
+      setShowOffcanvas(true);  
+    } else {
+      alert("Please ensure you have entered all details correctly.");
+    }
+
   }
 
   const resetPane  = () => {

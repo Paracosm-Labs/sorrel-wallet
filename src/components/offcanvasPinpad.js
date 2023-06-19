@@ -13,6 +13,10 @@ const PinPad = ({ showOffcanvas, setShowOffcanvas, offcanvasTitle, pin, setPin, 
     setPin('');
   };
 
+  const handleBiometrics = () => {
+    alert("To enable Biometrics please consider crowdfunding an addon.")
+  };
+
 
   const handleClearPin = () => {
     setPin('');
@@ -44,6 +48,11 @@ return (<>
                     </button>
                   </div>
                 ))}
+                <div className="col-4 mt-2">
+                  <button className="btn btn-outline-secondary btn-lg w-100" type="button" onClick={handleBiometrics}>
+                    <i className="fa-solid fa-fingerprint text-success"></i>
+                  </button>
+                </div>
                 <div className="col-4 mt-2">
                   <button className="btn btn-outline-secondary btn-lg w-100" type="button" onClick={handleClearPin}>
                     <i className="fa-solid fa-delete-left"></i>

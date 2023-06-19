@@ -139,6 +139,13 @@ code {
 
 .transactions img.avatar{height: 42px; width: 42px;}
 
+.explore .shops{
+  max-height: 200px;
+  max-width: 420px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
 .shop-card{ background-color: #eee!important;}
 
 .address-book i {color:#6a539b;}
@@ -159,7 +166,9 @@ code {
 
 /* Customize the scrollbar */
 
+.explore .shops::-webkit-scrollbar,
 .address-book::-webkit-scrollbar{height: 5px;}
+
 
 .address-book .modal-body::-webkit-scrollbar,
 .address-book::-webkit-scrollbar,
@@ -167,12 +176,14 @@ code {
   width: 1px;
 }
 
+.explore .shops::-webkit-scrollbar-thumb,
 .address-book .modal-body::-webkit-scrollbar,
 .address-book::-webkit-scrollbar-thumb,
 .transactions::-webkit-scrollbar-thumb {
   background-color: #109E76;
 }
 
+.explore .shops::-webkit-scrollbar-thumb,
 .address-book .modal-body::-webkit-scrollbar,
 .address-book::-webkit-scrollbar-track,
 .transactions::-webkit-scrollbar-track {

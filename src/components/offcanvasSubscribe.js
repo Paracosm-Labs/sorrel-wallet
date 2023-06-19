@@ -27,8 +27,12 @@ const OffcanvasSubscribe = ({ shopId, shopName, shopPic }) => {
 
 
   const handlePinConfirmation = (amount) => {
+    if (amount) {
     setOffcanvasTitle('Enter PIN to Confirm');
     setShowOffcanvas(true);
+    } else{
+      alert("Please ensure you have entered all details correctly.");
+    }
   }
 
   const resetPane  = () => {

@@ -35,35 +35,39 @@ const ExplorePage = () => {
       <div className="text-center explore">
         <Navigation />
         <SearchBox />
-        <div className="row shops mt-3">
+        <div className="d-flex shops mt-3">
           {shops.map((shop) => (
-            <div className="col mt-3 mb-3 m-auto" key={shop.id}>
+            <div className="col-4 mt-3 mb-3 m-auto  mx-3" key={shop.id}>
               <div className="card shop-card">
                 <img src={shop.image} alt={shop.username} className="shop-image" />
                 <p className="shop-username pt-2">{shop.username}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div  className="row actions mt-3">
+        <div  className="col">
                 <button
-                  className="btn btn-outline-success m-3 mt-2"
+                  className="btn btn-outline-success m-3 mt-2 w-50"
                   type="button"
                   data-bs-toggle="offcanvas"
                   data-bs-target="#offcanvasBuy"
                   aria-controls="offcanvasBuy"
-                  onClick={() => handleBuyClick(shop.id, shop.username, shop.image)}
+                  onClick={() => handleBuyClick(1, "Food & Entertainment", "https://media.discordapp.net/attachments/1061348902252597368/1113937679789338644/wescosmic_table_of_consumer_products_for_instagram_0_d75d5b92-5939-44f0-9139-850581ecbaf8.png?width=350&height=180")}
                 >
                   Buy Now<br/><small>Demo</small>
                 </button>
                 <button
-                  className="btn btn-outline-success m-3 mt-2"
+                  className="btn btn-outline-success m-3 mt-2  w-50"
                   type="button"
                   data-bs-toggle="offcanvas"
                   data-bs-target="#offcanvasSubscribe"
                   aria-controls="offcanvasSubscribe"
-                  onClick={() => handleSubscribeClick(shop.id, shop.username, shop.image)}
+                  onClick={() => handleSubscribeClick(1, "Food & Entertainment", "https://media.discordapp.net/attachments/1061348902252597368/1113937679789338644/wescosmic_table_of_consumer_products_for_instagram_0_d75d5b92-5939-44f0-9139-850581ecbaf8.png?width=350&height=180")}
                 >
                   Subscribe<br/><small>Demo</small>
                 </button>
-              </div>
-            </div>
-          ))}
+          </div>
         </div>
       </div>
       <OffcanvasBuy shopId={selectedShopId} shopName={selectedShopName} shopPic={selectedShopPic} />

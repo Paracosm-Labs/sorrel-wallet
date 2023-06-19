@@ -55,29 +55,32 @@ const EarnPage = () => {
                   {vault.name} Vault</h5>
                   <p className="card-text">
                     {(vault.balance) ? vault.balance : (<small className="text-muted">No Deposits</small>)}<br/>
+                    <b className="text-success">{vault.apr}+ APR</b><br/>
                     <small className="text-muted"><i className="fa-regular fa-sm fa-clock"></i>&nbsp;{vault.details}</small>
                   </p>
                 </div>
                 <div className="col">
-                  <p className="text-end"><b className="text-success">{vault.apr}+ APR</b></p>
+                  
+                  <button onClick={() => handleVaultAddress(vault.address)} className="btn btn-sm btn-outline-secondary mt-3 w-100 mx-2"  type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTransfer" aria-controls="offcanvasTransfer">
+                  <i className="fa-solid fa-sm fa-right-from-bracket"></i>&nbsp;
+                  Deposit</button>
+
+                  <button
+                    className="btn btn-outline-secondary btn-sm w-100 mx-2 mt-3"
+
+                    onClick={() => handleRedeem(vault.address)}
+                    disabled={!isUnlockTimePassed(vault.id)}
+                  >
+                    <i className={!isUnlockTimePassed(vault.id) ? "fa fa-sm fa-lock" : "fa fa-sm fa-lock-open text-success"}></i>&nbsp;
+                     Redeem
+                  </button>
+
                 </div>
               </div>
 
                 
                 <div className="d-flex">
-                <button onClick={() => handleVaultAddress(vault.address)} className="btn btn-lg btn-outline-secondary mt-3 w-100 mx-2"  type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTransfer" aria-controls="offcanvasTransfer">
-                <i className="fa-solid fa-sm fa-right-from-bracket"></i>&nbsp;
-                Deposit</button>
 
-                <button
-                  className="btn btn-outline-secondary btn-lg w-100 mx-2 mt-3"
-
-                  onClick={() => handleRedeem(vault.address)}
-                  disabled={!isUnlockTimePassed(vault.id)}
-                >
-                  <i className={!isUnlockTimePassed(vault.id) ? "fa fa-sm fa-lock" : "fa fa-sm fa-lock-open text-success"}></i>&nbsp;
-                   Redeem
-                </button>
               </div>
               </div>
             </div>
