@@ -11,10 +11,12 @@ import Addons from './pages/addonsPage';
 import Contract from './components/contractInterface';
 import WalletCards from './pages/cardsPage';
 import { WalletProvider } from './context/walletContext';
+import { TronWebContext } from './context/tronWebContext';
 
 const App = () => {
 
     return (
+    <TronWebContext>
     <WalletProvider>
     <BrowserRouter>
       <Routes>
@@ -31,6 +33,7 @@ const App = () => {
       </Routes>
     </BrowserRouter>
     </WalletProvider>
+    </TronWebContext>
 
   );
 

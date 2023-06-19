@@ -4,9 +4,10 @@ import gTTDImg from '../img/gttd.png';
 import { BeatLoader } from 'react-spinners';
 import TronWeb from 'tronweb';
 import { WalletContext } from '../context/walletContext';
+import { TronWebContext } from '../context/tronWebContext';
 
 const AccountBalance = () => {
-  const [tronWeb, setTronWeb] = useState(null);
+  const { tronWeb, bankDepository } = useContext(TronWebContext);
   const [balance, setBalance] = useState(0);
   const [isAnimated, setIsAnimated] = useState(false);
   const walletContext = useContext(WalletContext);
@@ -15,28 +16,8 @@ const AccountBalance = () => {
   // const contractAddress = 'TNYsTzEyH5Jr2BuagKhfTCTjeaLRaRu1Av';
 
   // Nile
-  const contractAddress = 'TQoiUFedkHM2RiBNCbDCMBFwAf8HTX8qKc';
+  // const contractAddress = 'TQoiUFedkHM2RiBNCbDCMBFwAf8HTX8qKc';
   const walletAddress = (walletContext.walletData ? walletContext.walletData.address.base58 : `no-0x-t-address`);
-
-  useEffect(() => {
-    const HttpProvider = TronWeb.providers.HttpProvider;
-    const fullNode = new HttpProvider('https://api.nileex.io');
-    const solidityNode = new HttpProvider('https://api.nileex.io');
-    const eventServer = 'https://api.nileex.io';
-
-
-    const privateKey = '0f';
-
-    const tronWebInstance = new TronWeb(
-      fullNode,
-      solidityNode,
-      eventServer,
-      privateKey
-    );
-
-    setTronWeb(tronWebInstance);
-  }, []);
-
 
 
   // Function to handle the logic of making the value animate then back to normal.
@@ -55,25 +36,25 @@ const AccountBalance = () => {
       // Call the contract's function to retrieve the balance
       try {
         if (!tronWeb || !tronWeb.contract) {
-          throw new Error('tronWeb is not initialized');
+          alert('tronWeb is not initialized');
         }
-        const banq = await tronWeb.contract().at(contractAddress);
-        const userBalance = await banq.gStableBalanceMap(1,"TCiJCtTBhGSw8mMYYts67vCXUjdoFLLuYw").call();
+        const banq = await tronWeb.contract().at(bankDepository);
+        // Call the contract's gstablebalancemap function
+        // const result = await banq.gStableBalanceMap(1,walletAddress).call();
+        const result = await banq.gStableBalanceMap(1,"TCiJCtTBhGSw8mMYYts67vCXUjdoFLLuYw").call();
         // Update the balance state
-        const gStableBalance = userBalance / (10 ** 18);
+        const gStableBalance = result / (10 ** 18);
         setBalance(gStableBalance);
-        console.log(balance);
         if (balance !== 0) {
           handleValueAnimate();
         }
       } catch (e) {
         console.error(e);
+        alert(e);
       }
     };
-    if (tronWeb) {
       fetchBalance();
-    }
-  }, [tronWeb]);
+  }, [tronWeb, bankDepository]);
 
   if (!tronWeb) {
     return <div className="text-center m-auto"><BeatLoader color="#109e77" size={30} /></div>;

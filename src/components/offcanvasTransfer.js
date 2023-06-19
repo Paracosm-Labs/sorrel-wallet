@@ -1,4 +1,5 @@
 import React, { useState,  useContext } from 'react';
+import CryptoJS from 'crypto-js';
 import AddressBook from './addressBook';
 import Dialpad from './dialpad';
 import { toast } from 'react-toastify';
@@ -6,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import LogoImg from '../img/logo2x.png';
 import OffcanvasPinpad from './offcanvasPinpad';
 import { WalletContext } from '../context/walletContext';
+import { TronWebContext } from '../context/tronWebContext';
 
 const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
   const [selectedDestination, setSelectedDestination] = useState('');
@@ -15,6 +17,7 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
   const [closeTransferPane, setCloseTransferPane] = useState(null);
   const [offcanvasTitle, setOffcanvasTitle] = useState('');
   const walletContext = useContext(WalletContext);
+  const { tronWeb, bankDepository } = useContext(TronWebContext);
 
   const handleDestinationChange = (event) => {
     setSelectedDestination(event);
@@ -47,6 +50,34 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
     if (walletContext.walletData) {
 
       if (walletContext.checkPIN(pin)) { // Check the pin before proceeding
+
+        // Decrypt the private key using the pin
+        const bytes = CryptoJS.AES.decrypt(walletContext.walletData.encryptedPrivateKey, pin);
+        const privateKey = bytes.toString(CryptoJS.enc.Utf8);
+
+        // Create a new instance of TronWeb using the decrypted private key
+        const userTronWeb = new tronWeb({
+          fullHost: tronWeb.fullHost,
+          privateKey: privateKey
+        });
+
+        // Get the contract instance
+        const contract = await userTronWeb.contract().at(bankDepository);
+
+        const amount = sendAmount * (10 ** 18);
+
+        if (selectedSorrelAddress) {
+        // Call the contract's send function for Sorrel transfer
+        await contract.send(selectedSorrelAddress, amount).send({
+          from: walletContext.walletData.address.base58
+        });
+
+        } else {
+          // Call the contract's send function for Member transfer
+          await contract.send(selectedDestination, amount).send({
+            from: walletContext.walletData.address.base58
+          });
+        }
         setShowOffcanvas(false)
         setCloseTransferPane(true);
 
