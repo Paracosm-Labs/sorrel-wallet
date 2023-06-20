@@ -46,10 +46,17 @@ const OffcanvasDeposit = () => {
           <div className="row">
             <div className="col-12 mt-2">
               <a href="#">
-              <button className="btn btn lg btn-outline-primary w-100" type="button">
+              <button className="btn btn lg btn-outline-primary w-100 disabled d-none" type="button">
                 <i className="fa-solid fa-lg fa-wallet mt-4"></i><p className="">TronLink</p>
               </button>
               </a>
+            </div>
+            <div className="col-12 mt-2">
+              
+              <button onClick={handleQRCodeClick} className="btn btn lg btn-outline-primary w-100" type="button">
+                <i className="fa-solid fa-lg fa-qrcode mt-4"></i><p className="">Payment Request</p>
+              </button>
+              
             </div>
             <div className="col-12 mt-2">
               

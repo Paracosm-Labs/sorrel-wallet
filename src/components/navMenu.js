@@ -22,8 +22,11 @@ const NavMenu = () => {
             <NavItem className="px-3">
               <Link to="/wallet" className="nav-link"><i className="fa-solid fa-wallet"></i><br/>Wallet</Link>
             </NavItem>
-            <NavItem className="px-3">
+            <NavItem className="px-3 d-none">
               <Link to="/earn" className="nav-link"><i className="fa-solid fa-vault"></i><br/>Earn</Link>
+            </NavItem>
+            <NavItem className="px-3">
+              <Link to="/cards" className="nav-link"><i className="fa-solid fa-credit-card"></i><br/>Card</Link>
             </NavItem>
             <NavItem className="px-3">
               <Link to="/explore" className="nav-link"><i className="fa-solid fa-store"></i><br/>Explore</Link>

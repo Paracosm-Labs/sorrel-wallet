@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import CryptoJS from 'crypto-js';
+import TronWeb from 'tronweb';
 import AddressBook from './addressBook';
 import Dialpad from './dialpad';
 import { toast } from 'react-toastify';
@@ -8,6 +9,8 @@ import LogoImg from '../img/logo2x.png';
 import OffcanvasPinpad from './offcanvasPinpad';
 import { WalletContext } from '../context/walletContext';
 import { TronWebContext } from '../context/tronWebContext';
+import Web3 from 'web3';
+
 
 const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
   const [selectedDestination, setSelectedDestination] = useState('');
@@ -17,7 +20,7 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
   const [closeTransferPane, setCloseTransferPane] = useState(null);
   const [offcanvasTitle, setOffcanvasTitle] = useState('');
   const walletContext = useContext(WalletContext);
-  const { tronWeb, bankDepository } = useContext(TronWebContext);
+  const { tronWeb, bankDepository,setTransactionCompleted, transactionCompleted, demoKey } = useContext(TronWebContext);
 
   const handleDestinationChange = (event) => {
     setSelectedDestination(event);
@@ -56,30 +59,29 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
         const privateKey = bytes.toString(CryptoJS.enc.Utf8);
 
         // Create a new instance of TronWeb using the decrypted private key
-        const userTronWeb = new tronWeb({
-          fullHost: tronWeb.fullHost,
-          solidityNode: tronWeb.solidyNode,
-          eventServer: tronWeb.eventServer,
+        const userTronWeb = new TronWeb({
+          fullHost: tronWeb.fullNode,
           privateKey: privateKey,
         });
 
         // Get the contract instance
         const contract = await userTronWeb.contract().at(bankDepository);
 
-        const amount = sendAmount * (10 ** 18);
+        const amount = Web3.utils.toWei(sendAmount, 'ether');
 
         if (selectedSorrelAddress) {
         // Call the contract's send function for Sorrel transfer
-        await contract.send(selectedSorrelAddress, amount).send({
+        await contract.send(1, amount, selectedSorrelAddress).send({
           from: walletContext.walletData.address.base58
         });
 
         } else {
           // Call the contract's send function for Member transfer
-          await contract.send(selectedDestination, amount).send({
+          await contract.send(1, amount, selectedDestination).send({
             from: walletContext.walletData.address.base58
           });
         }
+        //TODO
         setShowOffcanvas(false)
         setCloseTransferPane(true);
 
@@ -107,7 +109,8 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
 
     } else {
         //demo mode if there is no wallet loaded
-        alert("using test pin");
+        alert("Using test pin");
+        alert(` ${demoKey}`)
 
         const  validTestPin = '000000';
         const isValidTestPin = (pin  === validTestPin);
@@ -115,30 +118,29 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
 
 
           // Create a new instance of TronWeb using the decrypted private key
-          const userTronWeb = new tronWeb({
-            fullHost: tronWeb.fullHost,
-            solidityNode: tronWeb.solidyNode,
-            eventServer: tronWeb.eventServer,
-            privateKey: "0f423adf43c099bb4b3d348633abc306b8fc322ec326ef566c0821abc0ea4b9c"
+          const userTronWeb = new TronWeb({
+            fullHost: tronWeb.fullNode,
+            privateKey: demoKey,
           });
-          
-        if (!tronWeb) {
-          alert('tronWeb is not initialized');
-        }
+
+          if (!tronWeb) {
+            alert('tronWeb is not initialized.');
+          }
           // Get the contract instance
           const contract = await userTronWeb.contract().at(bankDepository);
-
-          const amount = sendAmount * (10 ** 18);
+          const amount = Web3.utils.toWei(sendAmount, 'ether');
 
           if (selectedSorrelAddress) {
           // Call the contract's send function for Sorrel transfer
-          await contract.send(selectedSorrelAddress, amount).send();
+          await contract.send(1, amount, selectedSorrelAddress).send();
 
           } else {
             // Call the contract's send function for Member transfer
-            await contract.send(selectedDestination, amount).send();
+            await contract.send(1, amount, selectedDestination).send();
           }
-
+          // After the transaction is sent
+          setTransactionCompleted(true);
+          setTimeout(() => setTransactionCompleted(false), 1000);
 
           setShowOffcanvas(false)
           setCloseTransferPane(true);

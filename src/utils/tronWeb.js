@@ -1,30 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import TronWeb from 'tronweb';
+// import React, { useState, useEffect } from 'react';
+// import TronWeb from 'tronweb';
 
-const TronWebConnect = () => {
-  const [tronWeb, setTronWeb] = useState(null);
+// const TronWebConnect = () => {
+//   const [tronWeb, setTronWeb] = useState(null);
 
-  useEffect(() => {
-    const HttpProvider = TronWeb.providers.HttpProvider;
-    const fullNode = new HttpProvider('https://api.nileex.io');
-    const solidityNode = new HttpProvider('https://api.nileex.io');
-    const eventServer = 'https://api.nileex.io';
+//   useEffect(() => {
+//     const HttpProvider = TronWeb.providers.HttpProvider;
+//     const fullNode = new HttpProvider('https://api.nileex.io');
+//     const solidityNode = new HttpProvider('https://api.nileex.io');
+//     const eventServer = 'https://api.nileex.io';
 
 
-    const privateKey = '0f';
+//     const privateKey = '0f';
 
-    const tronWebInstance = new TronWeb(
-      fullNode,
-      solidityNode,
-      eventServer,
-      privateKey
-    );
+//     const tronWebInstance = new TronWeb(
+//       fullNode,
+//       solidityNode,
+//       eventServer,
+//       privateKey
+//     );
 
-    setTronWeb(tronWebInstance);
-  }, []);
+//     setTronWeb(tronWebInstance);
+//   }, []);
   
 
-  };
+//   };
 
 
-export default TronWebConnect;
+// export default TronWebConnect;

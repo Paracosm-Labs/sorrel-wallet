@@ -6,7 +6,7 @@ const AddressBook = ({ onContactSelect, sorrelAddress}) => {
   const dummyContacts = [
     { name: 'Alex van Anders', avatar: '/img/alex.jpg', address: 'TLHKdCL7MiwT73rBrq8TXnANZ4VKH1P3kt' },
     { name: 'Javier Reyes', avatar: '/img/javier.jpg', address: 'TK5ruyDhV34sho8npBTd8JZAYeo418gKMu' },
-    { name: 'Michelle Ge', avatar: '/img/michelle.jpg', address: 'TTXSrAXM32eVpKVFJcMs1dcqFpvW6w6VM5R' },
+    { name: 'Michelle Ge', avatar: '/img/michelle.jpg', address: 'TTGu1xz54GXLwqAypitX4h8TeMWgWekG6e' },
     { name: 'Marcus Toussaint', avatar: '/img/marcus.jpg', address: 'TS7PDkLehxwA91HUf6Y3iGHZa5ehrMGYvB' },
   ];
 

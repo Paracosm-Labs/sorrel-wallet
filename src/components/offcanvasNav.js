@@ -93,47 +93,44 @@ const OffcanvasNav = () => {
             
               <Link to="/addons" className="nav-link">
               <button className="btn btn lg btn-outline-primary w-100" type="button" data-bs-dismiss="offcanvas" aria-label="Close">
-                <i className="fa-solid fa-lg fa-puzzle-piece mt-4"></i><p className="">Addons</p>
+                <i className="fa-solid fa-lg fa-puzzle-piece mt-4"></i><p className="">Crowdfund Addons</p>
               </button>
               </Link>
 
 
             </div>
+
             <div className="col mt-2">
-            <Link to="/cards" className="nav-link">
-              <button className="btn btn lg btn-outline-primary w-100" data-bs-dismiss="offcanvas" aria-label="Close">
-                <i className="fa-solid fa-credit-card mt-4 fa-lg"></i><p className="">NFC Cards</p>
-              </button>
-            </Link>
-            </div>
-            <div className="col mt-2">
-              <button className="btn btn lg btn-outline-primary disabled w-100" data-bs-dismiss="offcanvas" aria-label="Close">
+              <button className="btn btn lg btn-outline-primary disabled w-100 d-none" data-bs-dismiss="offcanvas" aria-label="Close">
                 <i className="fa-solid fa-bell-concierge mt-4 fa-lg"></i><p className="">Concierge</p>
               </button>
             </div>
             <div className="col mt-2">
-              <button className="btn btn lg btn-outline-primary disabled w-100" data-bs-dismiss="offcanvas" aria-label="Close">
+              <button className="btn btn lg btn-outline-primary disabled w-100 d-none" data-bs-dismiss="offcanvas" aria-label="Close">
                 <i className="fa-solid fa-plus mt-4 fa-lg"></i><p className="">Sorrel Lounges</p>
               </button>
             </div>
             <div className="col mt-2">
-              <button className="btn btn lg btn-outline-primary disabled w-100" data-bs-dismiss="offcanvas" aria-label="Close">
+              <button className="btn btn lg btn-outline-primary disabled w-100 d-none" data-bs-dismiss="offcanvas" aria-label="Close">
                 <i className="fa-solid fa-plus mt-4 fa-lg"></i><p className="">Sorrel <br/>Pay</p>
               </button>
             </div>
             <div className="col mt-2">
-              <button className="btn btn lg btn-outline-primary disabled w-100" data-bs-dismiss="offcanvas" aria-label="Close">
+              <button className="btn btn lg btn-outline-primary disabled w-100 d-none" data-bs-dismiss="offcanvas" aria-label="Close">
                 <i className="fa-solid fa-plus mt-4 fa-lg"></i><p className="">Family Office</p>
               </button>
+            </div>
+            <div className="col mt-2">
+              <a href="https://discord.gg/kBtNQ9dtFV" rel="noreferrer" target="_blank">
+                <button className="btn btn lg btn-outline-primary w-100" type="button" data-bs-dismiss="offcanvas" aria-label="Close">
+                  <i className="fa-solid fa-lg fa-satellite-dish mt-4"></i><p>Join Community</p>
+                </button>
+              </a>
             </div>
           </div>
         </section>
 
-        <a href="https://discord.gg/kBtNQ9dtFV" rel="noreferrer" target="_blank">
-          <button className="btn btn lg btn-outline-primary w-100 mt-3" type="button" data-bs-dismiss="offcanvas" aria-label="Close">
-            <i className="fa-solid fa-xl fa-satellite-dish mt-4"></i><p>Join Community</p>
-          </button>
-        </a>
+
         <div className="mt-5 text-center">
           <p className="text-muted">By Paracsom Labs</p>
         </div>

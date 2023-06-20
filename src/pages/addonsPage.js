@@ -13,7 +13,7 @@ const AddonsPage = () => {
     link: "https://docs.sorrelbanq.org/addons/wallet-nfc-cards",
     progress: 12,
     status:1,
-    address: "TL0x22-Addon-34",
+    address: "TS7PDkLehxwA91HUf6Y3iGHZa5ehrMGYvB",
   },
 
   {
@@ -23,7 +23,7 @@ const AddonsPage = () => {
     link: "https://docs.sorrelbanq.org/addons/aia-team",
     progress: 3,
     status:1,
-    address: "TL0x15-Addon-534",
+    address: "TVob34nPei9u1kPCdv6rLo43rw6YBchb7L",
   },
 
   {
@@ -33,7 +33,7 @@ const AddonsPage = () => {
     link: "https://docs.sorrelbanq.org/addons/lounges",
     progress: 3,
     status:1,
-    address: "TL0x12-Addon-7734",
+    address: "TTGu1xz54GXLwqAypitX4h8TeMWgWekG6e",
   },
 
   {
@@ -43,7 +43,7 @@ const AddonsPage = () => {
     link: "https://docs.sorrelbanq.org/addons/sorrelpay",
     progress: 0,
     status:0,
-    address: "TL0x18-Addon-8234",
+    address: "TTGu1xz54GXLwqAypitX4h8TeMWgWekG6e",
   },
 
   {
@@ -53,7 +53,7 @@ const AddonsPage = () => {
     link: "https://docs.sorrelbanq.org/addons/family-office",
     progress: 0,
     status:0,
-    address: "TL0x12-Addon-9934",
+    address: "TTGu1xz54GXLwqAypitX4h8TeMWgWekG6e",
   },
     // Add more dummy addons as needed
   ];

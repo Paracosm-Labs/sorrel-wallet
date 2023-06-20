@@ -9,7 +9,6 @@ const PromoSlide = () => {
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 3"></button>
   </div>
   <div className="carousel-inner">
     <div className="carousel-item active">
@@ -19,13 +18,7 @@ const PromoSlide = () => {
       </div>
     </Link>
     </div>
-    <div className="carousel-item">
-    <Link to="/earn">
-      <img src="/img/earn-yield.jpg" className="d-block w-100" width="380" height="220" alt=""/>
-      <div className="carousel-caption bg-primary">Earn Base <span className="text-success">2% APR</span> and more!
-      </div>
-    </Link>
-    </div>
+
     <div className="carousel-item">
     <Link to="/addons">
       <img src="/img/jes-concierge.jpg" className="d-block w-100" width="380" height="220" alt=""/>
