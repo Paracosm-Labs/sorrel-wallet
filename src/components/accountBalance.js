@@ -53,7 +53,7 @@ const AccountBalance = () => {
       fetchBalance();
 
     // Fetch the balance every 15 seconds
-      const intervalId = setInterval(fetchBalance, 60000);
+      const intervalId = setInterval(fetchBalance, 120000);
 
       // Clear the interval when the component is unmounted
       return () => clearInterval(intervalId);

@@ -1,6 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import { OrbitDBContext } from '../context/orbitdbContext';
 
 const TxnHistory = () => {
+  const { databases } = useContext(OrbitDBContext);
+  const transactionHistoryDb = databases.transaction_history;
+
+
   const transactions = [
     {
       id: 1,
