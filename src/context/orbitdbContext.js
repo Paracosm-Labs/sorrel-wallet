@@ -1,27 +1,26 @@
-// OrbitDBContext.js
 import React, { createContext, useState, useEffect } from 'react';
-import IPFS from 'ipfs-core';
+import { create } from 'ipfs-http-client';
 import OrbitDB from 'orbit-db';
 
 export const OrbitDBContext = createContext();
 
 export const OrbitDBProvider = ({ children }) => {
   const [orbitdb, setOrbitdb] = useState(null);
-  const [ipfs, setIpfs] = useState(null);
+
+  // Create an instance of IPFS client
+  const ipfs = create({ url: 'https://gateway.pinata.cloud:5001' });
+
 
   useEffect(() => {
     const init = async () => {
-      const ipfsOptions = { EXPERIMENTAL: { pubsub: true } };
-      const ipfs = await IPFS.create(ipfsOptions);
-      const orbitdb = await OrbitDB.createInstance(ipfs);
-      setOrbitdb(orbitdb);
-      setIpfs(ipfs);
+      const instance = await OrbitDB.createInstance(ipfs);
+      setOrbitdb(instance);
     };
-    init();
-  }, []);
+    if (!orbitdb) init();
+  }, [orbitdb]);
 
   return (
-    <OrbitDBContext.Provider value={{ orbitdb, ipfs }}>
+    <OrbitDBContext.Provider value={{ orbitdb }}>
       {children}
     </OrbitDBContext.Provider>
   );
