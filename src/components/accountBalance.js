@@ -46,14 +46,13 @@ const AccountBalance = () => {
         }
       } catch (e) {
         console.error(e);
-        alert(demoSorrelMember);
 
       }
     };
       fetchBalance();
 
     // Fetch the balance every 15 seconds
-      const intervalId = setInterval(fetchBalance, 120000);
+      const intervalId = setInterval(fetchBalance, 500000);
 
       // Clear the interval when the component is unmounted
       return () => clearInterval(intervalId);

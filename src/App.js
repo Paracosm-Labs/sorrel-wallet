@@ -12,14 +12,14 @@ import Contract from './components/contractInterface';
 import WalletCards from './pages/cardsPage';
 import { WalletProvider } from './context/walletContext';
 import TronWebContextProvider from './context/tronWebContext';
-import { OrbitDBProvider } from './context/orbitdbContext';
+// import { OrbitDBProvider } from './context/orbitdbContext';
 
 
 
 const App = () => {
 
      return (
-    <OrbitDBProvider>
+    // <OrbitDBProvider>
     <TronWebContextProvider>
     <WalletProvider>
     <BrowserRouter>
@@ -38,7 +38,7 @@ const App = () => {
     </BrowserRouter>
     </WalletProvider>
     </TronWebContextProvider>
-    </OrbitDBProvider>
+    // </OrbitDBProvider>
 
   );
 

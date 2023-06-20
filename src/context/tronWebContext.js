@@ -16,7 +16,7 @@ const TronWebContextProvider = ({ children }) => {
 	const ConvertComptroller = "TFuXJa7Hk47ny5Xa5W6ePRoK6GdXMcateh";
 	const demoSorrelMember = 'TULEMBAZwHsTK5JSfyF1cZAMTVsoknCPnp';
 	const demoKey = process.env.REACT_APP_DEMO_PRIVATE_KEY; // Nile DO NOT USE on Mainnet
-
+	const tronProAPIKey = process.env.TRON_PRO_API_KEY; 
 
   //Mainnet
 	// const bankDepository = 'TNYsTzEyH5Jr2BuagKhfTCTjeaLRaRu1Av';
@@ -29,7 +29,13 @@ const TronWebContextProvider = ({ children }) => {
   const privateKey = '0f';
   const [transactionCompleted, setTransactionCompleted] = useState(false);
 
-  const tronWeb = new TronWeb(fullNode, solidityNode, eventServer, privateKey);
+  const tronWeb = new TronWeb({
+  	fullNode, 
+  	solidityNode, 
+  	eventServer,
+  	headers: { "TRON-PRO-API-KEY": tronProAPIKey },
+  	privateKey
+  });
 
 
   return (

@@ -8,13 +8,13 @@ export const OrbitDBProvider = ({ children }) => {
   const [databases, setDatabases] = useState({});
 
   // Create an instance of IPFS client
-  const ipfs = create({ url: 'https://gateway.pinata.cloud:5001' });
+  const ipfs = create({ url: 'https://gateway.ipfs.io:5001' });
 
   useEffect(() => {
     const init = async () => {
       const instance = await OrbitDB.createInstance(ipfs);
       const db1 = await instance.create('transaction_history', 'docstore', {
-        indexBy: 'id',
+        indexBy: 'txHash',
       });
       await db1.load();
 
@@ -26,7 +26,7 @@ export const OrbitDBProvider = ({ children }) => {
       setDatabases({ transaction_history: db1, address_book: db2 });
     };
     if (Object.keys(databases).length === 0) init();
-  }, [databases]);
+  }, [databases, ipfs]);
 
   return (
     <OrbitDBContext.Provider value={{ databases }}>
