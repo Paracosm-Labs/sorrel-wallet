@@ -58,6 +58,11 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
         const bytes = CryptoJS.AES.decrypt(walletContext.walletData.encryptedPrivateKey, pin);
         const privateKey = bytes.toString(CryptoJS.enc.Utf8);
 
+         toast.success(`Sending...`, {
+            icon: ({theme, type}) =>  <img src={LogoImg} alt="Sorrel Logo" className="rounded-circle me-5" height="24"/>,
+            theme: "dark",
+          });
+
         // Create a new instance of TronWeb using the decrypted private key
         const userTronWeb = new TronWeb({
           fullHost: tronWeb.fullNode,
@@ -109,13 +114,14 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
 
     } else {
         //demo mode if there is no wallet loaded
-        alert("Using test pin");
-        alert(` ${demoKey}`)
-
         const  validTestPin = '000000';
         const isValidTestPin = (pin  === validTestPin);
         if (isValidTestPin) {
 
+         toast.success(`Sending...`, {
+            icon: ({theme, type}) =>  <img src={LogoImg} alt="Sorrel Logo" className="rounded-circle me-5" height="24"/>,
+            theme: "dark",
+          });
 
           // Create a new instance of TronWeb using the decrypted private key
           const userTronWeb = new TronWeb({
