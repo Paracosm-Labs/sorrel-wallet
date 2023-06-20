@@ -132,6 +132,8 @@ code {
 
 .list-group-item {background-color: #eee!important;}
 
+.transactions .fa-border-none{font-size: 4em;}
+
 .transactions{
   max-height: 500px; /* Adjust the height as needed */
   overflow-y: auto;

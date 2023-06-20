@@ -4,6 +4,7 @@ import gTTDImg from '../img/gttd.png';
 import { BeatLoader } from 'react-spinners';
 import { WalletContext } from '../context/walletContext';
 import { TronWebContext } from '../context/tronWebContext';
+import { utils } from 'web3';
 
 const AccountBalance = () => {
   const [balance, setBalance] = useState(0);
@@ -38,7 +39,7 @@ const AccountBalance = () => {
         // const result = await banq.gStableBalanceMap(1,walletAddress).call();
         const result = await banq.gStableBalanceMap(1,walletAddress).call();
         // Update the balance state
-        const gStableBalance = result / (10 ** 18);
+        const gStableBalance = Number(utils.fromWei(result.toString(), 'ether')).toFixed(2);
         setBalance(gStableBalance);
         if (balance !== 0) {
           handleValueAnimate();
@@ -50,6 +51,13 @@ const AccountBalance = () => {
       }
     };
       fetchBalance();
+
+    // Fetch the balance every 15 seconds
+      const intervalId = setInterval(fetchBalance, 30000);
+
+      // Clear the interval when the component is unmounted
+      return () => clearInterval(intervalId);
+
   }, [tronWeb, bankDepository, transactionCompleted]);
 
   if (!tronWeb) {

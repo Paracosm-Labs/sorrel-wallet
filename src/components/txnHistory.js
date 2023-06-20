@@ -77,6 +77,24 @@ const TxnHistory = () => {
     // Add more dummy transactions here...
   ];
 
+
+  if (transactions.length === 0) {
+    return (
+    <div className="mt-4">
+    <h6 className="text-start text-muted mx-3">Transactions</h6>
+    <div className="mt-2 transactions">
+      <div className="list-group-item d-flex justify-content-center align-items-center" style={{ height: '50vh' }}>
+        <div className="text-center">
+          <i className="fa-solid fa-border-none"></i>
+          <p>No transactions yet..</p>
+        </div>
+      </div>
+    </div>
+  </div>
+    );
+  }
+
+
   return (
     <div className="mt-4">
     <h6 className="text-start text-muted mx-3">Transactions</h6>
