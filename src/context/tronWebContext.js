@@ -33,7 +33,7 @@ const TronWebContextProvider = ({ children }) => {
   	fullNode, 
   	solidityNode, 
   	eventServer,
-  	headers: { "TRON-PRO-API-KEY": tronProAPIKey },
+  	// headers: { "TRON-PRO-API-KEY": tronProAPIKey },
   	privateKey
   });
 
