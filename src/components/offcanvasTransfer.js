@@ -10,6 +10,7 @@ import OffcanvasPinpad from './offcanvasPinpad';
 import { WalletContext } from '../context/walletContext';
 import { TronWebContext } from '../context/tronWebContext';
 import Web3 from 'web3';
+import { useEnergyUtils } from '../utils/tronNrg';
 
 
 const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
@@ -21,6 +22,7 @@ const OffcanvasTransfer = ({ selectedSorrelAddress }) => {
   const [offcanvasTitle, setOffcanvasTitle] = useState('');
   const walletContext = useContext(WalletContext);
   const { tronWeb, bankDepository,setTransactionCompleted, transactionCompleted, demoKey } = useContext(TronWebContext);
+  const { getAvailableEnergy, rentEnergy } = useEnergyUtils();
 
   const handleDestinationChange = (event) => {
     setSelectedDestination(event);

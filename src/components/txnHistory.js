@@ -111,9 +111,9 @@ const TxnHistory = () => {
             <div className="d-flex">
               <div className="p-2 mr-3">
                 {transaction.type === 'Payment' || 'Subscription' ? (
-                  <img className="rounded-circle avatar" src={transaction.avatar} />
+                  <img alt="avatar" className="rounded-circle avatar" src={transaction.avatar} />
                 ) : (
-                  <img className="rounded-circle avatar" src={transaction.avatar} width="42" height="42"/>
+                  <img alt="avatar" className="rounded-circle avatar" src={transaction.avatar} width="42" height="42"/>
                 )}
               </div>
               <div>

@@ -52,12 +52,12 @@ const AccountBalance = () => {
       fetchBalance();
 
     // Fetch the balance every 15 seconds
-      const intervalId = setInterval(fetchBalance, 500000);
+      const intervalId = setInterval(fetchBalance, 50000);
 
       // Clear the interval when the component is unmounted
       return () => clearInterval(intervalId);
 
-  }, [tronWeb, bankDepository, transactionCompleted]);
+  }, [tronWeb, bankDepository, transactionCompleted, balance, walletAddress]);
 
   if (!tronWeb) {
     return <div className="text-center m-auto"><BeatLoader color="#109e77" size={30} /></div>;
