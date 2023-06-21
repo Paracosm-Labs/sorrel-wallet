@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TronWeb from 'tronweb';
 import CryptoJS from 'crypto-js';
@@ -22,6 +22,12 @@ const CreateWallet = ({ onWalletLoad }) => {
   const [isConfirmingOldPin, setIsConfirmingOldPin] = useState(false);
   const { openModal } = useContext(ModalContext);
   const navigate = useNavigate();
+
+
+useEffect(() => {
+  walletContext.setCountryFromLocalStorage();
+}, [walletContext]);
+
 
 
   const handleNFCRead = (data) => {
@@ -107,6 +113,7 @@ const CreateWallet = ({ onWalletLoad }) => {
         ...newWallet,
         encryptedPrivateKey: cipher,
         checksum: checksum,
+        country: walletContext.country,
         activated: "false"
       };
       walletContext.setWalletData(secureWallet);

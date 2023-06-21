@@ -1,5 +1,7 @@
 import React, { createContext, useState } from 'react';
+import TronWeb from 'tronweb';
 import CryptoJS from 'crypto-js';
+import crc from 'crc';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LogoImg from '../img/logo2x.png';
@@ -8,17 +10,37 @@ export const WalletContext = createContext();
 
 export const WalletProvider = ({ children }) => {
   const [walletData, setWalletData] = useState(null);
+  const [country, setCountry] = useState(null);
 
-  // ({
-  //   //dummy wallet info
-  //   address: {
-  //     base58: 'TCiJCtTBhGSw8mMYYts67vCXUjdoFLLuYw',
-  //     hex: '417E4AAA33079E34F1CCCF5B985EA4863B82118C15'
-  //   },
-  //   encryptedPrivateKey: 'U2FsdGVkX19T7k5SeKGFAPBaxDwy72I26Mavuk3mkO5oqWIiID2TYnu2W4V0ss0cT7jmVCQAfKJGNo/NaYWKTaXB6zG29GVKYXrrywitS9qD+ihpz/eXQu8kPEbBWbsD',
-  //   checksum: '7ddb8a40',
-  //   dataSources: 'data-sources-0x'
-  // });
+
+  const setCountryFromLocalStorage = () => {
+  const selectedCountry = localStorage.getItem('selectedCountry');
+  setCountry(selectedCountry);
+};
+
+
+
+  const createWallet = (pin) => {
+    TronWeb.createAccount().then(newWallet => {
+      // Encrypt the private key with the pin
+      const cipher = CryptoJS.AES.encrypt(newWallet.privateKey, pin).toString();
+      // Generate a CRC32 checksum of the cipher
+      const checksum = crc.crc32(cipher).toString(16);
+      // Create a new wallet object with the encrypted private key and checksum
+      const secureWallet = {
+        ...newWallet,
+        encryptedPrivateKey: cipher,
+        checksum: checksum,
+        country: country,
+        activated: "false"
+      };
+      setWalletData(secureWallet);
+    });
+  };
+
+
+
+
 
   const checkPIN = (pin) => {
 
@@ -57,7 +79,14 @@ export const WalletProvider = ({ children }) => {
   };
 
   return (
-    <WalletContext.Provider value={{ walletData, setWalletData, checkPIN }}>
+    <WalletContext.Provider value={{ 
+      walletData, 
+      setWalletData, 
+      checkPIN, 
+      country, 
+      setCountryFromLocalStorage,
+      createWallet 
+    }}>
       {children}
     </WalletContext.Provider>
   );
