@@ -10,6 +10,8 @@ import BarLoader from "react-spinners/BarLoader";
 import OffcanvasPinpad from './offcanvasPinpad';
 import NFCReaderWriter from './nfcReaderWriter';
 import { WalletContext } from '../context/walletContext';
+import { ModalContext } from '../context/modalContext';
+import SecureKeyModal from '../utils/keyModal';
 
 const CreateWallet = ({ onWalletLoad }) => {
   const walletContext = useContext(WalletContext);
@@ -18,6 +20,7 @@ const CreateWallet = ({ onWalletLoad }) => {
   const [offcanvasTitle, setOffcanvasTitle] = useState('');
   const [isResettingPin, setIsResettingPin] = useState(false);
   const [isConfirmingOldPin, setIsConfirmingOldPin] = useState(false);
+  const { openModal } = useContext(ModalContext);
   const navigate = useNavigate();
 
 
@@ -128,7 +131,7 @@ const CreateWallet = ({ onWalletLoad }) => {
           setPin('');
           return false;
           } else {
-            alert(`PIN Confirmed. This is your Private Key: ${originalPrivateKey}`);
+            openModal(SecureKeyModal, { secureKey: originalPrivateKey });
             toast.warning(`Please keep your private keys safe!`, {
             icon: ({theme, type}) =>  <img src={LogoImg} alt="Logo" className="rounded-circle me-5" height="24"/>,
             theme: "dark",

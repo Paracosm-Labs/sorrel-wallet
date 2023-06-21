@@ -61,7 +61,7 @@ const OffcanvasNav = () => {
               <option value="Other Countries">other countries</option>
             </select>
           </div>
-          <button onClick={handleLogout} className="btn btn-xs btn-outline-secondary mt-3" type="button">
+          <button onClick={handleLogout} className="btn btn-xs btn-outline-secondary mt-3" type="button" data-bs-dismiss="offcanvas" aria-label="Close">
             Logout
           </button>
         </section> ):(

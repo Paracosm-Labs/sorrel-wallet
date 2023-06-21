@@ -11,6 +11,7 @@ import Addons from './pages/addonsPage';
 import Contract from './components/contractInterface';
 import WalletCards from './pages/cardsPage';
 import { WalletProvider } from './context/walletContext';
+import { ModalManager } from './context/modalContext';
 import TronWebContextProvider from './context/tronWebContext';
 // import { OrbitDBProvider } from './context/orbitdbContext';
 
@@ -22,6 +23,7 @@ const App = () => {
     // <OrbitDBProvider>
     <TronWebContextProvider>
     <WalletProvider>
+    <ModalManager>
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Intro />} />
@@ -36,6 +38,7 @@ const App = () => {
         <Route element={<Wallet />} />
       </Routes>
     </BrowserRouter>
+    </ModalManager>
     </WalletProvider>
     </TronWebContextProvider>
     // </OrbitDBProvider>

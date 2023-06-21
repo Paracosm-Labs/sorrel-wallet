@@ -219,6 +219,21 @@ background-color: #f8f8f8;
 }
 
 
+.secureKeyModal .modal-content{
+  background-color: #242435;
+  border-radius: 0px 0px 30px 30px;
+  border: none;
+  box-shadow: 0 3px 0px #109e77;
+
+}
+
+.secureKeyModal .modal-footer{border:none;}
+
+.secureKeyModal .card{
+  background-color: #000;
+/*  color:#eee!important;*/
+}
+
 /**
  * ----------------------------------------
  * animation vibrate-1
