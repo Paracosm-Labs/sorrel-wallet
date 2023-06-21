@@ -30,7 +30,7 @@ const WelcomeOnboarding = () => {
 
 
   const  goToWallet = () => {
-  	return navigate('/wallet');
+  	return navigate('/welcome');
   }
 
 
@@ -131,7 +131,7 @@ const WelcomeOnboarding = () => {
 									<NFCCards onNFCRead={handleNfcLogin} mode="alternative" />
 
 				          <button onClick={() => goToWallet()} className="btn btn-lg btn-outline-success w-100" type="button">
-				            <i className="fa-solid fa-wallet me-2"></i>Demo Wallet
+				            <i className="fa-solid fa-wallet me-2"></i>Create Wallet
 				          </button>
 
 				        </div>
