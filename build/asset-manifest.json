@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ace7ba00.css",
+    "main.js": "/static/js/main.af787c80.js",
+    "static/js/787.b91b553d.chunk.js": "/static/js/787.b91b553d.chunk.js",
+    "static/media/logo2x.png": "/static/media/logo2x.0b4f6b6b6ec2a5e97ecf.png",
+    "static/media/sorrel-logo.png": "/static/media/sorrel-logo.cc305a10ae4c2bb7531f.png",
+    "index.html": "/index.html",
+    "main.ace7ba00.css.map": "/static/css/main.ace7ba00.css.map",
+    "main.af787c80.js.map": "/static/js/main.af787c80.js.map",
+    "787.b91b553d.chunk.js.map": "/static/js/787.b91b553d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ace7ba00.css",
+    "static/js/main.af787c80.js"
+  ]
+}

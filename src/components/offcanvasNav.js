@@ -73,7 +73,7 @@ const OffcanvasNav = () => {
           <div className="align-items-center">
             <p className="badge bg-info p-2"><i className="fa-solid fa-toggle-off"></i>&nbsp;Not Connected</p>
           </div>
-          <button onClick={() => loginWithRedirect()} className="btn btn-xs btn-outline-secondary m-2 mt-3 mb-3" type="button">
+          <button onClick={() => loginWithRedirect()} className="btn btn-xs btn-outline-secondary m-2 mt-3 mb-3 d-none" type="button">
             Login | Sign Up
           </button>
           <NFCCards  onNFCRead={handleNfcLogin} mode="alternative" />
@@ -93,11 +93,19 @@ const OffcanvasNav = () => {
             
               <Link to="/addons" className="nav-link">
               <button className="btn btn lg btn-outline-primary w-100" type="button" data-bs-dismiss="offcanvas" aria-label="Close">
-                <i className="fa-solid fa-lg fa-puzzle-piece mt-4"></i><p className="">Crowdfund Addons</p>
+                <i className="fa-solid fa-lg fa-puzzle-piece mt-4"></i><p className="mt-2">Addons</p>
               </button>
               </Link>
 
 
+            </div>
+
+            <div className="col mt-2">
+              <a href="https://discord.gg/kBtNQ9dtFV" rel="noreferrer" target="_blank">
+                <button className="btn btn lg btn-outline-primary w-100" type="button" data-bs-dismiss="offcanvas" aria-label="Close">
+                  <i className="fa-solid fa-lg fa-satellite-dish mt-4"></i><p className="mt-2">Community</p>
+                </button>
+              </a>
             </div>
 
             <div className="col mt-2">
@@ -120,13 +128,7 @@ const OffcanvasNav = () => {
                 <i className="fa-solid fa-plus mt-4 fa-lg"></i><p className="">Family Office</p>
               </button>
             </div>
-            <div className="col mt-2">
-              <a href="https://discord.gg/kBtNQ9dtFV" rel="noreferrer" target="_blank">
-                <button className="btn btn lg btn-outline-primary w-100" type="button" data-bs-dismiss="offcanvas" aria-label="Close">
-                  <i className="fa-solid fa-lg fa-satellite-dish mt-4"></i><p>Join Community</p>
-                </button>
-              </a>
-            </div>
+
           </div>
         </section>
 
