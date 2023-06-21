@@ -7,18 +7,22 @@ import PinPad from '../components/offcanvasPinpad';
 
 const CountryPage = () => {
   const { user, isAuthenticated } = useAuth0();
+  const [pin, setPin] = useState('');
   const [selectedCountry, setSelectedCountry] = useState('1');
   const [showPinPad, setShowPinPad] = useState(false);
   const walletContext = useContext(WalletContext);
   const navigate = useNavigate();
 
-  const createWallets = async () => {
+  const handleCreateWallet = async () => {
   // Store the selected country in the local storage
     localStorage.setItem('selectedCountry', selectedCountry);
-    // Handle on-chain wallet creation logic
     console.log('Your wallet is being created...');
     setShowPinPad(true);
-    // return navigate('/wallet');
+  };
+
+  const createWallet = async () => {
+    //TODO
+    alert(selectedCountry);
   };
 
   const handleCountryChange = (event) => {
@@ -49,23 +53,23 @@ const CountryPage = () => {
                 <option value="1001">Other Countries</option>
               </select>
             </div>
-            <button onClick={createWallets} className="btn btn-lg btn-outline-success w-100 mt-5 mb-3" type="button">
+            <button onClick={handleCreateWallet} className="btn btn-lg btn-outline-success w-100 mt-5 mb-3" type="button">
               Create Account
             </button>
           </div>
         </div>
 
-        {showPinPad && (
+      
+
           <PinPad
             showOffcanvas={showPinPad}
             setShowOffcanvas={setShowPinPad}
             offcanvasTitle="Enter New PIN"
-            handleOffcanvasSubmit={(pin) => {
-              walletContext.createWallet(pin);
-              setShowPinPad(false);
-            }}
+            pin={pin}
+            setPin={setPin}
+            handleOffcanvasSubmit={createWallet}
           />
-        )}
+        
       </div>
 
       

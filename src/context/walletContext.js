@@ -20,28 +20,6 @@ export const WalletProvider = ({ children }) => {
 
 
 
-  const createWallet = (pin) => {
-    TronWeb.createAccount().then(newWallet => {
-      // Encrypt the private key with the pin
-      const cipher = CryptoJS.AES.encrypt(newWallet.privateKey, pin).toString();
-      // Generate a CRC32 checksum of the cipher
-      const checksum = crc.crc32(cipher).toString(16);
-      // Create a new wallet object with the encrypted private key and checksum
-      const secureWallet = {
-        ...newWallet,
-        encryptedPrivateKey: cipher,
-        checksum: checksum,
-        country: country,
-        activated: "false"
-      };
-      setWalletData(secureWallet);
-    });
-  };
-
-
-
-
-
   const checkPIN = (pin) => {
 
     const bytesCheck = CryptoJS.AES.decrypt(walletData.encryptedPrivateKey, pin);
@@ -84,8 +62,7 @@ export const WalletProvider = ({ children }) => {
       setWalletData, 
       checkPIN, 
       country, 
-      setCountryFromLocalStorage,
-      createWallet 
+      setCountryFromLocalStorage
     }}>
       {children}
     </WalletContext.Provider>

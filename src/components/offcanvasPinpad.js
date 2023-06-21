@@ -34,20 +34,35 @@ return (<>
             <div className="col d-none d-md-block d-sm-none"></div>
             <div className="col">
               <div className="row justify-content-between">
-              {Array(6).fill().map((_, index) => (
-                <div id={`pin-${index}`} className={`col border text-center text-light mx-2 p-3 ${pin[index] ? 'border-success' : 'border-primary'}`}>
-                  <h4 className={`text-success m-auto`}>{pin[index] ? '*' : '_'}</h4>
-                </div>
-              ))}
+
+
+                {Array(6).fill().map((_, index) => (
+                  <div 
+                    key={index} // Add a key prop here
+                    id={`pin-${index}`} 
+                    className={`col border text-center text-light mx-2 p-3 ${pin[index] ? 'border-success' : 'border-primary'}`}
+                  >
+                    <h4 className={`text-success m-auto`}>{pin[index] ? '*' : '_'}</h4>
+                  </div>
+                ))}
               </div>
               <div className="row justify-content-between mt-4">
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((digit) => (
-                  <div className="col-4 mt-2">
-                    <button id={digit} className="btn btn-outline-secondary btn-lg w-100" type="button" onClick={() => handlePinChange(digit)}>
+                  <div 
+                    key={digit} // And here
+                    className="col-4 mt-2"
+                  >
+                    <button 
+                      id={digit} 
+                      className="btn btn-outline-secondary btn-lg w-100" 
+                      type="button" 
+                      onClick={() => handlePinChange(digit)}
+                    >
                       {digit}
                     </button>
                   </div>
                 ))}
+
                 <div className="col-4 mt-2">
                   <button className="btn btn-outline-secondary btn-lg w-100" type="button" onClick={handleBiometrics}>
                     <i className="fa-solid fa-fingerprint text-success"></i>
