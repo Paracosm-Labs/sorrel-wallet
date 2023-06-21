@@ -29,6 +29,11 @@ const WelcomeOnboarding = () => {
   };
 
 
+  const  goToWallet = () => {
+  	return navigate('/wallet');
+  }
+
+
   if (isLoading) {
     return (
     	<div className="spinner-container">
@@ -124,6 +129,10 @@ const WelcomeOnboarding = () => {
 				          </button>
 				        
 									<NFCCards onNFCRead={handleNfcLogin} mode="alternative" />
+
+				          <button onClick={() => goToWallet()} className="btn btn-lg btn-outline-success w-100" type="button">
+				            <i className="fa-solid fa-wallet me-2"></i>Go To Wallet
+				          </button>
 
 				        </div>
 

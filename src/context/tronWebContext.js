@@ -15,8 +15,8 @@ const TronWebContextProvider = ({ children }) => {
 	const TransferComptroller = "TGWs2QiZsoi4B1muRepSgEzJjQHiZjHEY9";
 	const ConvertComptroller = "TFuXJa7Hk47ny5Xa5W6ePRoK6GdXMcateh";
 	const demoSorrelMember = 'TULEMBAZwHsTK5JSfyF1cZAMTVsoknCPnp';
-	const demoKey = process.env.REACT_APP_DEMO_PRIVATE_KEY; // Nile DO NOT USE on Mainnet
-	const tronProAPIKey = process.env.TRON_PRO_API_KEY; 
+	const demoKey = "b79666fea1d3b9023e5e9844d6deaab6e19d17788a00bb92aa961c0c80803c40"; //process.env.REACT_APP_DEMO_PRIVATE_KEY; // Nile DO NOT USE on Mainnet
+	// const tronProAPIKey = process.env.TRON_PRO_API_KEY; 
 
   //Mainnet
 	// const bankDepository = 'TNYsTzEyH5Jr2BuagKhfTCTjeaLRaRu1Av';
