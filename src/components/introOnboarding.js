@@ -124,14 +124,14 @@ const WelcomeOnboarding = () => {
 
 				        <div className="d-grid gap-3 mt-3">
 				        
-				          <button onClick={() => loginWithRedirect()} className="btn btn-lg btn-outline-success w-100" type="button">
+				          <button onClick={() => loginWithRedirect()} className="btn btn-lg btn-outline-success w-100 d-none" type="button">
 				            <i className="fa-solid fa-user-plus me-2"></i>Signup | Login
 				          </button>
 				        
 									<NFCCards onNFCRead={handleNfcLogin} mode="alternative" />
 
 				          <button onClick={() => goToWallet()} className="btn btn-lg btn-outline-success w-100" type="button">
-				            <i className="fa-solid fa-wallet me-2"></i>Go To Wallet
+				            <i className="fa-solid fa-wallet me-2"></i>Demo Wallet
 				          </button>
 
 				        </div>

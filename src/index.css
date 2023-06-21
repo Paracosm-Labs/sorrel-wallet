@@ -21,12 +21,14 @@ code {
 
 /* Track */
 ::-webkit-scrollbar {
-  width: 8px; /* Set the width of the scrollbar */
+  width: 5px; /* Set the width of the scrollbar */
+
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #888; /* Set the color of the scrollbar handle */
+  border-radius: 36px!important;
 }
 
 /* Handle on hover */
@@ -142,13 +144,24 @@ code {
 .transactions img.avatar{height: 42px; width: 42px;}
 
 .explore .shops{
-  max-height: 200px;
-  max-width: 420px;
-  overflow-x: auto;
-  overflow-y: hidden;
+  max-height: 800px;
+/*  max-width: 420px;*/
+  margin: 5px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #eee;
+  border-radius: 12px;
+  padding-bottom: 30px;
 }
 
-.shop-card{ background-color: #eee!important;}
+.shop-card img{
+  border-radius: 36px 36px 0px 0px;
+}
+
+.shop-card{ 
+  background-color: #eee!important;
+  border-radius: 36px!important;
+}
 
 .address-book i {color:#6a539b;}
 
@@ -169,7 +182,8 @@ code {
 /* Customize the scrollbar */
 
 .explore .shops::-webkit-scrollbar,
-.address-book::-webkit-scrollbar{height: 5px;}
+.address-book::-webkit-scrollbar{height: 5px;
+}
 
 
 .address-book .modal-body::-webkit-scrollbar,
@@ -183,9 +197,9 @@ code {
 .address-book::-webkit-scrollbar-thumb,
 .transactions::-webkit-scrollbar-thumb {
   background-color: #109E76;
+  border-radius: 36px!important;
 }
 
-.explore .shops::-webkit-scrollbar-thumb,
 .address-book .modal-body::-webkit-scrollbar,
 .address-book::-webkit-scrollbar-track,
 .transactions::-webkit-scrollbar-track {
