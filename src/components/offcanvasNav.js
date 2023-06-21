@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import NFCCards from './nfcReaderWriter';
 import { WalletContext } from '../context/walletContext';
@@ -9,6 +9,7 @@ const OffcanvasNav = () => {
   const { isAuthenticated, user, logout, loginWithRedirect } =
     useAuth0();
   const walletContext = useContext(WalletContext);
+  const navigate = useNavigate();
 
   const handleCountryChange = async (event) => {
     setSelectedCountry(event.target.value);
@@ -17,15 +18,18 @@ const OffcanvasNav = () => {
 
   const handleLogout = async () => {
       walletContext.setWalletData(null);
-      logout({ returnTo: `/explore` });
+      navigate(`/explore`);
       alert("Thank you for choosing Sorrel! See you Soon!")
   };
 
   // Function to handle NFC card login
   const handleNfcLogin = async (data) => {
-    if (data) {
-      alert(`Hi! Welcome to Sorrel!`);
+    if (!walletContext.walletData) {
+      if (data) {
+        alert(`Hi! Welcome to Sorrel!`);
+      }
     }
+
   };
 
   return (
@@ -69,6 +73,9 @@ const OffcanvasNav = () => {
             <small className="text-muted d-block" >{walletContext.walletData.address.base58}</small>
             <p className="badge bg-success p-2 mt-3"><i className="fa-solid fa-wifi"></i>&nbsp;Connected</p>
           </div>
+          <button onClick={handleLogout} className="btn btn-xs btn-outline-secondary mt-3" type="button" data-bs-dismiss="offcanvas" aria-label="Close">
+            Logout
+          </button>
         </>):(<>
           <div className="align-items-center">
             <p className="badge bg-info p-2"><i className="fa-solid fa-toggle-off"></i>&nbsp;Not Connected</p>
