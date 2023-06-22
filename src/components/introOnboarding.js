@@ -131,14 +131,14 @@ const WelcomeOnboarding = () => {
 				          <button onClick={() => loginWithRedirect()} className="btn btn-lg btn-outline-success w-100 d-none" type="button">
 				            <i className="fa-solid fa-user-plus me-2"></i>Signup | Login
 				          </button>
-				        
-									<NFCCards onNFCRead={handleNfcLogin} mode="alternative" />
-
+				        	<div className="mb-3">
+										<NFCCards onNFCRead={handleNfcLogin} mode="alternative" />
+									</div>
 				          <button onClick={() => goToWallet("a")} className="btn btn-lg btn-outline-success w-100" type="button">
-				            <i className="fa-solid fa-wallet me-2"></i>Create Wallet
+				            <i className="fa-solid fa-wallet me-2"></i>New Wallet
 				          </button>
 
-				          <button onClick={() => goToWallet("b")} className="btn btn-sm p-2 btn-outline-success w-50 m-auto" type="button">
+				          <button onClick={() => goToWallet("b")} className="btn btn-sm mt-3 p-2 btn-outline-success w-50 m-auto" type="button">
 				            <i className="fa-solid fa-wallet me-2"></i>Demo Wallet
 				          </button>
 

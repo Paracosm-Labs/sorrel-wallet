@@ -184,7 +184,7 @@ useEffect(() => {
 
   const createWalletUIButton = (
     <div>
-    <button className={`btn btn-outline-success btn-lg m-2 w-100 m-auto`} onClick={handleCreateWallet}>Create Account</button>
+    <button className={`btn btn-outline-success btn-lg m-2 w-100 m-auto`} onClick={handleCreateWallet}>Create Wallet</button>
       <OffcanvasPinpad 
         showOffcanvas={showOffcanvas} 
         setShowOffcanvas={setShowOffcanvas} 
@@ -219,9 +219,9 @@ useEffect(() => {
           <small>Your Address: {walletContext.walletData.address.base58}</small><br/>
           <small>PIN: <span className="text-wrap">*****************</span></small><br/>
           <small>CRC: {walletContext.walletData.checksum}</small><br/>
+          {walletContext.walletData.country ? (<small>Issuer: {walletContext.walletData.country} </small>):(``)}<br/>
           <small>Data: {walletContext.walletData.dataSources}</small><br/>
           {walletContext.walletData.activated ==="true" ? (<small className="text-success">Activated</small>):(``)}
-          {walletContext.walletData.country ? (<small>Country: {walletContext.walletData.country} </small>):(``)}
         </div>
         <hr className="mx-2"/>
       <NFCReaderWriter

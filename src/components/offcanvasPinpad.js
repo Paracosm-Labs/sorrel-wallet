@@ -1,4 +1,7 @@
 import React from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import LogoImg from '../img/logo2x.png';
 
 const PinPad = ({ showOffcanvas, setShowOffcanvas, offcanvasTitle, pin, setPin, handleOffcanvasSubmit }) => {
 
@@ -81,7 +84,15 @@ return (<>
             </div>
             <div className="col d-none d-md-block d-sm-none"></div>
       </div>
-
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   </div>
 </>);
