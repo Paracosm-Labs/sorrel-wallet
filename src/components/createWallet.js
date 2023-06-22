@@ -13,7 +13,7 @@ import { WalletContext } from '../context/walletContext';
 import { ModalContext } from '../context/modalContext';
 import SecureKeyModal from '../utils/keyModal';
 
-const CreateWallet = ({ onWalletLoad }) => {
+const CreateWallet = ({ onWalletLoad, view  }) => {
   const walletContext = useContext(WalletContext);
   const [pin, setPin] = useState('');
   const [showOffcanvas, setShowOffcanvas] = useState(false);
@@ -72,6 +72,7 @@ useEffect(() => {
 
   }
     else if (offcanvasTitle === 'Set PIN') {
+      // alert("Creating Wallets");
       createWallet(pin);
   } else if ((offcanvasTitle === 'Check Private Key') || (offcanvasTitle === 'Check Private Key' && walletContext.walletData)) {
       checkPrivateKey(pin);
@@ -181,7 +182,23 @@ useEffect(() => {
   };
 
 
-  return (
+  const createWalletUIButton = (
+    <div>
+    <button className={`btn btn-outline-success btn-lg m-2 w-100 m-auto`} onClick={handleCreateWallet}>Create Account</button>
+      <OffcanvasPinpad 
+        showOffcanvas={showOffcanvas} 
+        setShowOffcanvas={setShowOffcanvas} 
+        offcanvasTitle={offcanvasTitle} 
+        pin={pin} 
+        setPin={setPin} 
+        handleOffcanvasSubmit={handleOffcanvasSubmit} 
+      />
+      </div>
+  );
+
+
+  const defaultUI  = (
+    <div>
     <div className="text-white">
       
       <button className={`btn btn-outline-success btn-lg m-2 ${walletContext.walletData ? `d-none` : `` }`} onClick={handleCreateWallet}>Begin Activation</button>
@@ -204,6 +221,7 @@ useEffect(() => {
           <small>CRC: {walletContext.walletData.checksum}</small><br/>
           <small>Data: {walletContext.walletData.dataSources}</small><br/>
           {walletContext.walletData.activated ==="true" ? (<small className="text-success">Activated</small>):(``)}
+          {walletContext.walletData.country ? (<small>Country: {walletContext.walletData.country} </small>):(``)}
         </div>
         <hr className="mx-2"/>
       <NFCReaderWriter
@@ -221,7 +239,25 @@ useEffect(() => {
 
 
     </div>
-  );
+  </div>
+  )
+
+
+  let uiToRender;
+  switch (view) {
+    case 'createWalletUIButton':
+      uiToRender = createWalletUIButton;
+      break;
+    default:
+      uiToRender = defaultUI;
+  }
+
+
+  return (<div>
+
+      {uiToRender}
+
+  </div>);
 };
 
 export default CreateWallet;

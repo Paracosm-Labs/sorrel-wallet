@@ -1,33 +1,23 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { withAuth0, useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
 import { WalletContext } from '../context/walletContext';
-import PinPad from '../components/offcanvasPinpad';
-
+import CreateWalletBtn from '../components/createWallet';
 
 const CountryPage = () => {
   const { user, isAuthenticated } = useAuth0();
-  const [pin, setPin] = useState('');
-  const [selectedCountry, setSelectedCountry] = useState('1');
-  const [showPinPad, setShowPinPad] = useState(false);
+  // const [selectedCountry, setSelectedCountry] = useState('1');
   const walletContext = useContext(WalletContext);
   const navigate = useNavigate();
 
-  const handleCreateWallet = async () => {
-  // Store the selected country in the local storage
-    localStorage.setItem('selectedCountry', selectedCountry);
-    console.log('Your wallet is being created...');
-    setShowPinPad(true);
-  };
-
-  const createWallet = async () => {
-    //TODO
-    alert(selectedCountry);
+  const goToWallet = async () => {
+    alert("Hi! Welcome to Sorrel!");
+    navigate("/cards");
   };
 
   const handleCountryChange = (event) => {
-    setSelectedCountry(event.target.value);
-    console.log('Selected Country:', event);
+    localStorage.setItem('selectedCountry', event.target.value);
+    console.log('Selected Country:', event.target.value);
   };
 
   return (
@@ -42,8 +32,9 @@ const CountryPage = () => {
 	            <h6 className="mb-0">{user.name}</h6>
 	            <p className="badge bg-success p-1"><i className="fa-solid fa-wifi"></i>&nbsp;Connected</p>
 	          </div> ):(<></>)}
-            <h5>Your Sorrel Account Awaits!</h5>
-            <div className="p-1 mt-5">
+            <h5>Your Sorrel Wallet Awaits!</h5>
+            {!walletContext.walletData ? (
+            <div className="p-1 mt-3">
               <h6 className="text-left">Select Your Home Country</h6>
               <select className="mt-3 form-select" aria-label="Select Country" onChange={handleCountryChange}>
                 <option defaultValue value="1">Trinidad & Tobago</option>
@@ -53,22 +44,21 @@ const CountryPage = () => {
                 <option value="1001">Other Countries</option>
               </select>
             </div>
-            <button onClick={handleCreateWallet} className="btn btn-lg btn-outline-success w-100 mt-5 mb-3" type="button">
-              Create Account
-            </button>
+                ):(``)}          
+            <div className="mt-4 p-1">
+              
+              {walletContext.walletData ? (
+                  <button className={`btn btn-success btn-lg m-2 w-100 m-auto`} onClick={goToWallet}>Go To Wallet</button>
+                ):(
+                  <CreateWalletBtn view="createWalletUIButton"/>
+                )}
+              
+
+            </div>
           </div>
         </div>
 
       
-
-          <PinPad
-            showOffcanvas={showPinPad}
-            setShowOffcanvas={setShowPinPad}
-            offcanvasTitle="Enter New PIN"
-            pin={pin}
-            setPin={setPin}
-            handleOffcanvasSubmit={createWallet}
-          />
         
       </div>
 

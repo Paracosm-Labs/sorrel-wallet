@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import OffcanvasBuy from '../components/offcanvasBuy'; // Import the OffcanvasBuy component
+import OffcanvasBuy from '../components/offcanvasBuy';
 import Navigation from '../components/navMenu';
 import CreateWallet from '../components/createWallet';
-import AccountBalance from '../components/accountBalance';
+// import AccountBalance from '../components/accountBalance';
 import { WalletContext } from '../context/walletContext';
 
 const CardsPage = () => {
@@ -16,9 +16,6 @@ const CardsPage = () => {
   return (
     <div className="text-center wallet-cards">
       <Navigation />
-      {walletContext.walletData ? (
-      <AccountBalance />
-      ) : (<>
 
       <div className="info mb-5">
         <div className="card">
@@ -37,7 +34,7 @@ const CardsPage = () => {
           </div>
         </div>
       </div>
-      </>)}
+      
 
       <div className="m-1 text-white">
       <div className="content pb-3">

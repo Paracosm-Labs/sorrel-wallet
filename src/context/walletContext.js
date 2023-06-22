@@ -1,7 +1,5 @@
 import React, { createContext, useState } from 'react';
-import TronWeb from 'tronweb';
 import CryptoJS from 'crypto-js';
-import crc from 'crc';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LogoImg from '../img/logo2x.png';

@@ -54,6 +54,11 @@ code {
 .skipper a{text-decoration: none;}
 
 .welcome{background-color: #252435;}
+
+.onboarding .carousel-caption{
+  bottom: 3em!important;
+}
+
 .wallet, .vaults, .discover, .wallet-cards {background-color: #2f3349;}
 .carousel-inner{color: #fff;}
 .carousel-inner .bg-primary{background-color: #2f3349!important;}

@@ -11,7 +11,6 @@ const WelcomeOnboarding = () => {
   const walletContext = useContext(WalletContext);
   const navigate = useNavigate();
 
-
   if (isAuthenticated) {
     return navigate('/wallet');
   };
@@ -29,8 +28,13 @@ const WelcomeOnboarding = () => {
   };
 
 
-  const  goToWallet = () => {
-  	return navigate('/welcome');
+  const  goToWallet = (choice) => {
+  	if (choice === "a") {
+  		return navigate('/welcome');
+  	} else {
+  		return navigate('/wallet');
+  	}
+  	
   }
 
 
@@ -130,8 +134,12 @@ const WelcomeOnboarding = () => {
 				        
 									<NFCCards onNFCRead={handleNfcLogin} mode="alternative" />
 
-				          <button onClick={() => goToWallet()} className="btn btn-lg btn-outline-success w-100" type="button">
+				          <button onClick={() => goToWallet("a")} className="btn btn-lg btn-outline-success w-100" type="button">
 				            <i className="fa-solid fa-wallet me-2"></i>Create Wallet
+				          </button>
+
+				          <button onClick={() => goToWallet("b")} className="btn btn-sm p-2 btn-outline-success w-50 m-auto" type="button">
+				            <i className="fa-solid fa-wallet me-2"></i>Demo Wallet
 				          </button>
 
 				        </div>
